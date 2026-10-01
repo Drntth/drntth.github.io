@@ -1,0 +1,128 @@
+{
+  "order": 1,
+  "visibility": "public",
+  "year": 2025,
+  "icon": "lucide:bot",
+  "repo": "https://github.com/Drntth/thesis-langmodels-project-management",
+  "label": { "en": "Thesis: AI in web apps", "hu": "Szakdolgozat" },
+  "concepts": ["prompt-engineering", "small-language-models"],
+  "links": [
+    {
+      "label": { "en": "Docker Hub image", "hu": "Docker Hub image" },
+      "href": "https://hub.docker.com/r/drntth/thesis-langmodels-project-management"
+    }
+  ],
+  "tech": [
+    "python",
+    "django",
+    "sqlite",
+    "huggingface",
+    "prompt-engineering",
+    "docker",
+    "cypress",
+    "bootstrap",
+    "javascript",
+    "git"
+  ],
+  "models": [
+    "DistilGPT2",
+    "GPT-Neo 125M",
+    "Facebook OPT 125M",
+    "Facebook OPT 350M",
+    "GPT-2 Medium"
+  ],
+  "en": {
+    "title": "Artificial Intelligence in Web Applications",
+    "subtitle": "Language models in project management (BSc thesis)",
+    "summary": "A Django web application that supports project administration by generating documentation and specifications with small, freely available language models on minimal hardware.",
+    "goal": "Support project administration, especially writing documentation and specifications, with free, small-parameter language models that run on minimal hardware while the generated text stays useful.",
+    "solution": "A Django application with an intuitive interface and role-based access. Several small models are driven by different prompting techniques and tool configurations; each technique was tested alone and in combination, and one shared configuration was found that performs adequately across all models.",
+    "result": "A working system that exports generated documents as Markdown, compatible with GitHub. Specific prompting techniques gave a significant quality improvement; handling complex relationships remains limited and would need further fine-tuning.",
+    "status": "Completed (BSc thesis, 2025)",
+    "highlights": [
+      "248 unit tests and 258 Cypress end-to-end tests, all passing",
+      "Five small language models compared: DistilGPT2, GPT-Neo 125M, Facebook OPT 125M and 350M, GPT-2 Medium",
+      "Four permission levels: guest, user, staff, superuser",
+      "Containerized with Docker, image published on Docker Hub"
+    ],
+    "sections": [
+      {
+        "title": "Research question",
+        "body": [
+          "How can freely available language models be used effectively on minimal hardware while the generated text stays good enough? The hardest part was judging text quality: specifications are difficult to measure objectively, so the main criterion was how well the output meets user expectations and supports their work."
+        ]
+      },
+      {
+        "title": "What the experiments showed",
+        "body": [
+          "There is no universal configuration. A parameter set that works well for one model can degrade another. After long experimentation I found a configuration that gave adequate results for all five models on the chosen task."
+        ]
+      },
+      {
+        "title": "Architecture and stack",
+        "body": [
+          "Django (Python) backend with SQLite, an HTML, CSS and JavaScript frontend with Bootstrap, MVC structure and Docker containerization. Models run through Hugging Face Transformers. Work was organized with GitHub Projects and Issues."
+        ]
+      },
+      {
+        "title": "Testing",
+        "body": [
+          "Unit tests with Django's unittest framework per app (models, views, URLs, forms, admin and the language-model service layer), and Cypress end-to-end tests organized by permission level. The 248 unit tests ran in about 4.5 minutes, the 258 end-to-end tests in about 2.5 minutes."
+        ]
+      },
+      {
+        "title": "Future work",
+        "body": [
+          "Document-type-specific fine-tuning, task-specific prompt and parameter optimization, more document types, automatic evaluation with a medium-sized model, vector-database-based context (RAG), and performance optimization."
+        ]
+      }
+    ]
+  },
+  "hu": {
+    "title": "Mesterséges intelligencia a webalkalmazásokban",
+    "subtitle": "Nyelvi modellek a projektmenedzsmentben (BSc szakdolgozat)",
+    "summary": "Django webalkalmazás, amely kisebb, ingyenesen elérhető nyelvi modellekkel, minimális hardverigény mellett támogatja a projektadminisztrációt dokumentációk és specifikációk generálásával.",
+    "goal": "A projektadminisztráció, különösen a dokumentációk és specifikációk készítésének támogatása ingyenes, kisebb paraméterszámú, minimális hardveren futó nyelvi modellekkel úgy, hogy a generált szöveg minősége megfelelő maradjon.",
+    "solution": "Django alkalmazás intuitív felülettel és szerepkör-alapú hozzáféréssel. Több kisebb modellt különböző promptolási technikákkal és eszközkonfigurációkkal hajtottam meg; a technikákat külön és kombinálva is teszteltem, és találtam egy közös konfigurációt, amely mindegyik modellnél megfelelően teljesít.",
+    "result": "Működő rendszer, amely a generált dokumentumokat GitHub-kompatibilis Markdown formátumban tölti le. Specifikus promptolási technikákkal jelentős minőségjavulást értem el; a komplex összefüggések kezelése korlátozott, további finomhangolást igényel.",
+    "status": "Befejezett (BSc szakdolgozat, 2025)",
+    "highlights": [
+      "248 egységteszt és 258 Cypress end-to-end teszt, mind sikeres",
+      "Öt kisebb nyelvi modell összehasonlítása: DistilGPT2, GPT-Neo 125M, Facebook OPT 125M és 350M, GPT-2 Medium",
+      "Négy jogosultsági szint: vendég, felhasználó, moderátor, adminisztrátor",
+      "Dockerrel konténerizálva, az image elérhető a Docker Hubon"
+    ],
+    "sections": [
+      {
+        "title": "Kutatási kérdés",
+        "body": [
+          "Hogyan használhatók hatékonyan az ingyenesen elérhető nyelvi modellek minimális hardveren úgy, hogy a generált szöveg minősége megfelelő marad? A legnagyobb kihívás a szövegminőség megítélése volt: a specifikációk tartalma objektíven nehezen mérhető, ezért a fő szempont az volt, mennyire felel meg az eredmény a felhasználók elvárásainak, és mennyire segíti a munkájukat."
+        ]
+      },
+      {
+        "title": "Mit mutattak a kísérletek",
+        "body": [
+          "Nem létezik univerzális konfiguráció. Egy paraméterezés az egyik modellnél kiváló lehet, a másiknál rontja a képességeket. Hosszú kísérletezés után találtam olyan konfigurációt, amely mind az öt modellnél megfelelő eredményt adott a kijelölt feladaton."
+        ]
+      },
+      {
+        "title": "Architektúra és technológiák",
+        "body": [
+          "Django (Python) backend SQLite adatbázissal, HTML, CSS és JavaScript frontend Bootstrappel, MVC felépítés és Docker konténerizáció. A modellek Hugging Face Transformersen keresztül futnak. A munkaszervezés GitHub Projects és Issues segítségével történt."
+        ]
+      },
+      {
+        "title": "Tesztelés",
+        "body": [
+          "Egységtesztek a Django beépített unittest keretrendszerével alkalmazásonként (modellek, nézetek, URL-ek, űrlapok, admin és a nyelvimodell-szolgáltatási réteg), valamint jogosultsági szintenként szervezett Cypress end-to-end tesztek. A 248 egységteszt kb. 4,5 perc, a 258 E2E teszt kb. 2,5 perc alatt futott le."
+        ]
+      },
+      {
+        "title": "Továbbfejlesztés",
+        "body": [
+          "Dokumentumtípus-specifikus finomhangolás, feladatspecifikus prompt- és paraméteroptimalizálás, további dokumentumtípusok, automatikus értékelés közepes méretű modellel, vektoradatbázis-alapú kontextuskezelés (RAG) és teljesítményoptimalizálás."
+        ]
+      }
+    ]
+  }
+}

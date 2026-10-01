@@ -1,0 +1,24 @@
+{
+  "order": 99,
+  "visibility": "planned",
+  "icon": "lucide:gamepad-2",
+  "label": { "en": "Game project (planned)", "hu": "Játékprojekt (tervezett)" },
+  "tech": ["python", "java"],
+  "concepts": ["branching"],
+  "en": {
+    "title": "Game project (planned)",
+    "summary": "Placeholder for a planned game development project.",
+    "goal": "To be defined.",
+    "solution": "To be defined.",
+    "result": "To be defined.",
+    "status": "Planned"
+  },
+  "hu": {
+    "title": "Játékprojekt (tervezett)",
+    "summary": "Helyőrző egy tervezett játékfejlesztési projekthez.",
+    "goal": "Meghatározandó.",
+    "solution": "Meghatározandó.",
+    "result": "Meghatározandó.",
+    "status": "Tervezett"
+  }
+}

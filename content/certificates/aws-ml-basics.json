@@ -1,0 +1,27 @@
+{
+  "order": 1,
+  "issuer": "AWS Training and Certification",
+  "date": "2026-09-24",
+  "file": "/certs/aws-ml-basics.pdf",
+  "preview": "/certs/aws-ml-basics.png",
+  "en": {
+    "title": "AWS Foundations: Machine Learning Basics",
+    "summary": "An overview of machine learning concepts, terminology and processes: what ML is, how it solves business problems, when a model is appropriate, and the phases of an ML pipeline.",
+    "topics": [
+      "Machine learning",
+      "Three categories of ML algorithms",
+      "Deep learning",
+      "ML pipeline phases"
+    ]
+  },
+  "hu": {
+    "title": "AWS Foundations: Machine Learning Basics",
+    "summary": "Áttekintés a gépi tanulás fogalmairól, terminológiájáról és folyamatairól: mi a gépi tanulás, hogyan old meg üzleti problémákat, mikor érdemes modellt használni, és milyen fázisokból áll az ML pipeline.",
+    "topics": [
+      "Gépi tanulás",
+      "Az ML algoritmusok három kategóriája",
+      "Deep learning",
+      "Az ML pipeline fázisai"
+    ]
+  }
+}

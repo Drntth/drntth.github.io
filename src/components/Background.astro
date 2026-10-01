@@ -1,0 +1,60 @@
+<div class="bg-glows" aria-hidden="true"></div>
+<div
+  id="particles"
+  class="pointer-events-none fixed inset-0 -z-10"
+  aria-hidden="true"
+>
+</div>
+
+<script>
+  import { tsParticles } from "@tsparticles/engine";
+  import type { Container, ISourceOptions } from "@tsparticles/engine";
+  import { loadSlim } from "@tsparticles/slim";
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let container: Container | undefined;
+  let ready = false;
+
+  async function start() {
+    if (reduce) return;
+    if (!ready) {
+      await loadSlim(tsParticles);
+      ready = true;
+    }
+    container?.destroy();
+    const css = getComputedStyle(document.documentElement);
+    const a = css.getPropertyValue("--accent").trim();
+    const b = css.getPropertyValue("--accent-2").trim();
+    const coarse = matchMedia("(pointer: coarse)").matches;
+
+    const options: ISourceOptions = {
+      fullScreen: { enable: false },
+      fpsLimit: 60,
+      detectRetina: true,
+      particles: {
+        number: { value: coarse ? 28 : 60 },
+        color: { value: [a, b] },
+        links: {
+          enable: true,
+          color: a,
+          distance: 140,
+          opacity: 0.18,
+          width: 1,
+        },
+        move: { enable: true, speed: 0.5, outModes: { default: "out" } },
+        opacity: { value: 0.35 },
+        size: { value: { min: 1, max: 2.2 } },
+        shape: { type: "circle" },
+      },
+      interactivity: {
+        detectsOn: "window",
+        events: { onHover: { enable: !coarse, mode: "grab" } },
+        modes: { grab: { distance: 160, links: { opacity: 0.4 } } },
+      },
+    };
+    container = await tsParticles.load({ id: "particles", options });
+  }
+
+  start();
+  window.addEventListener("themechange", start);
+</script>

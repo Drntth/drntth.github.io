@@ -1,0 +1,149 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getContent, localePath, loc, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = getContent(lang);
+const L = c.researchPage;
+const items = (await getCollection("research")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const techs = await getCollection("technologies");
+const projects = await getCollection("projects");
+---
+
+<BaseLayout lang={lang} title={`${L.title} | ${c.hero.name}`}>
+  <h1 class="section-title reveal !text-4xl">{L.title}</h1>
+  <p class="reveal mb-4 text-justify text-muted">{L.intro}</p>
+  <p
+    class="reveal mb-10 text-justify rounded-lg border border-dashed border-accent-2/60 p-3 text-sm"
+  >
+    {L.note}
+  </p>
+
+  <ul class="reveal mb-12 flex flex-wrap gap-2">
+    {
+      L.rules.map((r) => (
+        <li class="chip">
+          <Icon name="lucide:shield-check" class="size-3.5 text-accent-2" />
+          {r}
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="space-y-8">
+    {
+      items.map((r) => {
+        const d = r.data[lang];
+        const planned = r.data.visibility === "planned";
+        const relTech = techs.filter((t) => r.data.technologies.includes(t.id));
+        const relProj = projects.filter((p) => r.data.projects.includes(p.id));
+        return (
+          <article id={r.id} class="card reveal scroll-mt-24 p-6 md:p-8">
+            <div class="flex flex-wrap items-center gap-3">
+              <Icon name={r.data.icon} class="size-7 text-accent" />
+              <span class="chip">{loc(r.data.topic, lang)}</span>
+              <span
+                class:list={[
+                  "chip",
+                  planned && "!border-dashed !border-accent-2/60",
+                ]}
+              >
+                {planned ? L.planned : L.published}
+              </span>
+            </div>
+            <h2 class="mt-3 font-display text-2xl font-semibold">{d.title}</h2>
+            <p class="mt-2 text-muted">{d.summary}</p>
+            {d.question && (
+              <p class="mt-4 text-sm">
+                <span class="font-medium text-accent">{L.question}:</span>{" "}
+                {d.question}
+              </p>
+            )}
+
+            {d.findings.length > 0 && (
+              <div class="mt-5">
+                <h3 class="mb-2 text-sm font-medium text-accent-2">
+                  {L.findings}
+                </h3>
+                <ul class="list-disc space-y-1 pl-5 text-sm text-muted">
+                  {d.findings.map((f) => (
+                    <li>{f}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {d.planned.length > 0 && (
+              <div class="mt-5">
+                <h3 class="mb-2 text-sm font-medium text-accent-2">
+                  {L.plannedTitle}
+                </h3>
+                <ul class="space-y-1.5 text-sm">
+                  {d.planned.map((p) => (
+                    <li class="flex gap-2">
+                      <Icon
+                        name="lucide:circle-dashed"
+                        class="mt-0.5 size-4 shrink-0 text-accent-2"
+                      />
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {d.examples.length > 0 && (
+              <div class="mt-5">
+                <h3 class="mb-2 text-sm font-medium text-accent">
+                  {L.examplesTitle}
+                </h3>
+                <ul class="flex flex-wrap gap-2">
+                  {d.examples.map((x) => (
+                    <li class="chip">{x}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {(relTech.length > 0 ||
+              relProj.length > 0 ||
+              r.data.links.length > 0) && (
+              <div class="mt-6 flex flex-wrap gap-2 border-t border-line pt-5">
+                {relTech.map((t) => (
+                  <a
+                    class="btn btn-ghost !py-1.5"
+                    href={localePath(lang, `/technologies/${t.id}`)}
+                  >
+                    <Icon name="lucide:lightbulb" class="size-4" />
+                    {t.data[lang].title}
+                  </a>
+                ))}
+                {relProj.map((p) => (
+                  <span class="chip">
+                    {L.projects}: {p.data.label?.[lang] ?? p.data[lang].title}
+                  </span>
+                ))}
+                {r.data.links.map((l) => (
+                  <a
+                    class="btn btn-ghost !py-1.5"
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon name="lucide:link" class="size-4" />
+                    {loc(l.label, lang)}
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
+        );
+      })
+    }
+  </div>
+</BaseLayout>

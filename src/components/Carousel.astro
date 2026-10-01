@@ -1,0 +1,96 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  label: string;
+  autoplay?: number;
+  prev?: string;
+  next?: string;
+}
+const {
+  label,
+  autoplay = 6000,
+  prev = "Previous",
+  next = "Next",
+} = Astro.props;
+---
+
+<div
+  data-carousel
+  data-autoplay={autoplay}
+  role="region"
+  aria-roledescription="carousel"
+  aria-label={label}
+>
+  <div class="overflow-hidden rounded-2xl" data-viewport>
+    <div class="flex"><slot /></div>
+  </div>
+  <div class="mt-5 flex items-center justify-between" data-controls>
+    <div class="flex items-center gap-2" data-dots></div>
+    <div class="flex gap-2">
+      <button type="button" data-prev class="icon-btn" aria-label={prev}
+        ><Icon name="lucide:chevron-left" class="size-4" /></button
+      >
+      <button type="button" data-next class="icon-btn" aria-label={next}
+        ><Icon name="lucide:chevron-right" class="size-4" /></button
+      >
+    </div>
+  </div>
+</div>
+
+<script>
+  import EmblaCarousel from "embla-carousel";
+  import type { EmblaPluginType } from "embla-carousel";
+  import Autoplay from "embla-carousel-autoplay";
+  import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((root) => {
+    const viewport = root.querySelector<HTMLElement>("[data-viewport]")!;
+    const plugins: EmblaPluginType[] = [WheelGesturesPlugin()];
+    if (!reduce) {
+      plugins.push(
+        Autoplay({
+          delay: Number(root.dataset.autoplay) || 6000,
+          stopOnInteraction: false,
+          stopOnMouseEnter: true,
+        }),
+      );
+    }
+    const embla = EmblaCarousel(
+      viewport,
+      { loop: true, align: "start" },
+      plugins,
+    );
+
+    const count = embla.scrollSnapList().length;
+    if (count < 2) {
+      root.querySelector("[data-controls]")?.classList.add("hidden");
+      return;
+    }
+
+    const dotsEl = root.querySelector<HTMLElement>("[data-dots]")!;
+    const dots = Array.from({ length: count }, (_, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", `${i + 1} / ${count}`);
+      b.addEventListener("click", () => embla.scrollTo(i));
+      dotsEl.appendChild(b);
+      return b;
+    });
+    const sync = () =>
+      dots.forEach((d, i) =>
+        d.classList.toggle("is-active", i === embla.selectedScrollSnap()),
+      );
+    embla.on("select", sync).on("init", sync);
+    sync();
+
+    root
+      .querySelector("[data-prev]")
+      ?.addEventListener("click", () => embla.scrollPrev());
+    root
+      .querySelector("[data-next]")
+      ?.addEventListener("click", () => embla.scrollNext());
+  });
+</script>

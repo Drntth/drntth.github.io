@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import TechnologyDetail from "../../views/TechnologyDetail.astro";
+
+export async function getStaticPaths() {
+  return (await getCollection("technologies")).map((t) => ({
+    params: { slug: t.id },
+  }));
+}
+const { slug } = Astro.params;
+---
+
+<TechnologyDetail lang="en" slug={slug!} />

@@ -1,0 +1,247 @@
+{
+  "meta": {
+    "title": "Tóth Dorina - Software Developer, AI & Backend",
+    "description": "Portfolio of Tóth Dorina: LLM, RAG, NLP and computer vision systems, document processing and Python backend development.",
+    "keywords": "Tóth Dorina Ildikó, Tóth Dorina, Dorina Tóth, software developer, AI developer, backend developer, LLM, GenAI, RAG, NLP, computer vision, prompt engineering, fine-tuning, embeddings, OCR, Tesseract, deep learning, Python, Django, PostgreSQL, Hungary"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "stack": "Stack",
+    "certificates": "Certificates",
+    "projects": "Projects",
+    "technologies": "Technologies",
+    "research": "Research",
+    "contact": "Contact",
+    "cv": "CV"
+  },
+  "ui": {
+    "theme": "Toggle light/dark theme",
+    "menu": "Toggle menu",
+    "prev": "Previous slide",
+    "next": "Next slide",
+    "language": "Switch language"
+  },
+  "hero": {
+    "name": "Tóth Dorina Ildikó",
+    "shortName": "Dorina Tóth",
+    "role": "Software Developer - AI & Backend",
+    "tagline": "I work at the intersection of AI and software engineering. I am interested in not only using AI technologies but understanding them, and integrating them into reliable software systems that solve real problems.",
+    "keywords": [
+      "NLP",
+      "LLM",
+      "GenAI",
+      "Computer Vision",
+      "RAG",
+      "Prompt Engineering",
+      "Fine-tuning",
+      "Embeddings",
+      "OCR",
+      "Deep Learning"
+    ],
+    "cta": {
+      "projects": "Selected projects",
+      "github": "GitHub",
+      "cv": "Download CV"
+    }
+  },
+  "focus": {
+    "title": "Focus areas",
+    "intro": "I work with LLMs, RAG systems, embeddings, prompt engineering, fine-tuning, document processing and Python-based AI applications, while also deepening my understanding of the foundations of machine learning and deep learning.",
+    "items": [
+      {
+        "icon": "lucide:sparkles",
+        "name": "LLM and GenAI engineering",
+        "text": "LLM-based systems, prompt engineering, fine-tuning, generative AI applications, and experiments with AI agents and agent frameworks."
+      },
+      {
+        "icon": "lucide:search-code",
+        "name": "RAG and embeddings",
+        "text": "Retrieval-augmented systems, embeddings, chunking and vector search with PostgreSQL and pgvector."
+      },
+      {
+        "icon": "lucide:scan-text",
+        "name": "Document intelligence",
+        "text": "OCR with Tesseract, AI vision, document cleaning and content extraction, AI-based text processing."
+      },
+      {
+        "icon": "lucide:brain-circuit",
+        "name": "NLP, ML and deep learning",
+        "text": "Natural language processing, neural networks, computer vision, model training, and the mathematical foundations behind them."
+      },
+      {
+        "icon": "lucide:server",
+        "name": "Backend and APIs",
+        "text": "Python and Django backends, API-based services, SQL and PostgreSQL, containerization with Docker."
+      },
+      {
+        "icon": "lucide:puzzle",
+        "name": "Optimization and system design",
+        "text": "Constraint satisfaction and SAT-based optimization, linear and logical constraints, software architecture."
+      }
+    ]
+  },
+  "featured": {
+    "title": "Selected projects",
+    "open": "View project",
+    "all": "All projects"
+  },
+  "about": {
+    "title": "About",
+    "paragraphs": [
+      "My interest in AI began during my university years, when I started experimenting with the first LLMs and chatbots that could communicate in natural language and help with programming tasks. At first this steered me towards practical uses of NLP and generative AI; later I became more interested in what happens behind the technology. In Python I worked on machine learning and image processing projects, training models and working with neural networks and computer vision, and alongside them I studied how machine learning, deep learning, algorithms and the underlying mathematics work. In my thesis I studied the practical use of language models and prompting techniques.",
+      "I currently work as an AI developer. Besides building LLM-based systems, RAG, embeddings, prompt engineering, fine-tuning, document processing, OCR, AI-based text processing and Python systems, my work also covers classical software engineering and optimization problems. I am particularly interested in integrating AI capabilities into reliable, well-designed software systems, so I want to understand the technologies behind them, not just use them. In the coming years I want to grow towards an AI Engineer / Software Engineer role where I can independently design and build complex AI-based systems while keeping a research and experimental mindset.",
+      "For me, AI should not replace engineering thinking but serve as its tool. I use LLMs and vibe-coding-style tools mainly for faster prototyping, learning, experimenting and supporting the development process, while I consider it important to truly understand the code, the architecture and the technologies used. I like to examine a problem from several angles, experiment with different solutions, and then turn the working result into a real software system."
+    ],
+    "softTitle": "Soft skills",
+    "soft": [
+      "Problem solving",
+      "Analytical thinking",
+      "Teamwork",
+      "Communication",
+      "Leadership",
+      "Presentation",
+      "Responsibility",
+      "Adaptability",
+      "Fast learning"
+    ],
+    "experienceTitle": "Experience",
+    "experience": [
+      {
+        "period": "2025 - present",
+        "role": "Software Developer",
+        "org": "Eszterházy Károly Catholic University, IT Development Department",
+        "text": "Design and development of Python-based systems that use AI. Technology areas: LLMs, RAG and embeddings, prompt engineering, fine-tuning, document processing and OCR (Tesseract, AI vision), AI-based text processing, and constraint-based optimization (SAT solving, linear and logical constraints). Experimenting with agent frameworks."
+      },
+      {
+        "period": "2023 - 2024",
+        "role": "Teaching Assistant",
+        "org": "Eszterházy Károly Catholic University",
+        "text": "Supported programming courses in C#: procedural and object-oriented programming, collections, LINQ, generics and GUI programming, plus agile project methods, Git, UML and testing."
+      },
+      {
+        "period": "2022 - 2025",
+        "role": "Web Developer and Maintainer",
+        "org": "Kepes György College for Advanced Studies",
+        "text": "Website development and maintenance with HTML, CSS and JavaScript. Also served as head of the external communication working group, financial officer and secretary."
+      }
+    ],
+    "educationTitle": "Education",
+    "education": [
+      {
+        "period": "2022 - 2025",
+        "name": "BSc in Software Engineering",
+        "org": "Eszterházy Károly Catholic University"
+      },
+      {
+        "period": "2018 - 2022",
+        "name": "Computer System Maintenance Technician",
+        "org": "Váci SZC Petőfi Sándor Technical School"
+      }
+    ]
+  },
+  "stack": {
+    "title": "Stack",
+    "intro": "Technologies and areas I work with, grouped by type."
+  },
+  "certificates": {
+    "title": "Certificates",
+    "intro": "Completed courses and certifications.",
+    "open": "Open PDF",
+    "issued": "Issued"
+  },
+  "projects": {
+    "title": "Projects",
+    "intro": "Published, professionally relevant projects.",
+    "goal": "Goal",
+    "solution": "Solution",
+    "result": "Result",
+    "status": "Status",
+    "details": "Details",
+    "repo": "Repository",
+    "demo": "Demo",
+    "models": "Tested models"
+  },
+  "contact": {
+    "title": "Contact",
+    "github": "https://github.com/Drntth",
+    "linkedin": "https://www.linkedin.com/in/dorina-t%C3%B3th-045488357/",
+    "email": "tothdi03@gmail.com",
+    "cv": "/cv/Toth_Dorina_Ildiko_CV_en.pdf"
+  },
+  "projectPage": {
+    "back": "All projects",
+    "concepts": "Technology nodes",
+    "research": "Related research",
+    "links": "Links"
+  },
+  "technologiesPage": {
+    "title": "Technologies",
+    "intro": "A knowledge map of technologies I research through real project needs. It is not a skill list: every node exists because a project raised a concrete question, and links to the projects, languages and research around it.",
+    "modelTitle": "How the map is structured",
+    "modelText": "A technology node describes a general concept. A language entry documents how that concept is implemented in one language. A project documents how it uses the concept and the implementation.",
+    "modelLabels": {
+      "language": "Programming language",
+      "implements": "implements",
+      "technology": "Technology / concept",
+      "usedBy": "used by",
+      "project": "Project"
+    },
+    "modelExample": "Example: Python and Java implement Branching, which a game project (planned) uses.",
+    "flowTitle": "How a technology gets researched",
+    "flowNote": "Research starts from a concrete project requirement and covers only what the project needs. It does not reproduce a technology's full documentation. A concept that matters in several projects becomes a technology node; project-specific implementation stays in the project.",
+    "flow": [
+      "Project requirement",
+      "Unknown / technical question",
+      "Required technology",
+      "Relevant concepts",
+      "Targeted research",
+      "Prototype / validation",
+      "Decision",
+      "Technology node / project documentation"
+    ],
+    "graphTitle": "Connection map",
+    "graphHint": "Drag nodes, hover to highlight connections, click to open. Dashed nodes are planned. The map grows automatically as projects, technologies and research are added.",
+    "graphLabel": "Graph connecting programming languages, technologies, projects and research",
+    "legend": {
+      "language": "Language",
+      "technology": "Technology",
+      "project": "Project",
+      "research": "Research",
+      "planned": "Planned"
+    },
+    "nodesTitle": "Technology nodes",
+    "published": "Published",
+    "planned": "Planned",
+    "open": "Open node",
+    "back": "All technologies",
+    "requirement": "Project requirement",
+    "question": "Technical question",
+    "validation": "Validation",
+    "decision": "Decision",
+    "implementations": "Implementations by language",
+    "noImpl": "No language implementation documented yet.",
+    "usedBy": "Used by projects",
+    "researchBy": "Related research",
+    "plannedTitle": "Planned content"
+  },
+  "researchPage": {
+    "title": "Research",
+    "intro": "Selected research with standalone professional value, each tied to a project and the technologies it touches.",
+    "note": "This page is a plan. Entries marked Planned describe the intended content and structure, not finished research.",
+    "rulesTitle": "Publication rules",
+    "rules": [
+      "Only selected research with standalone professional value is published.",
+      "Private research is never published automatically.",
+      "Research starts from a concrete project question."
+    ],
+    "planned": "Planned",
+    "published": "Published",
+    "question": "Research question",
+    "findings": "Findings",
+    "plannedTitle": "What will be published here",
+    "examplesTitle": "Example outputs",
+    "technologies": "Related technologies",
+    "projects": "Related projects"
+  }
+}

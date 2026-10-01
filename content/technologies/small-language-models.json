@@ -1,0 +1,40 @@
+{
+  "order": 2,
+  "visibility": "published",
+  "icon": "lucide:cpu",
+  "implementations": [
+    {
+      "language": "python",
+      "en": {
+        "summary": "Models are loaded and run through Hugging Face Transformers pipelines.",
+        "notes": []
+      },
+      "hu": {
+        "summary": "A modellek betöltése és futtatása Hugging Face Transformers pipeline-okon keresztül történik.",
+        "notes": []
+      }
+    }
+  ],
+  "en": {
+    "title": "Small language models",
+    "summary": "Using small-parameter, freely available language models on minimal hardware.",
+    "process": {
+      "requirement": "No hardware for running large models.",
+      "question": "How far can small models go in document generation?",
+      "validation": "DistilGPT2, GPT-Neo 125M, Facebook OPT 125M and 350M, and GPT-2 Medium were compared.",
+      "decision": "Small models are usable with tailored prompting; handling complex relationships is still limited and needs fine-tuning."
+    },
+    "body": []
+  },
+  "hu": {
+    "title": "Kisebb nyelvi modellek",
+    "summary": "Kisebb paraméterszámú, ingyenesen elérhető nyelvi modellek használata minimális hardveren.",
+    "process": {
+      "requirement": "Nincs hardver nagy modellek futtatásához.",
+      "question": "Meddig juthatnak el a kisebb modellek a dokumentumgenerálásban?",
+      "validation": "Összehasonlítottam a DistilGPT2, GPT-Neo 125M, Facebook OPT 125M és 350M, valamint a GPT-2 Medium modelleket.",
+      "decision": "A kisebb modellek célzott promptolással használhatók; a komplex összefüggések kezelése korlátozott, finomhangolást igényel."
+    },
+    "body": []
+  }
+}

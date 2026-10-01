@@ -1,0 +1,161 @@
+---
+import "../styles/global.css";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/space-grotesk";
+import Header from "../components/Header.astro";
+import Background from "../components/Background.astro";
+import { getContent, switchPath, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  keywords?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>;
+}
+const {
+  lang,
+  title,
+  description,
+  keywords,
+  type = "website",
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+const c = getContent(lang);
+const pageTitle = title ?? c.meta.title;
+const pageDesc = description ?? c.meta.description;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og.png", Astro.site);
+const url = (l: Lang) => new URL(switchPath(Astro.url, l), Astro.site);
+
+const person = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${Astro.site}#person`,
+  name: "Tóth Dorina Ildikó",
+  givenName: 'Dorina',
+  additionalName: 'Ildikó',
+  familyName: 'Tóth',
+  alternateName: ["Dorina Tóth", "Tóth Dorina"],
+  jobTitle: c.hero.role,
+  url: String(Astro.site),
+  image: String(new URL("/apple-touch-icon.png", Astro.site)),
+  email: `mailto:${c.contact.email}`,
+  sameAs: [c.contact.github, c.contact.linkedin],
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Eszterházy Károly Catholic University",
+  },
+  knowsLanguage: ["hu", "en", "de"],
+  knowsAbout: [
+    "Artificial intelligence",
+    "Large language models",
+    "Retrieval-augmented generation",
+    "Natural language processing",
+    "Computer vision",
+    "Prompt engineering",
+    "Python",
+    "Backend development",
+  ],
+};
+
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta name="keywords" content={keywords ?? c.meta.keywords} />
+    <meta name="author" content="Tóth Dorina Ildikó" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#7c3aed" />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={c.hero.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={c.hero.name} />
+    <meta property="og:locale" content={lang === "hu" ? "hu_HU" : "en_GB"} />
+    <meta
+      property="og:locale:alternate"
+      content={lang === "hu" ? "en_GB" : "hu_HU"}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={url("en")} />
+    <link rel="alternate" hreflang="hu" href={url("hu")} />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(person)}
+    />
+    {
+      jsonLd && (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify(jsonLd)}
+        />
+      )
+    }
+
+    <script is:inline>
+      const stored = localStorage.getItem("theme");
+      const dark = stored
+        ? stored === "dark"
+        : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.classList.toggle("dark", dark);
+    </script>
+  </head>
+  <body class="min-h-screen antialiased">
+    <Background />
+    <Header lang={lang} />
+    <main class="mx-auto max-w-6xl px-6 py-12">
+      <slot />
+    </main>
+    <div class="mx-auto max-w-5xl px-6">
+      <hr class="border-line" />
+
+      <footer class="flex flex-col items-center gap-2 py-10 text-center">
+        <p class="font-display text-sm font-medium text-gradient">
+          &copy; {new Date().getFullYear()} - {c.hero.name}
+        </p>
+      </footer>
+    </div>
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

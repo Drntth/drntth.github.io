@@ -1,0 +1,29 @@
+{
+  "order": 2,
+  "issuer": "AWS Training and Certification",
+  "date": "2026-09-24",
+  "file": "/certs/aws-ml-ai-fundamentals.pdf",
+  "preview": "/certs/aws-ml-ai-fundamentals.png",
+  "en": {
+    "title": "Fundamentals of Machine Learning and Artificial Intelligence",
+    "summary": "Foundations of ML and AI and how AI, ML, deep learning and generative AI relate. Covers training data types, learning paradigms, neural networks, the foundation model lifecycle, and AWS services that use AI.",
+    "topics": [
+      "AI, ML, deep learning and generative AI",
+      "Supervised, unsupervised and reinforcement learning",
+      "Neural networks",
+      "Foundation models: LLMs, diffusion and multimodal models",
+      "AWS AI services (Amazon Bedrock, Comprehend, Polly)"
+    ]
+  },
+  "hu": {
+    "title": "Fundamentals of Machine Learning and Artificial Intelligence",
+    "summary": "A gépi tanulás és a mesterséges intelligencia alapjai, valamint az AI, ML, deep learning és generatív AI kapcsolata. Témák: tanítóadatok típusai, tanulási paradigmák, neurális hálózatok, a foundation modellek életciklusa és az AI-t használó AWS szolgáltatások.",
+    "topics": [
+      "AI, ML, deep learning és generatív AI",
+      "Felügyelt, felügyelet nélküli és megerősítéses tanulás",
+      "Neurális hálózatok",
+      "Foundation modellek: LLM, diffúziós és multimodális modellek",
+      "AWS AI szolgáltatások (Amazon Bedrock, Comprehend, Polly)"
+    ]
+  }
+}

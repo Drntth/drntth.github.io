@@ -1,0 +1,247 @@
+{
+  "meta": {
+    "title": "Tóth Dorina - Szoftverfejlesztő, AI és Backend",
+    "description": "Tóth Dorina portfóliója: LLM, RAG, NLP és computer vision rendszerek, dokumentumfeldolgozás és Python backend fejlesztés.",
+    "keywords": "Tóth Dorina Ildikó, Tóth Dorina, Dorina Tóth, software developer, AI developer, backend developer, LLM, GenAI, RAG, NLP, computer vision, prompt engineering, fine-tuning, embeddings, OCR, Tesseract, deep learning, Python, Django, PostgreSQL, Hungary"
+  },
+  "nav": {
+    "home": "Kezdőlap",
+    "about": "Rólam",
+    "stack": "Stack",
+    "certificates": "Tanúsítványok",
+    "projects": "Projektek",
+    "technologies": "Technológiák",
+    "research": "Kutatás",
+    "contact": "Kapcsolat",
+    "cv": "Önéletrajz"
+  },
+  "ui": {
+    "theme": "Világos/sötét téma váltása",
+    "menu": "Menü megnyitása",
+    "prev": "Előző dia",
+    "next": "Következő dia",
+    "language": "Nyelv váltása"
+  },
+  "hero": {
+    "name": "Tóth Dorina Ildikó",
+    "shortName": "Tóth Dorina",
+    "role": "Szoftverfejlesztő - AI és Backend",
+    "tagline": "AI és software engineering metszetében dolgozom. Az érdekel, hogyan lehet az AI-technológiákat nemcsak használni, hanem megérteni és megbízható, valódi problémákat megoldó szoftverrendszerekbe integrálni.",
+    "keywords": [
+      "NLP",
+      "LLM",
+      "GenAI",
+      "Computer Vision",
+      "RAG",
+      "Prompt Engineering",
+      "Fine-tuning",
+      "Embeddings",
+      "OCR",
+      "Deep Learning"
+    ],
+    "cta": {
+      "projects": "Kiemelt projektek",
+      "github": "GitHub",
+      "cv": "Önéletrajz letöltése"
+    }
+  },
+  "focus": {
+    "title": "Fókuszterületek",
+    "intro": "LLM-ekkel, RAG rendszerekkel, embeddingekkel, prompt engineeringgel, fine-tuninggal, dokumentumfeldolgozással és Python-alapú AI alkalmazásokkal foglalkozom, miközben a machine learning és deep learning alapjainak mélyebb megértésére is törekszem.",
+    "items": [
+      {
+        "icon": "lucide:sparkles",
+        "name": "LLM és GenAI fejlesztés",
+        "text": "LLM-alapú rendszerek, prompt engineering, fine-tuning, generatív AI alkalmazások, valamint kísérletezés AI agentekkel és agent keretrendszerekkel."
+      },
+      {
+        "icon": "lucide:search-code",
+        "name": "RAG és embeddingek",
+        "text": "Retrieval-augmented rendszerek, embeddingek, chunkolás és vektorkeresés PostgreSQL és pgvector segítségével."
+      },
+      {
+        "icon": "lucide:scan-text",
+        "name": "Dokumentumfeldolgozás",
+        "text": "OCR Tesseracttel, AI vision, dokumentumtisztítás és tartalomkinyerés, AI-alapú szövegfeldolgozás."
+      },
+      {
+        "icon": "lucide:brain-circuit",
+        "name": "NLP, ML és deep learning",
+        "text": "Természetes nyelvfeldolgozás, neurális hálózatok, computer vision, modellek betanítása és a mögöttes matematikai alapok."
+      },
+      {
+        "icon": "lucide:server",
+        "name": "Backend és API-k",
+        "text": "Python és Django backend, API-alapú szolgáltatások, SQL és PostgreSQL, konténerizáció Dockerrel."
+      },
+      {
+        "icon": "lucide:puzzle",
+        "name": "Optimalizálás és rendszertervezés",
+        "text": "Korlátkielégítés és SAT-alapú optimalizálás, lineáris és logikai korlátok, szoftverarchitektúra."
+      }
+    ]
+  },
+  "featured": {
+    "title": "Kiemelt projektek",
+    "open": "Projekt megtekintése",
+    "all": "Összes projekt"
+  },
+  "about": {
+    "title": "Rólam",
+    "paragraphs": [
+      "Az AI iránti érdeklődésem az egyetemi éveim alatt kezdődött, amikor az első olyan LLM-ekkel és chatbotokkal kezdtem kísérletezni, amelyek már természetes nyelven is képesek voltak kommunikálni és programozási feladatokban segítséget nyújtani. Ez kezdetben főként az NLP és a generatív AI gyakorlati felhasználása felé terelt, később azonban egyre mélyebben kezdett érdekelni az is, mi történik a technológia mögött. Pythonban gépi tanulási és képfeldolgozási projekteken keresztül foglalkoztam modellek betanításával, neurális hálózatokkal és Computer Vision feladatokkal, majd ezek mellett a machine learning, deep learning, algoritmusok és a kapcsolódó matematikai alapok működését is elkezdtem tanulmányozni. A szakdolgozatomban már nyelvi modellek gyakorlati alkalmazását és promptolási technikákat vizsgáltam.",
+      "Jelenleg AI fejlesztőként dolgozom, ahol az LLM-ek, RAG rendszerek, embeddingek, prompt engineering, fine-tuning, dokumentumfeldolgozás, OCR, AI-alapú szövegfeldolgozás és Python-alapú rendszerek fejlesztése mellett a klasszikus software engineering és optimalizálási problémák is részei a munkámnak. Különösen érdekel, hogyan lehet az AI-képességeket megbízható és jól tervezett szoftverrendszerekbe integrálni, ezért a technológiákat nem csak használni, hanem a mögöttük álló működést is megérteni szeretném. A következő években olyan AI Engineer / Software Engineer irányba szeretnék fejlődni, ahol önállóan tudok komplex AI-alapú rendszereket megtervezni és megvalósítani, miközben a kutatási és kísérleti megközelítést is megtartom.",
+      "A fejlesztésben számomra az egyik legfontosabb szempont, hogy az AI ne helyettesítse a mérnöki gondolkodást, hanem annak eszköze legyen. Az LLM-eket és a vibe coding jellegű eszközöket is elsősorban gyorsabb prototípus-készítésre, tanulásra, kísérletezésre és a fejlesztési folyamat támogatására használom, miközben fontosnak tartom a kód, az architektúra és az alkalmazott technológiák tényleges megértését. Szeretek egy problémát több oldalról megvizsgálni, kísérletezni különböző megoldásokkal, majd a működő eredményt valódi szoftverrendszerré alakítani."
+    ],
+    "softTitle": "Soft skillek",
+    "soft": [
+      "Problémamegoldás",
+      "Analitikus gondolkodás",
+      "Csapatmunka",
+      "Kommunikáció",
+      "Vezetői készség",
+      "Prezentáció",
+      "Felelősségvállalás",
+      "Alkalmazkodás",
+      "Gyors tanulás"
+    ],
+    "experienceTitle": "Szakmai tapasztalat",
+    "experience": [
+      {
+        "period": "2025 - jelenleg",
+        "role": "Szoftverfejlesztő",
+        "org": "Eszterházy Károly Katolikus Egyetem, Informatikai Fejlesztési Osztály",
+        "text": "AI-t alkalmazó, Python-alapú rendszerek tervezése és fejlesztése. Technológiai területek: LLM-ek, RAG és embeddingek, prompt engineering, fine-tuning, dokumentumfeldolgozás és OCR (Tesseract, AI vision), AI-alapú szövegfeldolgozás, valamint korlátalapú optimalizálás (SAT-solver, lineáris és logikai korlátok). Agent keretrendszerekkel kísérletezem."
+      },
+      {
+        "period": "2023 - 2024",
+        "role": "Oktatási asszisztens demonstrátor",
+        "org": "Eszterházy Károly Katolikus Egyetem",
+        "text": "C# programozási kurzusok támogatása: eljárásorientált és objektumorientált programozás, gyűjtemények, LINQ, generikusok és grafikus felületek, valamint agilis projektmódszerek, Git, UML és tesztelés."
+      },
+      {
+        "period": "2022 - 2025",
+        "role": "Webfejlesztő és karbantartó",
+        "org": "Kepes György Szakkollégium",
+        "text": "Weboldal fejlesztése és karbantartása HTML, CSS és JavaScript segítségével. Emellett a külső kommunikációs munkacsoport vezetője, gazdasági felelős és titkár."
+      }
+    ],
+    "educationTitle": "Tanulmányok",
+    "education": [
+      {
+        "period": "2022 - 2025",
+        "name": "Programtervező informatikus BSc",
+        "org": "Eszterházy Károly Katolikus Egyetem"
+      },
+      {
+        "period": "2018 - 2022",
+        "name": "Számítógépes rendszerkarbantartó",
+        "org": "Váci SZC Petőfi Sándor Műszaki Technikum"
+      }
+    ]
+  },
+  "stack": {
+    "title": "Stack",
+    "intro": "A használt technológiák és területek típus szerint csoportosítva."
+  },
+  "certificates": {
+    "title": "Tanúsítványok",
+    "intro": "Elvégzett kurzusok és tanúsítványok.",
+    "open": "PDF megnyitása",
+    "issued": "Kiállítva"
+  },
+  "projects": {
+    "title": "Projektek",
+    "intro": "Publikált, szakmailag releváns projektek.",
+    "goal": "Cél",
+    "solution": "Megoldás",
+    "result": "Eredmény",
+    "status": "Állapot",
+    "details": "Részletek",
+    "repo": "Repó",
+    "demo": "Demó",
+    "models": "Tesztelt modellek"
+  },
+  "contact": {
+    "title": "Kapcsolat",
+    "github": "https://github.com/Drntth",
+    "linkedin": "https://www.linkedin.com/in/dorina-t%C3%B3th-045488357/",
+    "email": "tothdi03@gmail.com",
+    "cv": "/cv/Toth_Dorina_Ildiko_CV_hu.pdf"
+  },
+  "projectPage": {
+    "back": "Összes projekt",
+    "concepts": "Technology csomópontok",
+    "research": "Kapcsolódó kutatás",
+    "links": "Hivatkozások"
+  },
+  "technologiesPage": {
+    "title": "Technológiák",
+    "intro": "Tudástérkép azokról a technológiákról, amelyeket valós projektigényeken keresztül kutatok. Nem skill-lista: minden csomópont azért létezik, mert egy projekt konkrét kérdést vetett fel, és kapcsolódik a körülötte lévő projektekhez, nyelvekhez és kutatásokhoz.",
+    "modelTitle": "A térkép felépítése",
+    "modelText": "A technology csomópont egy általános koncepciót ír le. A nyelvi bejegyzés azt dokumentálja, hogyan valósul meg a koncepció egy adott nyelven. A projekt azt, hogyan használja a koncepciót és a megvalósítást.",
+    "modelLabels": {
+      "language": "Programozási nyelv",
+      "implements": "megvalósítja",
+      "technology": "Technológia / koncepció",
+      "usedBy": "használja",
+      "project": "Projekt"
+    },
+    "modelExample": "Példa: a Python és a Java megvalósítja a Branchinget, amelyet egy (tervezett) játékprojekt használ.",
+    "flowTitle": "Hogyan kutatok egy technológiát",
+    "flowNote": "A kutatás konkrét projektigényből indul, és csak azt fedi le, amire a projektnek szüksége van. Nem célja egy technológia teljes dokumentációjának reprodukálása. Ha egy koncepció több projektben is fontos, technology csomópont lesz belőle; a projektspecifikus megvalósítás a projektben marad.",
+    "flow": [
+      "Projektigény",
+      "Ismeretlen / technikai kérdés",
+      "Szükséges technológia",
+      "Releváns koncepciók",
+      "Célzott kutatás",
+      "Prototípus / validáció",
+      "Döntés",
+      "Technology csomópont / projektdokumentáció"
+    ],
+    "graphTitle": "Kapcsolati térkép",
+    "graphHint": "Húzd a csomópontokat, vidd fölé az egeret a kapcsolatok kiemeléséhez, kattintással megnyitod. A szaggatott csomópontok tervezettek. A térkép magától bővül, ahogy új projekt, technológia és kutatás kerül be.",
+    "graphLabel": "Gráf, amely programozási nyelveket, technológiákat, projekteket és kutatásokat köt össze",
+    "legend": {
+      "language": "Nyelv",
+      "technology": "Technológia",
+      "project": "Projekt",
+      "research": "Kutatás",
+      "planned": "Tervezett"
+    },
+    "nodesTitle": "Technology csomópontok",
+    "published": "Publikált",
+    "planned": "Tervezett",
+    "open": "Csomópont megnyitása",
+    "back": "Összes technológia",
+    "requirement": "Projektigény",
+    "question": "Technikai kérdés",
+    "validation": "Validáció",
+    "decision": "Döntés",
+    "implementations": "Megvalósítások nyelvenként",
+    "noImpl": "Még nincs dokumentált nyelvi megvalósítás.",
+    "usedBy": "Ezek a projektek használják",
+    "researchBy": "Kapcsolódó kutatás",
+    "plannedTitle": "Tervezett tartalom"
+  },
+  "researchPage": {
+    "title": "Kutatás",
+    "intro": "Kiválasztott, önálló szakmai értékkel bíró kutatások, mindegyik egy projekthez és az érintett technológiákhoz kötve.",
+    "note": "Ez az oldal terv. A Tervezett jelzésű bejegyzések a szándékolt tartalmat és szerkezetet írják le, nem kész kutatást.",
+    "rulesTitle": "Publikálási szabályok",
+    "rules": [
+      "Csak kiválasztott, önálló szakmai értékkel bíró kutatás kerül ki.",
+      "A privát kutatás sosem kerül ki automatikusan.",
+      "A kutatás konkrét projektkérdésből indul."
+    ],
+    "planned": "Tervezett",
+    "published": "Publikált",
+    "question": "Kutatási kérdés",
+    "findings": "Eredmények",
+    "plannedTitle": "Mi fog itt megjelenni",
+    "examplesTitle": "Példa kimenetek",
+    "technologies": "Kapcsolódó technológiák",
+    "projects": "Kapcsolódó projektek"
+  }
+}

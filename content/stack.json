@@ -1,0 +1,174 @@
+{
+  "groups": [
+    {
+      "id": "languages",
+      "name": { "en": "Languages", "hu": "Nyelvek" },
+      "items": [
+        { "id": "python", "name": "Python", "icon": "simple-icons:python" },
+        { "id": "java", "name": "Java", "icon": "mdi:language-java" },
+        { "id": "csharp", "name": "C#", "icon": "mdi:language-csharp" },
+        {
+          "id": "typescript",
+          "name": "TypeScript",
+          "icon": "simple-icons:typescript"
+        },
+        {
+          "id": "javascript",
+          "name": "JavaScript",
+          "icon": "simple-icons:javascript"
+        },
+        { "id": "sql", "name": "SQL", "icon": "lucide:database" },
+        { "id": "php", "name": "PHP", "icon": "simple-icons:php" }
+      ]
+    },
+    {
+      "id": "frameworks",
+      "name": {
+        "en": "Frameworks and libraries",
+        "hu": "Keretrendszerek és könyvtárak"
+      },
+      "items": [
+        { "id": "django", "name": "Django", "icon": "simple-icons:django" },
+        {
+          "id": "spring-boot",
+          "name": "Spring Boot",
+          "icon": "simple-icons:springboot"
+        },
+        { "id": "dotnet", "name": ".NET", "icon": "simple-icons:dotnet" },
+        { "id": "laravel", "name": "Laravel", "icon": "simple-icons:laravel" },
+        { "id": "react", "name": "React", "icon": "simple-icons:react" },
+        { "id": "astro", "name": "Astro", "icon": "simple-icons:astro" },
+        {
+          "id": "tailwind",
+          "name": "Tailwind CSS",
+          "icon": "simple-icons:tailwindcss"
+        },
+        {
+          "id": "bootstrap",
+          "name": "Bootstrap",
+          "icon": "simple-icons:bootstrap"
+        },
+        { "id": "html5", "name": "HTML5", "icon": "simple-icons:html5" },
+        { "id": "css3", "name": "CSS3", "icon": "mdi:language-css3" }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": { "en": "Databases", "hu": "Adatbázisok" },
+      "items": [
+        {
+          "id": "postgresql",
+          "name": "PostgreSQL",
+          "icon": "simple-icons:postgresql"
+        },
+        { "id": "mysql", "name": "MySQL", "icon": "simple-icons:mysql" },
+        { "id": "sqlite", "name": "SQLite", "icon": "simple-icons:sqlite" },
+        { "id": "mongodb", "name": "MongoDB", "icon": "simple-icons:mongodb" }
+      ]
+    },
+    {
+      "id": "devops",
+      "name": { "en": "DevOps and tools", "hu": "DevOps és eszközök" },
+      "items": [
+        { "id": "docker", "name": "Docker", "icon": "simple-icons:docker" },
+        {
+          "id": "github-actions",
+          "name": "GitHub Actions",
+          "icon": "simple-icons:githubactions"
+        },
+        { "id": "git", "name": "Git", "icon": "simple-icons:git" },
+        { "id": "github", "name": "GitHub", "icon": "mdi:github" },
+        { "id": "bash", "name": "Bash", "icon": "simple-icons:gnubash" },
+        { "id": "linux", "name": "Linux", "icon": "simple-icons:linux" },
+        { "id": "cypress", "name": "Cypress", "icon": "simple-icons:cypress" },
+        { "id": "plantuml", "name": "PlantUML", "icon": "lucide:workflow" },
+        { "id": "trello", "name": "Trello", "icon": "simple-icons:trello" },
+        {
+          "id": "markdown",
+          "name": "Markdown",
+          "icon": "simple-icons:markdown"
+        },
+        { "id": "latex", "name": "LaTeX", "icon": "simple-icons:latex" }
+      ]
+    },
+    {
+      "id": "ai",
+      "name": { "en": "AI and ML", "hu": "AI és ML" },
+      "items": [
+        {
+          "id": "huggingface",
+          "name": "Hugging Face Transformers",
+          "icon": "simple-icons:huggingface"
+        },
+        { "id": "ollama", "name": "Ollama", "icon": "simple-icons:ollama" },
+        { "id": "pytorch", "name": "PyTorch", "icon": "simple-icons:pytorch" },
+        { "id": "langgraph", "name": "LangGraph", "icon": "lucide:share-2" },
+        { "id": "pgvector", "name": "pgvector", "icon": "lucide:database" },
+        {
+          "id": "tesseract",
+          "name": "Tesseract OCR",
+          "icon": "lucide:scan-text"
+        },
+        { "id": "openai", "name": "OpenAI API", "icon": "simple-icons:openai" },
+        {
+          "id": "anthropic",
+          "name": "Anthropic API",
+          "icon": "simple-icons:anthropic"
+        }
+      ]
+    },
+    {
+      "id": "concepts",
+      "name": { "en": "Concepts", "hu": "Koncepciók" },
+      "items": [
+        { "id": "llm", "name": "LLM and GenAI", "icon": "lucide:sparkles" },
+        { "id": "rag", "name": "RAG", "icon": "lucide:search-code" },
+        { "id": "embeddings", "name": "Embeddings", "icon": "lucide:braces" },
+        {
+          "id": "prompt-engineering",
+          "name": "Prompt engineering",
+          "icon": "lucide:message-square-text"
+        },
+        {
+          "id": "fine-tuning",
+          "name": "Fine-tuning",
+          "icon": "lucide:sliders-horizontal"
+        },
+        { "id": "nlp", "name": "NLP", "icon": "lucide:languages" },
+        {
+          "id": "deep-learning",
+          "name": "Deep learning",
+          "icon": "lucide:brain-circuit"
+        },
+        {
+          "id": "computer-vision",
+          "name": "Computer vision",
+          "icon": "lucide:scan-eye"
+        },
+        {
+          "id": "ai-agents",
+          "name": { "en": "AI agents", "hu": "AI agentek" },
+          "icon": "lucide:bot"
+        },
+        {
+          "id": "constraint-solving",
+          "name": {
+            "en": "Constraint solving (SAT)",
+            "hu": "Korlátkielégítés (SAT)"
+          },
+          "icon": "lucide:puzzle"
+        },
+        {
+          "id": "rest-api",
+          "name": { "en": "REST APIs", "hu": "REST API-k" },
+          "icon": "lucide:plug"
+        },
+        {
+          "id": "system-design",
+          "name": { "en": "System design", "hu": "Rendszertervezés" },
+          "icon": "lucide:blocks"
+        }
+      ]
+    }
+  ]
+}

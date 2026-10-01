@@ -1,0 +1,48 @@
+{
+  "order": 1,
+  "visibility": "published",
+  "icon": "lucide:message-square-text",
+  "implementations": [
+    {
+      "language": "python",
+      "en": {
+        "summary": "Prompts and generation parameters are assembled in a Python service layer and passed to Hugging Face text-generation pipelines.",
+        "notes": [
+          "Implemented as a service class around a text-generation pipeline inside a Django app."
+        ]
+      },
+      "hu": {
+        "summary": "A promptokat és a generálási paramétereket egy Python szolgáltatási réteg állítja össze, majd Hugging Face text-generation pipeline-nak adja át.",
+        "notes": [
+          "Egy Django alkalmazáson belüli, text-generation pipeline köré épített szolgáltatásosztályként valósul meg."
+        ]
+      }
+    }
+  ],
+  "en": {
+    "title": "Prompt engineering",
+    "summary": "Designing and combining prompts and generation parameters so that small language models produce useful text.",
+    "process": {
+      "requirement": "Generate project documents with small, free models on minimal hardware.",
+      "question": "Which prompting techniques and parameters give usable output across several small models?",
+      "validation": "Techniques were tested alone and in combination on five models; output was judged by how well it met user expectations.",
+      "decision": "One shared configuration that performed adequately on all five models was kept."
+    },
+    "body": [
+      "The findings are task- and model-specific: a setting that helps one model can degrade another."
+    ]
+  },
+  "hu": {
+    "title": "Prompt engineering",
+    "summary": "Promptok és generálási paraméterek tervezése és kombinálása úgy, hogy kisebb nyelvi modellek is használható szöveget adjanak.",
+    "process": {
+      "requirement": "Projektdokumentumok generálása kisebb, ingyenes modellekkel, minimális hardveren.",
+      "question": "Mely promptolási technikák és paraméterek adnak használható kimenetet több kisebb modellnél?",
+      "validation": "A technikákat külön és kombinálva is teszteltem öt modellen; a kimenetet aszerint ítéltem meg, mennyire felel meg a felhasználói elvárásoknak.",
+      "decision": "Megmaradt az a közös konfiguráció, amely mind az öt modellnél megfelelően teljesített."
+    },
+    "body": [
+      "Az eredmények feladat- és modellspecifikusak: ami az egyik modellnél javít, a másiknál ronthat."
+    ]
+  }
+}

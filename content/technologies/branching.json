@@ -1,0 +1,49 @@
+{
+  "order": 90,
+  "visibility": "planned",
+  "icon": "lucide:git-branch",
+  "implementations": [
+    {
+      "language": "python",
+      "en": {
+        "summary": "Planned: how the concept is implemented in Python.",
+        "notes": []
+      },
+      "hu": {
+        "summary": "Tervezett: a koncepció megvalósítása Pythonban.",
+        "notes": []
+      }
+    },
+    {
+      "language": "java",
+      "en": {
+        "summary": "Planned: how the concept is implemented in Java.",
+        "notes": []
+      },
+      "hu": {
+        "summary": "Tervezett: a koncepció megvalósítása Javában.",
+        "notes": []
+      }
+    }
+  ],
+  "en": {
+    "title": "Branching (example)",
+    "summary": "Example node that shows the structure: one general concept, documented once, with a separate implementation per language.",
+    "body": [],
+    "planned": [
+      "General description of the concept, independent of any language",
+      "Python implementation and Java implementation as separate notes",
+      "Link to the game project that uses it"
+    ]
+  },
+  "hu": {
+    "title": "Branching (példa)",
+    "summary": "Példa csomópont a szerkezet bemutatására: egy általános koncepció, egyszer dokumentálva, nyelvenként külön megvalósítással.",
+    "body": [],
+    "planned": [
+      "A koncepció általános leírása, nyelvtől függetlenül",
+      "Python és Java megvalósítás külön jegyzetként",
+      "Hivatkozás az azt használó játékprojektre"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+---
+import { Icon } from "astro-icon/components";
+import { techOf } from "../i18n/stack";
+import type { Lang } from "../i18n/utils";
+
+interface Props {
+  id: string;
+  lang: Lang;
+}
+const t = techOf(Astro.props.id, Astro.props.lang);
+---
+
+<span class="chip"><Icon name={t.icon} class="size-3.5" />{t.name}</span>

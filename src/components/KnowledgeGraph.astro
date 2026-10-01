@@ -1,0 +1,270 @@
+---
+import type { GNode, GLink } from "../lib/graph";
+
+interface Props {
+  nodes: GNode[];
+  links: GLink[];
+  label: string;
+  hint: string;
+  legend: Record<
+    "language" | "technology" | "project" | "research" | "planned",
+    string
+  >;
+}
+const { nodes, links, label, hint, legend } = Astro.props;
+const json = JSON.stringify({ nodes, links }).replace(/</g, "\\u003c");
+const colors: Record<string, string> = {
+  language: "var(--accent-2)",
+  technology: "var(--accent)",
+  project: "var(--fg)",
+  research: "color-mix(in srgb, var(--accent) 50%, var(--accent-2))",
+};
+---
+
+<figure data-kg class="card p-3 md:p-5">
+  <ul class="mb-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted">
+    {
+      (["language", "technology", "project", "research"] as const).map((k) => (
+        <li class="flex items-center gap-1.5">
+          <span
+            class="inline-block size-2.5 rounded-full"
+            style={`background:${colors[k]}`}
+          />
+          {legend[k]}
+        </li>
+      ))
+    }
+    <li class="flex items-center gap-1.5">
+      <span
+        class="inline-block size-2.5 rounded-full border border-dashed border-fg"
+      ></span>{legend.planned}
+    </li>
+  </ul>
+  <svg
+    viewBox="0 0 900 560"
+    role="group"
+    aria-label={label}
+    class="h-auto w-full select-none"></svg>
+  <script is:inline type="application/json" data-graph-data set:html={json} />
+  <figcaption class="mt-3 text-xs text-muted">{hint}</figcaption>
+</figure>
+
+<script>
+  import {
+    forceSimulation,
+    forceLink,
+    forceManyBody,
+    forceCollide,
+    forceX,
+    forceY,
+  } from "d3-force";
+  import type { SimulationNodeDatum, SimulationLinkDatum } from "d3-force";
+
+  interface GN extends SimulationNodeDatum {
+    id: string;
+    label: string;
+    type: string;
+    planned: boolean;
+    href?: string;
+    r: number;
+  }
+  interface GL extends SimulationLinkDatum<GN> {
+    kind: string;
+  }
+
+  const NS = "http://www.w3.org/2000/svg";
+  const W = 900,
+    H = 560;
+  const COLORS: Record<string, string> = {
+    language: "var(--accent-2)",
+    technology: "var(--accent)",
+    project: "var(--fg)",
+    research: "color-mix(in srgb, var(--accent) 50%, var(--accent-2))",
+  };
+  const svgEl = <K extends keyof SVGElementTagNameMap>(tag: K) =>
+    document.createElementNS(NS, tag);
+
+  function init(fig: HTMLElement) {
+    const svg = fig.querySelector("svg")!;
+    const data = JSON.parse(
+      fig.querySelector("script[data-graph-data]")!.textContent || "{}",
+    );
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const degree = new Map<string, number>();
+    const neighbors = new Map<string, Set<string>>();
+    data.nodes.forEach((n: any) => neighbors.set(n.id, new Set([n.id])));
+    for (const l of data.links) {
+      for (const id of [l.source, l.target])
+        degree.set(id, (degree.get(id) ?? 0) + 1);
+      neighbors.get(l.source)!.add(l.target);
+      neighbors.get(l.target)!.add(l.source);
+    }
+
+    const nodes: GN[] = data.nodes.map((n: any) => ({
+      ...n,
+      r: 7 + Math.min(9, (degree.get(n.id) ?? 0) * 2),
+    }));
+    const links: GL[] = data.links.map((l: any) => ({ ...l }));
+
+    const gLinks = svgEl("g");
+    const gNodes = svgEl("g");
+    svg.append(gLinks, gNodes);
+
+    const lineEls = links.map(() => {
+      const line = svgEl("line");
+      line.style.stroke = "var(--muted)";
+      line.style.strokeOpacity = "0.5";
+      line.style.strokeWidth = "1.2";
+      gLinks.appendChild(line);
+      return line;
+    });
+
+    const nodeEls = new Map<string, SVGGElement>();
+    for (const n of nodes) {
+      const g = svgEl("g");
+      g.setAttribute("tabindex", "0");
+      g.setAttribute("aria-label", n.label);
+      if (n.href) g.setAttribute("role", "link");
+      g.style.cursor = n.href ? "pointer" : "grab";
+      g.style.touchAction = "none";
+      g.style.outline = "none";
+
+      const title = svgEl("title");
+      title.textContent = n.label;
+      const circle = svgEl("circle");
+      circle.setAttribute("r", String(n.r));
+      circle.style.fill = COLORS[n.type];
+      circle.style.fillOpacity = n.planned ? "0.18" : "0.95";
+      circle.style.stroke = COLORS[n.type];
+      circle.style.strokeWidth = "2";
+      if (n.planned) circle.style.strokeDasharray = "4 3";
+      const text = svgEl("text");
+      text.textContent = n.label;
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("y", String(n.r + 14));
+      text.style.fontSize = "12px";
+      text.style.fill = "var(--fg)";
+      text.style.paintOrder = "stroke";
+      text.style.stroke = "var(--bg)";
+      text.style.strokeWidth = "3px";
+      text.style.pointerEvents = "none";
+
+      g.append(title, circle, text);
+      gNodes.appendChild(g);
+      nodeEls.set(n.id, g);
+    }
+
+    const sim = forceSimulation<GN>(nodes)
+      .force(
+        "link",
+        forceLink<GN, GL>(links)
+          .id((d) => d.id)
+          .distance(100)
+          .strength(0.7),
+      )
+      .force("charge", forceManyBody().strength(-280))
+      .force("x", forceX(W / 2).strength(0.06))
+      .force("y", forceY(H / 2).strength(0.09))
+      .force(
+        "collide",
+        forceCollide<GN>().radius((d) => d.r + 26),
+      );
+
+    links.forEach((l, i) => {
+      if ((l.source as GN).planned || (l.target as GN).planned)
+        lineEls[i].style.strokeDasharray = "4 3";
+    });
+
+    const place = () => {
+      for (const n of nodes) {
+        n.x = Math.max(n.r + 24, Math.min(W - n.r - 24, n.x ?? W / 2));
+        n.y = Math.max(n.r + 24, Math.min(H - n.r - 30, n.y ?? H / 2));
+      }
+      links.forEach((l, i) => {
+        const s = l.source as GN,
+          t = l.target as GN,
+          e = lineEls[i];
+        e.setAttribute("x1", String(s.x));
+        e.setAttribute("y1", String(s.y));
+        e.setAttribute("x2", String(t.x));
+        e.setAttribute("y2", String(t.y));
+      });
+      nodes.forEach((n) =>
+        nodeEls
+          .get(n.id)!
+          .setAttribute("transform", `translate(${n.x},${n.y})`),
+      );
+    };
+
+    sim.on("tick", place);
+    if (reduce) {
+      sim.stop();
+      for (let i = 0; i < 300; i++) sim.tick();
+      place();
+    }
+
+    const focusNode = (id: string | null) => {
+      nodes.forEach(
+        (n) =>
+          (nodeEls.get(n.id)!.style.opacity =
+            !id || neighbors.get(id)!.has(n.id) ? "1" : "0.2"),
+      );
+      links.forEach((l, i) => {
+        const on =
+          !id || (l.source as GN).id === id || (l.target as GN).id === id;
+        lineEls[i].style.opacity = on ? "1" : "0.1";
+      });
+    };
+
+    const toSvg = (e: PointerEvent) => {
+      const pt = svg.createSVGPoint();
+      pt.x = e.clientX;
+      pt.y = e.clientY;
+      return pt.matrixTransform(svg.getScreenCTM()!.inverse());
+    };
+
+    for (const n of nodes) {
+      const g = nodeEls.get(n.id)!;
+      let down: { x: number; y: number; moved: boolean } | null = null;
+
+      const end = (cancelled: boolean) => {
+        if (!down) return;
+        const click = !down.moved && !cancelled;
+        down = null;
+        n.fx = null;
+        n.fy = null;
+        if (!reduce) sim.alphaTarget(0);
+        if (click && n.href) location.href = n.href;
+      };
+
+      g.addEventListener("pointerenter", () => focusNode(n.id));
+      g.addEventListener("pointerleave", () => {
+        if (!down) focusNode(null);
+      });
+      g.addEventListener("focus", () => focusNode(n.id));
+      g.addEventListener("blur", () => focusNode(null));
+      g.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && n.href) location.href = n.href;
+      });
+      g.addEventListener("pointerdown", (e) => {
+        down = { x: e.clientX, y: e.clientY, moved: false };
+        g.setPointerCapture(e.pointerId);
+        if (!reduce) sim.alphaTarget(0.25).restart();
+      });
+      g.addEventListener("pointermove", (e) => {
+        if (!down) return;
+        if (Math.hypot(e.clientX - down.x, e.clientY - down.y) > 4)
+          down.moved = true;
+        if (!down.moved || reduce) return;
+        const p = toSvg(e);
+        n.fx = p.x;
+        n.fy = p.y;
+      });
+      g.addEventListener("pointerup", () => end(false));
+      g.addEventListener("pointercancel", () => end(true));
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>("figure[data-kg]").forEach(init);
+</script>

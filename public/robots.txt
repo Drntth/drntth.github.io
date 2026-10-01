@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://drntth.github.io/sitemap-index.xml

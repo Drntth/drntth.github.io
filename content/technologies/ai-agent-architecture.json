@@ -1,0 +1,26 @@
+{
+  "order": 91,
+  "visibility": "planned",
+  "icon": "lucide:bot",
+  "implementations": [],
+  "en": {
+    "title": "AI agent architecture",
+    "summary": "Planned node: how AI agents are structured and how they operate.",
+    "body": [],
+    "planned": [
+      "Overview of the agent loop, tool use, memory and orchestration",
+      "Notes from experiments with agent frameworks, tied to a concrete project need",
+      "Language-specific implementation notes once a prototype exists"
+    ]
+  },
+  "hu": {
+    "title": "AI agent architektúra",
+    "summary": "Tervezett csomópont: az AI agentek felépítése és működése.",
+    "body": [],
+    "planned": [
+      "Az agent ciklus, az eszközhasználat, a memória és az orkesztráció áttekintése",
+      "Agent keretrendszerekkel végzett kísérletek jegyzetei, konkrét projektigényhez kötve",
+      "Nyelvspecifikus megvalósítási jegyzetek, amint van prototípus"
+    ]
+  }
+}

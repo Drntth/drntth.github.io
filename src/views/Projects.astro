@@ -1,0 +1,160 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TechChip from "../components/TechChip.astro";
+import { getContent, localePath, loc, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = getContent(lang);
+const L = c.projects;
+const projects = (await getCollection("projects"))
+  .filter((p) => p.data.visibility === "public")
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout lang={lang} title={`${L.title} | ${c.hero.name}`}>
+  <h1 class="section-title reveal !text-4xl">{L.title}</h1>
+  <p class="reveal mb-10 text-justify text-muted">{L.intro}</p>
+
+  <div class="space-y-8">
+    {
+      projects.map((p) => {
+        const d = p.data[lang];
+        return (
+          <article
+            id={p.id}
+            class="card reveal scroll-mt-24 overflow-hidden md:grid md:grid-cols-[15rem_1fr]"
+          >
+            <div class="flex flex-col items-center justify-center gap-3 bg-linear-to-br from-accent/25 to-accent-2/25 p-8">
+              {p.data.image ? (
+                <img
+                  src={p.data.image}
+                  alt=""
+                  class="size-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <Icon name={p.data.icon} class="size-16 text-accent" />
+              )}
+              {p.data.year && (
+                <span class="text-xs text-muted">{p.data.year}</span>
+              )}
+            </div>
+
+            <div class="p-6 md:p-8">
+              <span class="chip !border-accent-2/50 !text-accent-2">
+                {d.status}
+              </span>
+              <h2 class="mt-3 font-display text-2xl font-semibold">
+                {d.title}
+              </h2>
+              {d.subtitle && <p class="text-sm text-accent">{d.subtitle}</p>}
+              <p class="mt-3 text-muted">{d.summary}</p>
+
+              <dl class="mt-6 grid gap-5 text-sm md:grid-cols-3">
+                <div>
+                  <>
+                    <dt class="mb-1 font-medium text-accent">{L.goal}</dt>
+                    <dd class="text-muted">{d.goal}</dd>
+                  </>
+                </div>
+                <div>
+                  <>
+                    <dt class="mb-1 font-medium text-accent-2">{L.solution}</dt>
+                    <dd class="text-muted">{d.solution}</dd>
+                  </>
+                </div>
+                <div>
+                  <>
+                    <dt class="mb-1 font-medium text-accent">{L.result}</dt>
+                    <dd class="text-muted">{d.result}</dd>
+                  </>
+                </div>
+              </dl>
+
+              {d.highlights.length > 0 && (
+                <ul class="mt-6 grid gap-2 text-sm md:grid-cols-2">
+                  {d.highlights.map((h) => (
+                    <li class="flex gap-2">
+                      <Icon
+                        name="lucide:check"
+                        class="mt-0.5 size-4 shrink-0 text-accent-2"
+                      />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <ul class="mt-6 flex flex-wrap gap-2">
+                {p.data.tech.map((id) => (
+                  <li>
+                    <TechChip id={id} lang={lang} />
+                  </li>
+                ))}
+              </ul>
+              {p.data.models.length > 0 && (
+                <div class="mt-4">
+                  <p class="mb-2 text-xs font-medium uppercase tracking-wide text-muted">
+                    {L.models}
+                  </p>
+                  <ul class="flex flex-wrap gap-2">
+                    {p.data.models.map((m) => (
+                      <li class="chip">{m}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div class="mt-6 flex flex-wrap gap-3 border-t border-line pt-5">
+                <a
+                  href={localePath(lang, `/projects/${p.id}`)}
+                  class="btn btn-primary"
+                >
+                  {L.details}
+                </a>
+                {p.data.repo && (
+                  <a
+                    href={p.data.repo}
+                    class="btn btn-ghost"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon name="mdi:github" class="size-4" />
+                    {L.repo}
+                  </a>
+                )}
+                {p.data.demo && (
+                  <a
+                    href={p.data.demo}
+                    class="btn btn-ghost"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon name="lucide:external-link" class="size-4" />
+                    {L.demo}
+                  </a>
+                )}
+                {p.data.links.map((l) => (
+                  <a
+                    href={l.href}
+                    class="btn btn-ghost"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon name="lucide:link" class="size-4" />
+                    {loc(l.label, lang)}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</BaseLayout>

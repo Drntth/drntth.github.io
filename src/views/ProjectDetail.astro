@@ -1,0 +1,217 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TechChip from "../components/TechChip.astro";
+import { getContent, localePath, loc, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+  slug: string;
+}
+const { lang, slug } = Astro.props;
+const c = getContent(lang);
+const L = c.projects;
+const P = c.projectPage;
+const p = (await getEntry("projects", slug))!;
+const d = p.data[lang];
+const techs = (await getCollection("technologies")).filter((t) =>
+  p.data.concepts.includes(t.id),
+);
+const research = (await getCollection("research")).filter((r) =>
+  r.data.projects.includes(slug),
+);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: d.title,
+  description: d.summary,
+  inLanguage: lang,
+  ...(p.data.repo && { codeRepository: p.data.repo }),
+  programmingLanguage: p.data.tech.filter((id) =>
+    ["python", "java", "csharp", "javascript", "typescript", "php"].includes(
+      id,
+    ),
+  ),
+  author: { "@type": "Person", name: c.hero.name },
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${d.title} | ${c.hero.name}`}
+  description={d.summary}
+  jsonLd={jsonLd}
+>
+  <a href={localePath(lang, "/projects")} class="btn btn-ghost mb-8"
+    ><Icon name="lucide:arrow-left" class="size-4" />{P.back}</a
+  >
+
+  <header class="reveal mb-10">
+    <span class="chip !border-accent-2/50 !text-accent-2">{d.status}</span>
+    <h1 class="mt-3 font-display text-4xl font-bold">
+      <span class="text-gradient">{d.title}</span>
+    </h1>
+    {d.subtitle && <p class="mt-1 text-accent">{d.subtitle}</p>}
+    <p class="mt-4 text-lg text-muted text-justify">{d.summary}</p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      {
+        p.data.repo && (
+          <a
+            href={p.data.repo}
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="mdi:github" class="size-4" />
+            {L.repo}
+          </a>
+        )
+      }
+      {
+        p.data.demo && (
+          <a
+            href={p.data.demo}
+            class="btn btn-ghost"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="lucide:external-link" class="size-4" />
+            {L.demo}
+          </a>
+        )
+      }
+      {
+        p.data.links.map((l) => (
+          <a
+            href={l.href}
+            class="btn btn-ghost"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="lucide:link" class="size-4" />
+            {loc(l.label, lang)}
+          </a>
+        ))
+      }
+    </div>
+  </header>
+
+  <section class="mb-10 grid gap-4 md:grid-cols-3">
+    {
+      [
+        [L.goal, d.goal],
+        [L.solution, d.solution],
+        [L.result, d.result],
+      ].map(([k, v], i) => (
+        <div class="card reveal p-5">
+          <p
+            class:list={[
+              "mb-1 text-sm font-medium",
+              i % 2 ? "text-accent-2" : "text-accent",
+            ]}
+          >
+            {k}
+          </p>
+          <p class="text-sm text-muted">{v}</p>
+        </div>
+      ))
+    }
+  </section>
+
+  {
+    d.highlights.length > 0 && (
+      <ul class="reveal mb-10 grid gap-2 text-sm md:grid-cols-2">
+        {d.highlights.map((h) => (
+          <li class="flex gap-2">
+            <Icon
+              name="lucide:check"
+              class="mt-0.5 size-4 shrink-0 text-accent-2"
+            />
+            <span>{h}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    d.sections.map((s) => (
+      <section class="mb-8 text-justify">
+        <h2 class="section-title reveal !text-xl">{s.title}</h2>
+        <div class="space-y-3 text-muted">
+          {s.body.map((t) => (
+            <p class="reveal">{t}</p>
+          ))}
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="mb-10">
+    <ul class="reveal flex flex-wrap gap-2">
+      {
+        p.data.tech.map((id) => (
+          <li>
+            <TechChip id={id} lang={lang} />
+          </li>
+        ))
+      }
+    </ul>
+    {
+      p.data.models.length > 0 && (
+        <div class="mt-5">
+          <p class="mb-2 text-xs font-medium uppercase tracking-wide text-muted">
+            {L.models}
+          </p>
+          <ul class="flex flex-wrap gap-2">
+            {p.data.models.map((m) => (
+              <li class="chip">{m}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </section>
+
+  {
+    techs.length > 0 && (
+      <section class="mb-8">
+        <h2 class="section-title reveal !text-xl">{P.concepts}</h2>
+        <ul class="reveal flex flex-wrap gap-3">
+          {techs.map((t) => (
+            <li>
+              <a
+                class="btn btn-ghost"
+                href={localePath(lang, `/technologies/${t.id}`)}
+              >
+                <Icon name={t.data.icon} class="size-4" />
+                {t.data[lang].title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+  {
+    research.length > 0 && (
+      <section>
+        <h2 class="section-title reveal !text-xl">{P.research}</h2>
+        <ul class="reveal flex flex-wrap gap-3">
+          {research.map((r) => (
+            <li>
+              <a
+                class="btn btn-ghost"
+                href={`${localePath(lang, "/research")}#${r.id}`}
+              >
+                {r.data[lang].title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</BaseLayout>

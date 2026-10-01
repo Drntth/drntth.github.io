@@ -1,0 +1,14 @@
+---
+import { getCollection } from "astro:content";
+import ProjectDetail from "../../views/ProjectDetail.astro";
+
+export async function getStaticPaths() {
+  const items = (await getCollection("projects")).filter(
+    (p) => p.data.visibility === "public",
+  );
+  return items.map((p) => ({ params: { slug: p.id } }));
+}
+const { slug } = Astro.params;
+---
+
+<ProjectDetail lang="en" slug={slug!} />
