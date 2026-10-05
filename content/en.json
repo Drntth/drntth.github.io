@@ -233,7 +233,7 @@
     "rulesTitle": "Publication rules",
     "rules": [
       "Only selected research with standalone professional value is published.",
-      "Private research is never published automatically.",
+      "Research is never published automatically.",
       "Research starts from a concrete project question."
     ],
     "planned": "Planned",

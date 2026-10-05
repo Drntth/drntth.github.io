@@ -73,6 +73,7 @@ pdftoppm -png -r 90 -f 1 -l 1 -singlefile public/certs/<name>.pdf public/certs/<
 These skills are invoked by the user with `/name` and are not visible to the model. Remind the user when they apply:
 
 - `/add-project`: add a project entry in both languages.
+- `/add-cert`: add a certificate (PDF, preview, JSON entry in both languages).
 - `/release-check`: quality gate before every commit.
 - `/commit-message`: one-line commit message from the diff.
 
@@ -185,7 +186,7 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 | Add a stack item       | Add `{ id, name, icon }` to a group in `content/stack.json`.                                                                                                                                                                                                                                     |
 | Add a technology node  | Create `content/technologies/<slug>.json`. Fill `implementations` per language. Reference it from a project via `concepts`.                                                                                                                                                                      |
 | Add research           | Create `content/research/<slug>.json`. Link `technologies` and `projects`. Keep `visibility: planned` until real content exists.                                                                                                                                                                 |
-| Add a certificate      | Put PDF in `public/certs/`, generate the PNG preview, add `content/certificates/<slug>.json`.                                                                                                                                                                                                    |
+| Add a certificate      | Use /add-cert (skill)                                                                                                                                                                                                                                                                            |
 | Add a page             | View, two wrappers, header link, `nav` key in both JSON files, check the sitemap.                                                                                                                                                                                                                |
 | Add a string           | Add the key to both `en.json` and `hu.json`.                                                                                                                                                                                                                                                     |
 | Change colors          | Edit tokens in `global.css` only.                                                                                                                                                                                                                                                                |
@@ -215,7 +216,7 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 
 **Thesis project** (`thesis-langmodels-project-management`): title "Mesterséges intelligencia a webalkalmazásokban", subtitle "Nyelvi modellek a projektmenedzsmentben", 2025. Django, Python, SQLite, Bootstrap, JavaScript, Docker, Cypress, Hugging Face pipelines. Models: DistilGPT2, GPT-Neo 125M, Facebook OPT 125M and 350M, GPT-2 Medium. 248 unit tests and 258 Cypress end-to-end tests, all passing. Four permission levels. Markdown export compatible with GitHub. Docker Hub: https://hub.docker.com/r/drntth/thesis-langmodels-project-management. No demo and no screenshots: the project uses an icon instead of an image. The thesis PDF is intentionally not published (it contains sensitive data).
 
-**Certificates** (both AWS Training and Certification, completed 2026-09-24): "AWS Foundations: Machine Learning Basics", "Fundamentals of Machine Learning and Artificial Intelligence".
+**Certificates** (all AWS Training and Certification): "AWS Foundations: Machine Learning Basics" and "Fundamentals of Machine Learning and Artificial Intelligence" (completed 2026-09-24), "Fundamentals of Generative AI" (completed 2026-10-04).
 
 **Stack decisions**: languages Python, Java, C#, TypeScript, JavaScript, SQL, PHP. Frontend: React, Astro, Tailwind CSS, Bootstrap. Databases PostgreSQL, MySQL, SQLite, MongoDB. pgvector is a PostgreSQL extension, listed under AI. AI tools: Ollama, Hugging Face Transformers, LangGraph, pgvector, PyTorch, OpenAI API, Anthropic API, Tesseract. Explicitly not claimed: LangChain, LlamaIndex, llama.cpp, ChromaDB, FAISS, Sentence Transformers, scikit-learn.
 

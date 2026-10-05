@@ -1,0 +1,29 @@
+{
+  "order": 3,
+  "issuer": "AWS Training and Certification",
+  "date": "2026-10-04",
+  "file": "/certs/aws-generative-ai-fundamentals.pdf",
+  "preview": "/certs/aws-generative-ai-fundamentals.png",
+  "en": {
+    "title": "Fundamentals of Generative AI",
+    "summary": "An introduction to machine learning and generative AI, including NLP, and to AWS AI/ML offerings such as Amazon SageMaker and Amazon Bedrock. Covers data preparation, model training, deployment and monitoring, and choosing an appropriate AI/ML solution for a use case.",
+    "topics": [
+      "AI and ML basics",
+      "Generative AI and NLP",
+      "Amazon SageMaker and Amazon Bedrock",
+      "Data preparation, model training, deployment and monitoring",
+      "Selecting AI/ML solutions for specific use cases"
+    ]
+  },
+  "hu": {
+    "title": "Fundamentals of Generative AI",
+    "summary": "Bevezetés a gépi tanulásba és a generatív AI-ba (beleértve az NLP-t), valamint az AWS AI/ML szolgáltatásaiba, például az Amazon SageMakerbe és az Amazon Bedrockba. Témák: adatelőkészítés, modelltanítás, telepítés és monitorozás, valamint a konkrét felhasználási esethez megfelelő AI/ML megoldás kiválasztása.",
+    "topics": [
+      "AI és ML alapok",
+      "Generatív AI és NLP",
+      "Amazon SageMaker és Amazon Bedrock",
+      "Adatelőkészítés, modelltanítás, telepítés és monitorozás",
+      "AI/ML megoldás kiválasztása konkrét felhasználási esetre"
+    ]
+  }
+}
