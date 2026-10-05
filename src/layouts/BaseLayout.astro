@@ -5,6 +5,9 @@ import "@fontsource-variable/space-grotesk";
 import Header from "../components/Header.astro";
 import Background from "../components/Background.astro";
 import { getContent, switchPath, type Lang } from "../i18n/utils";
+import SearchDialog from "../components/SearchDialog.astro";
+import Footer from "../components/Footer.astro";
+import LangBanner from "../components/LangBanner.astro";
 
 interface Props {
   lang: Lang;
@@ -13,6 +16,7 @@ interface Props {
   keywords?: string;
   type?: "website" | "article";
   noindex?: boolean;
+  print?: boolean;
   jsonLd?: Record<string, unknown>;
 }
 const {
@@ -22,6 +26,7 @@ const {
   keywords,
   type = "website",
   noindex = false,
+  print = true,
   jsonLd,
 } = Astro.props;
 const c = getContent(lang);
@@ -36,9 +41,9 @@ const person = {
   "@type": "Person",
   "@id": `${Astro.site}#person`,
   name: "Tóth Dorina Ildikó",
-  givenName: 'Dorina',
-  additionalName: 'Ildikó',
-  familyName: 'Tóth',
+  givenName: "Dorina",
+  additionalName: "Ildikó",
+  familyName: "Tóth",
   alternateName: ["Dorina Tóth", "Tóth Dorina"],
   jobTitle: c.hero.role,
   url: String(Astro.site),
@@ -61,11 +66,10 @@ const person = {
     "Backend development",
   ],
 };
-
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-print={print ? undefined : "off"}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -77,14 +81,14 @@ const person = {
     <meta name="theme-color" content="#7c3aed" />
 
     <meta property="og:type" content={type} />
-    <meta property="og:site_name" content={c.hero.name} />
+    <meta property="og:site_name" content={c.hero.shortName} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDesc} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={c.hero.name} />
+    <meta property="og:image:alt" content={c.hero.shortName} />
     <meta property="og:locale" content={lang === "hu" ? "hu_HU" : "en_GB"} />
     <meta
       property="og:locale:alternate"
@@ -129,20 +133,15 @@ const person = {
     </script>
   </head>
   <body class="min-h-screen antialiased">
+    <a href="#main" class="skip-link">{c.ui.skip}</a>
     <Background />
     <Header lang={lang} />
-    <main class="mx-auto max-w-6xl px-6 py-12">
+    <SearchDialog lang={lang} />
+    <main id="main" class="container-page py-12">
       <slot />
     </main>
-    <div class="mx-auto max-w-5xl px-6">
-      <hr class="border-line" />
-
-      <footer class="flex flex-col items-center gap-2 py-10 text-center">
-        <p class="font-display text-sm font-medium text-gradient">
-          &copy; {new Date().getFullYear()} - {c.hero.name}
-        </p>
-      </footer>
-    </div>
+    <Footer lang={lang} />
+    {!noindex && <LangBanner lang={lang} />}
     <script>
       const io = new IntersectionObserver(
         (entries) => {

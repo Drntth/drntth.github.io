@@ -9,40 +9,41 @@
     "about": "About",
     "stack": "Stack",
     "certificates": "Certificates",
+    "method": "Method",
     "projects": "Projects",
     "technologies": "Technologies",
     "research": "Research",
-    "contact": "Contact",
-    "cv": "CV"
+    "contact": "Contact"
   },
   "ui": {
     "theme": "Toggle light/dark theme",
     "menu": "Toggle menu",
     "prev": "Previous slide",
     "next": "Next slide",
-    "language": "Switch language"
+    "language": "Switch language",
+    "search": "Search",
+    "close": "Close",
+    "mainNav": "Main navigation",
+    "skip": "Skip to content",
+    "top": "Back to top",
+    "pause": "Pause automatic slide change",
+    "play": "Resume automatic slide change"
   },
   "hero": {
     "name": "Tóth Dorina Ildikó",
     "shortName": "Dorina Tóth",
     "role": "Software Developer - AI & Backend",
     "tagline": "I work at the intersection of AI and software engineering. I am interested in not only using AI technologies but understanding them, and integrating them into reliable software systems that solve real problems.",
-    "keywords": [
-      "NLP",
-      "LLM",
-      "GenAI",
-      "Computer Vision",
-      "RAG",
-      "Prompt Engineering",
-      "Fine-tuning",
-      "Embeddings",
-      "OCR",
-      "Deep Learning"
-    ],
     "cta": {
       "projects": "Selected projects",
-      "github": "GitHub",
-      "cv": "Download CV"
+      "method": "How I work"
+    }
+  },
+  "home": {
+    "method": {
+      "title": "How I work",
+      "text": "Every project goes through the same stages, from the first idea to the published result. A readiness check decides when an idea is ready to be built, and research stays tied to concrete project needs. The Method page explains the stages and how languages, technologies and projects relate.",
+      "link": "Read about the method"
     }
   },
   "focus": {
@@ -111,19 +112,25 @@
         "period": "2025 - present",
         "role": "Software Developer",
         "org": "Eszterházy Károly Catholic University, IT Development Department",
-        "text": "Design and development of Python-based systems that use AI. Technology areas: LLMs, RAG and embeddings, prompt engineering, fine-tuning, document processing and OCR (Tesseract, AI vision), AI-based text processing, and constraint-based optimization (SAT solving, linear and logical constraints). Experimenting with agent frameworks."
+        "text": "Design, development and integration of Python-based systems that use AI, including model training and optimization. Technology areas: LLMs, RAG and embeddings, prompt engineering, fine-tuning, document processing and OCR (Tesseract, AI vision), AI-based text processing, and constraint-based optimization (SAT solving, linear and logical constraints). Experimenting with agent frameworks. Technologies: Python, PostgreSQL, Django."
       },
       {
         "period": "2023 - 2024",
-        "role": "Teaching Assistant",
+        "role": "Teaching Assistant (Demonstrator)",
         "org": "Eszterházy Károly Catholic University",
-        "text": "Supported programming courses in C#: procedural and object-oriented programming, collections, LINQ, generics and GUI programming, plus agile project methods, Git, UML and testing."
+        "text": "Supported three practical courses. High-Level Programming Languages I: procedural programming in C# (types, variables, operators, selection and iteration, arrays, lists, dictionaries and records, text file handling, pseudo-random numbers, methods). High-Level Programming Languages II: object-oriented programming in C# (classes, constructors, inheritance, abstract classes, interfaces, LINQ, delegates and lambda expressions, exception handling, generics, GUI programming) and planning and implementing independent projects. Application Development and Project Lab I: agile and classical project methods (Scrum, Kanban), Git-based version control and task tracking, requirement and functional specifications, system plans, UML diagrams, prototyping, testing, documentation and software quality assurance. Technologies: .NET, C#, Git, GitHub, UML, Trello, Markdown."
       },
       {
         "period": "2022 - 2025",
         "role": "Web Developer and Maintainer",
         "org": "Kepes György College for Advanced Studies",
-        "text": "Website development and maintenance with HTML, CSS and JavaScript. Also served as head of the external communication working group, financial officer and secretary."
+        "text": "Website development and maintenance with HTML, CSS and JavaScript, including content updates, design and technical operation. Also served as head of the external communication working group, financial officer and secretary, and website operator."
+      },
+      {
+        "period": "2022 - 2024",
+        "role": "Web Developer and Maintainer",
+        "org": "Csath Veronika, helping professional",
+        "text": "Website development, maintenance and design with HTML, CSS and JavaScript, including content updates and technical operation."
       }
     ],
     "educationTitle": "Education",
@@ -150,9 +157,18 @@
     "open": "Open PDF",
     "issued": "Issued"
   },
+  "contact": {
+    "title": "Contact",
+    "github": "https://github.com/Drntth",
+    "linkedin": "https://www.linkedin.com/in/dorina-t%C3%B3th-045488357/",
+    "email": "tothdi03@gmail.com",
+    "cv": "/cv/Toth_Dorina_Ildiko_CV_en.pdf"
+  },
   "projects": {
     "title": "Projects",
-    "intro": "Published, professionally relevant projects.",
+    "intro": "A selection of finished, presentable projects. Each one describes its goal, solution and result, and links to the technology notes and research that came out of it, so a requirement can be followed through to a decision and a working system.",
+    "description": "Selected software projects: goals, solutions, results, technologies and repository links.",
+    "noMatch": "No project matches the current search.",
     "goal": "Goal",
     "solution": "Solution",
     "result": "Result",
@@ -162,44 +178,18 @@
     "demo": "Demo",
     "models": "Tested models"
   },
-  "contact": {
-    "title": "Contact",
-    "github": "https://github.com/Drntth",
-    "linkedin": "https://www.linkedin.com/in/dorina-t%C3%B3th-045488357/",
-    "email": "tothdi03@gmail.com",
-    "cv": "/cv/Toth_Dorina_Ildiko_CV_en.pdf"
-  },
   "projectPage": {
     "back": "All projects",
     "concepts": "Technology nodes",
     "research": "Related research",
-    "links": "Links"
+    "links": "Links",
+    "related": "Related",
+    "toc": "On this page",
+    "stack": "Technologies used"
   },
   "technologiesPage": {
     "title": "Technologies",
-    "intro": "A knowledge map of technologies I research through real project needs. It is not a skill list: every node exists because a project raised a concrete question, and links to the projects, languages and research around it.",
-    "modelTitle": "How the map is structured",
-    "modelText": "A technology node describes a general concept. A language entry documents how that concept is implemented in one language. A project documents how it uses the concept and the implementation.",
-    "modelLabels": {
-      "language": "Programming language",
-      "implements": "implements",
-      "technology": "Technology / concept",
-      "usedBy": "used by",
-      "project": "Project"
-    },
-    "modelExample": "Example: Python and Java implement Branching, which a game project (planned) uses.",
-    "flowTitle": "How a technology gets researched",
-    "flowNote": "Research starts from a concrete project requirement and covers only what the project needs. It does not reproduce a technology's full documentation. A concept that matters in several projects becomes a technology node; project-specific implementation stays in the project.",
-    "flow": [
-      "Project requirement",
-      "Unknown / technical question",
-      "Required technology",
-      "Relevant concepts",
-      "Targeted research",
-      "Prototype / validation",
-      "Decision",
-      "Technology node / project documentation"
-    ],
+    "intro": "A knowledge map of the technologies and concepts I research through real project needs. Nodes connect to languages, projects and research; they show relationships, not skill levels.",
     "graphTitle": "Connection map",
     "graphHint": "Drag nodes, hover to highlight connections, click to open. Dashed nodes are planned. The map grows automatically as projects, technologies and research are added.",
     "graphLabel": "Graph connecting programming languages, technologies, projects and research",
@@ -223,7 +213,18 @@
     "noImpl": "No language implementation documented yet.",
     "usedBy": "Used by projects",
     "researchBy": "Related research",
-    "plannedTitle": "Planned content"
+    "plannedTitle": "Planned content",
+    "modelHint": "A programming language implements a technology or concept, which a project uses. The full model is explained on the Method page.",
+    "modelLink": "How the model works",
+    "filters": "Filters",
+    "filtersActive": "active",
+    "showing": "Showing",
+    "of": "of",
+    "nodesUnit": "nodes",
+    "plannedNotice": "This node is planned. The content below describes what it is intended to cover; it contains no finished results.",
+    "toc": "On this page",
+    "languagesTitle": "Languages",
+    "related": "Related"
   },
   "researchPage": {
     "title": "Research",
@@ -243,5 +244,161 @@
     "examplesTitle": "Example outputs",
     "technologies": "Related technologies",
     "projects": "Related projects"
+  },
+  "search": {
+    "placeholder": "Search the site",
+    "placeholders": {
+      "projects": "Search projects",
+      "technologies": "Search technologies",
+      "research": "Search research",
+      "method": "Search the method"
+    },
+    "hint": "Type to search. Arrow keys to move, Enter to open, Esc to close.",
+    "empty": "No results",
+    "all": "All",
+    "sections": {
+      "projects": "Projects",
+      "technologies": "Technologies",
+      "research": "Research",
+      "method": "Method"
+    },
+    "types": {
+      "project": "Project",
+      "technology": "Technology",
+      "research": "Research",
+      "method": "Method"
+    },
+    "planned": "Planned",
+    "results": "results",
+    "filterSection": "Section",
+    "filterLanguage": "Language",
+    "filterStatus": "Status",
+    "reset": "Reset filters",
+    "noMatch": "No technology matches the current search and filters."
+  },
+  "methodPage": {
+    "title": "Method",
+    "intro": "How an idea becomes a finished project and where the knowledge behind it comes from: the stages, how technologies, languages and projects relate, and how research stays focused.",
+    "stagesTitle": "Stages",
+    "stagesNote": "The flow is not strictly linear: research can send me back to planning or architecture.",
+    "decisionLabel": "Decision point",
+    "stages": [
+      {
+        "name": "Idea",
+        "decision": false,
+        "text": "The origin, inspiration, goal and basic reason for the project. When the idea builds on existing work, the inspiration and its source are recorded and kept separate from the own idea and its goal."
+      },
+      {
+        "name": "Planning",
+        "decision": false,
+        "text": "What has to be created and what result must be reached: goal, scope, required components, required knowledge and the main development steps."
+      },
+      {
+        "name": "Research",
+        "decision": false,
+        "text": "Answering the unknown technical questions that matter for the project, and nothing beyond them."
+      },
+      {
+        "name": "Architecture",
+        "decision": false,
+        "text": "The structure of the system, built on the research results."
+      },
+      {
+        "name": "Implementation plan",
+        "decision": false,
+        "text": "The main implementation steps and their order."
+      },
+      {
+        "name": "Readiness check",
+        "decision": true,
+        "text": "Decides whether the idea is ready for real implementation. If not, work returns to research or planning."
+      },
+      {
+        "name": "Implementation",
+        "decision": false,
+        "text": "Building the project in its own repository, with source code, tests and project-specific documentation."
+      },
+      {
+        "name": "Result",
+        "decision": false,
+        "text": "The outcome is validated against the goal."
+      },
+      {
+        "name": "Publication",
+        "decision": false,
+        "text": "Presentable projects are published with a project README; the portfolio shows a curated selection."
+      }
+    ],
+    "knowledgeTitle": "Languages, technologies and projects",
+    "knowledgeText": "A technology node describes a general concept. A language entry documents how the concept is implemented in one language. A project documents how it uses the concept and the implementation. Keeping them apart means a concept is written down once, and project-specific solutions do not leak into the general description.",
+    "knowledgeLink": "Open the knowledge map",
+    "researchTitle": "Research approach",
+    "researchText": "Research never aims to learn a whole technology. It starts from a concrete project requirement and covers only what the project needs.",
+    "researchRules": [
+      "Start from a concrete project requirement.",
+      "Research only the parts of a technology the project needs; do not reproduce its full documentation.",
+      "Validate with a prototype or experiment where possible.",
+      "End with a decision, recorded in a technology node (general) or in the project documentation (specific).",
+      "If a concept matters in several projects, it becomes a technology node; project-specific implementation stays with the project.",
+      "Keep the general concept and its per-language implementation separate."
+    ],
+    "researchLink": "See research",
+    "readinessTitle": "Readiness check",
+    "readinessIntro": "A project moves to implementation only when all of these hold:",
+    "readiness": [
+      "The idea is clear and the problem or goal is defined",
+      "The desired result is specified and the scope is acceptable",
+      "The research questions that matter are answered",
+      "Critical technical uncertainties are identified",
+      "The required technologies are researched and the required language knowledge is identified",
+      "The basic architecture is defined and an implementation plan exists",
+      "The technical or practical value justifies the implementation",
+      "It is not just re-implementing a known example without a proper goal"
+    ],
+    "readinessNote": "If a criterion is not met, work continues in research or planning.",
+    "publishTitle": "What gets published",
+    "publishText": "The portfolio is curated: only presentable, professionally relevant work appears here.",
+    "publish": [
+      "Projects with a project README that gives a concise professional summary: problem and goal, solution, architecture highlights, technologies, how to run it, limitations and future work.",
+      "Technology notes and research with standalone value.",
+      "Not included: raw research logs, the full story of experiments, personal notes and details that cannot be shared."
+    ],
+    "bands": {
+      "projects": "Every project follows the same stages and readiness check, and links to the technologies and research behind it.",
+      "technologies": "Technology nodes come out of project requirements, not from studying technologies for their own sake.",
+      "research": "Research starts from a concrete project question and ends in a decision.",
+      "link": "How I work"
+    },
+    "flow": [
+      "Project requirement",
+      "Unknown / technical question",
+      "Required technology",
+      "Relevant concepts",
+      "Targeted research",
+      "Prototype / validation",
+      "Decision",
+      "Technology node / project documentation"
+    ],
+    "modelLabels": {
+      "language": "Programming language",
+      "implements": "implements",
+      "technology": "Technology / concept",
+      "usedBy": "used by",
+      "project": "Project"
+    },
+    "modelExample": "Example: Python and Java implement Branching, which a game project (planned) uses."
+  },
+  "footer": {
+    "text": "To understand what we build; to build what we do not yet understand.",
+    "navTitle": "Navigation",
+    "cv": "Download CV",
+    "source": "Source code",
+    "rights": "Code under the MIT license. Texts, images and documents: all rights reserved."
+  },
+  "langBanner": {
+    "label": "Nyelvi javaslat",
+    "text": "Ez az oldal magyarul is elérhető.",
+    "link": "Magyar nyelv",
+    "dismiss": "Bezárás"
   }
 }

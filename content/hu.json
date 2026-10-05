@@ -9,40 +9,41 @@
     "about": "Rólam",
     "stack": "Stack",
     "certificates": "Tanúsítványok",
+    "method": "Módszer",
     "projects": "Projektek",
     "technologies": "Technológiák",
     "research": "Kutatás",
-    "contact": "Kapcsolat",
-    "cv": "Önéletrajz"
+    "contact": "Kapcsolat"
   },
   "ui": {
     "theme": "Világos/sötét téma váltása",
     "menu": "Menü megnyitása",
     "prev": "Előző dia",
     "next": "Következő dia",
-    "language": "Nyelv váltása"
+    "language": "Nyelv váltása",
+    "search": "Keresés",
+    "close": "Bezárás",
+    "mainNav": "Főmenü",
+    "skip": "Ugrás a tartalomra",
+    "top": "Vissza a tetejére",
+    "pause": "Automatikus lapozás szüneteltetése",
+    "play": "Automatikus lapozás folytatása"
   },
   "hero": {
     "name": "Tóth Dorina Ildikó",
     "shortName": "Tóth Dorina",
     "role": "Szoftverfejlesztő - AI és Backend",
     "tagline": "AI és software engineering metszetében dolgozom. Az érdekel, hogyan lehet az AI-technológiákat nemcsak használni, hanem megérteni és megbízható, valódi problémákat megoldó szoftverrendszerekbe integrálni.",
-    "keywords": [
-      "NLP",
-      "LLM",
-      "GenAI",
-      "Computer Vision",
-      "RAG",
-      "Prompt Engineering",
-      "Fine-tuning",
-      "Embeddings",
-      "OCR",
-      "Deep Learning"
-    ],
     "cta": {
       "projects": "Kiemelt projektek",
-      "github": "GitHub",
-      "cv": "Önéletrajz letöltése"
+      "method": "Hogyan dolgozom"
+    }
+  },
+  "home": {
+    "method": {
+      "title": "Hogyan dolgozom",
+      "text": "Minden projekt ugyanazokon a szakaszokon megy át az első ötlettől a közzétett eredményig. Egy készenléti ellenőrzés dönti el, mikor áll készen egy ötlet a megvalósításra, a kutatás pedig konkrét projektigényekhez kötött. A Módszer oldal elmagyarázza a szakaszokat, valamint azt, hogyan kapcsolódnak egymáshoz a nyelvek, technológiák és projektek.",
+      "link": "A módszer megismerése"
     }
   },
   "focus": {
@@ -111,19 +112,25 @@
         "period": "2025 - jelenleg",
         "role": "Szoftverfejlesztő",
         "org": "Eszterházy Károly Katolikus Egyetem, Informatikai Fejlesztési Osztály",
-        "text": "AI-t alkalmazó, Python-alapú rendszerek tervezése és fejlesztése. Technológiai területek: LLM-ek, RAG és embeddingek, prompt engineering, fine-tuning, dokumentumfeldolgozás és OCR (Tesseract, AI vision), AI-alapú szövegfeldolgozás, valamint korlátalapú optimalizálás (SAT-solver, lineáris és logikai korlátok). Agent keretrendszerekkel kísérletezem."
+        "text": "AI-t alkalmazó, Python-alapú rendszerek tervezése, fejlesztése és integrálása, modellek betanítása és optimalizálása. Technológiai területek: LLM-ek, RAG és embeddingek, prompt engineering, fine-tuning, dokumentumfeldolgozás és OCR (Tesseract, AI vision), AI-alapú szövegfeldolgozás, valamint korlátalapú optimalizálás (SAT-solver, lineáris és logikai korlátok). Agent keretrendszerekkel kísérletezem. Technológiák: Python, PostgreSQL, Django."
       },
       {
         "period": "2023 - 2024",
         "role": "Oktatási asszisztens demonstrátor",
         "org": "Eszterházy Károly Katolikus Egyetem",
-        "text": "C# programozási kurzusok támogatása: eljárásorientált és objektumorientált programozás, gyűjtemények, LINQ, generikusok és grafikus felületek, valamint agilis projektmódszerek, Git, UML és tesztelés."
+        "text": "Három gyakorlat támogatása. Magasszintű programozási nyelvek I.: eljárásorientált programozás C# nyelven (típusok, változók, operátorok, szelekció és iteráció, tömbök, listák, könyvtárak és rekordok, szöveges állományok kezelése, pszeudovéletlen számok, metódusok). Magasszintű programozási nyelvek II.: objektumorientált programozás C# nyelven (osztályok, konstruktorok, öröklődés, absztrakt osztályok, interfészek, LINQ, delegate-ek és lambda kifejezések, kivételkezelés, generikus programozás, grafikus felületek) és önálló projektek tervezése és implementálása. Alkalmazások fejlesztése és projekt labor I.: agilis és klasszikus projektvezetési módszerek (Scrum, Kanban), Git-alapú verziókezelés és feladatkövetés, követelmény- és funkcionális specifikációk, rendszertervek, UML diagramok, prototípuskészítés, tesztelés, dokumentáció és szoftverminőség-biztosítás. Technológiák: .NET, C#, Git, GitHub, UML, Trello, Markdown."
       },
       {
         "period": "2022 - 2025",
         "role": "Webfejlesztő és karbantartó",
         "org": "Kepes György Szakkollégium",
-        "text": "Weboldal fejlesztése és karbantartása HTML, CSS és JavaScript segítségével. Emellett a külső kommunikációs munkacsoport vezetője, gazdasági felelős és titkár."
+        "text": "Weboldal fejlesztése és karbantartása HTML, CSS és JavaScript segítségével, beleértve a tartalomfrissítést, a dizájnt és a technikai működés biztosítását. Emellett a külső kommunikációs munkacsoport vezetője, gazdasági felelős és titkár, valamint weboldal üzemeltető."
+      },
+      {
+        "period": "2022 - 2024",
+        "role": "Webfejlesztő és karbantartó",
+        "org": "Csath Veronika, hivatásos segítő szakember",
+        "text": "Weboldal fejlesztése, karbantartása és dizájnjának kialakítása HTML, CSS és JavaScript segítségével, beleértve a tartalomfrissítést és a technikai működés biztosítását."
       }
     ],
     "educationTitle": "Tanulmányok",
@@ -150,9 +157,18 @@
     "open": "PDF megnyitása",
     "issued": "Kiállítva"
   },
+  "contact": {
+    "title": "Kapcsolat",
+    "github": "https://github.com/Drntth",
+    "linkedin": "https://www.linkedin.com/in/dorina-t%C3%B3th-045488357/",
+    "email": "tothdi03@gmail.com",
+    "cv": "/cv/Toth_Dorina_Ildiko_CV_hu.pdf"
+  },
   "projects": {
     "title": "Projektek",
-    "intro": "Publikált, szakmailag releváns projektek.",
+    "intro": "Elkészült, bemutatható projektek válogatása. Mindegyik leírja a célt, a megoldást és az eredményt, és hivatkozik a belőle született technológiai jegyzetekre és kutatásokra, így nyomon követhető, hogyan lett egy igényből döntés, majd működő rendszer.",
+    "description": "Válogatott szoftverprojektek: célok, megoldások, eredmények, technológiák és repólinkek.",
+    "noMatch": "Egy projekt sem felel meg a keresésnek.",
     "goal": "Cél",
     "solution": "Megoldás",
     "result": "Eredmény",
@@ -162,44 +178,18 @@
     "demo": "Demó",
     "models": "Tesztelt modellek"
   },
-  "contact": {
-    "title": "Kapcsolat",
-    "github": "https://github.com/Drntth",
-    "linkedin": "https://www.linkedin.com/in/dorina-t%C3%B3th-045488357/",
-    "email": "tothdi03@gmail.com",
-    "cv": "/cv/Toth_Dorina_Ildiko_CV_hu.pdf"
-  },
   "projectPage": {
     "back": "Összes projekt",
     "concepts": "Technology csomópontok",
     "research": "Kapcsolódó kutatás",
-    "links": "Hivatkozások"
+    "links": "Hivatkozások",
+    "related": "Kapcsolódó",
+    "toc": "Ezen az oldalon",
+    "stack": "Felhasznált technológiák"
   },
   "technologiesPage": {
     "title": "Technológiák",
-    "intro": "Tudástérkép azokról a technológiákról, amelyeket valós projektigényeken keresztül kutatok. Nem skill-lista: minden csomópont azért létezik, mert egy projekt konkrét kérdést vetett fel, és kapcsolódik a körülötte lévő projektekhez, nyelvekhez és kutatásokhoz.",
-    "modelTitle": "A térkép felépítése",
-    "modelText": "A technology csomópont egy általános koncepciót ír le. A nyelvi bejegyzés azt dokumentálja, hogyan valósul meg a koncepció egy adott nyelven. A projekt azt, hogyan használja a koncepciót és a megvalósítást.",
-    "modelLabels": {
-      "language": "Programozási nyelv",
-      "implements": "megvalósítja",
-      "technology": "Technológia / koncepció",
-      "usedBy": "használja",
-      "project": "Projekt"
-    },
-    "modelExample": "Példa: a Python és a Java megvalósítja a Branchinget, amelyet egy (tervezett) játékprojekt használ.",
-    "flowTitle": "Hogyan kutatok egy technológiát",
-    "flowNote": "A kutatás konkrét projektigényből indul, és csak azt fedi le, amire a projektnek szüksége van. Nem célja egy technológia teljes dokumentációjának reprodukálása. Ha egy koncepció több projektben is fontos, technology csomópont lesz belőle; a projektspecifikus megvalósítás a projektben marad.",
-    "flow": [
-      "Projektigény",
-      "Ismeretlen / technikai kérdés",
-      "Szükséges technológia",
-      "Releváns koncepciók",
-      "Célzott kutatás",
-      "Prototípus / validáció",
-      "Döntés",
-      "Technology csomópont / projektdokumentáció"
-    ],
+    "intro": "Tudástérkép azokról a technológiákról és koncepciókról, amelyeket valós projektigényeken keresztül kutatok. A csomópontok nyelvekhez, projektekhez és kutatásokhoz kapcsolódnak; kapcsolatokat mutatnak, nem készségszintet.",
     "graphTitle": "Kapcsolati térkép",
     "graphHint": "Húzd a csomópontokat, vidd fölé az egeret a kapcsolatok kiemeléséhez, kattintással megnyitod. A szaggatott csomópontok tervezettek. A térkép magától bővül, ahogy új projekt, technológia és kutatás kerül be.",
     "graphLabel": "Gráf, amely programozási nyelveket, technológiákat, projekteket és kutatásokat köt össze",
@@ -223,7 +213,18 @@
     "noImpl": "Még nincs dokumentált nyelvi megvalósítás.",
     "usedBy": "Ezek a projektek használják",
     "researchBy": "Kapcsolódó kutatás",
-    "plannedTitle": "Tervezett tartalom"
+    "plannedTitle": "Tervezett tartalom",
+    "modelHint": "A programozási nyelv megvalósít egy technológiát vagy koncepciót, amelyet egy projekt használ. A teljes modell a Módszer oldalon olvasható.",
+    "modelLink": "Hogyan működik a modell",
+    "filters": "Szűrők",
+    "filtersActive": "aktív",
+    "showing": "Megjelenítve",
+    "of": "/",
+    "nodesUnit": "csomópont",
+    "plannedNotice": "Ez a csomópont tervezett. Az alábbi tartalom azt írja le, mit szán lefedni; kész eredményt nem tartalmaz.",
+    "toc": "Ezen az oldalon",
+    "languagesTitle": "Nyelvek",
+    "related": "Kapcsolódó"
   },
   "researchPage": {
     "title": "Kutatás",
@@ -243,5 +244,161 @@
     "examplesTitle": "Példa kimenetek",
     "technologies": "Kapcsolódó technológiák",
     "projects": "Kapcsolódó projektek"
+  },
+  "search": {
+    "placeholder": "Keresés az oldalon",
+    "placeholders": {
+      "projects": "Keresés a projektekben",
+      "technologies": "Keresés a technológiákban",
+      "research": "Keresés a kutatásban",
+      "method": "Keresés a módszerben"
+    },
+    "hint": "Gépelj a kereséshez. Nyilakkal lépkedhetsz, Enter megnyit, Esc bezár.",
+    "empty": "Nincs találat",
+    "all": "Mind",
+    "sections": {
+      "projects": "Projektek",
+      "technologies": "Technológiák",
+      "research": "Kutatás",
+      "method": "Módszer"
+    },
+    "types": {
+      "project": "Projekt",
+      "technology": "Technológia",
+      "research": "Kutatás",
+      "method": "Módszer"
+    },
+    "planned": "Tervezett",
+    "results": "találat",
+    "filterSection": "Szekció",
+    "filterLanguage": "Nyelv",
+    "filterStatus": "Állapot",
+    "reset": "Szűrők törlése",
+    "noMatch": "Egy technológia sem felel meg a keresésnek és a szűrőknek."
+  },
+  "methodPage": {
+    "title": "Módszer",
+    "intro": "Hogyan lesz egy ötletből kész projekt, és honnan származik a mögötte lévő tudás: a szakaszok, a technológiák, nyelvek és projektek kapcsolata, és hogyan marad fókuszált a kutatás.",
+    "stagesTitle": "Szakaszok",
+    "stagesNote": "A folyamat nem szigorúan lineáris: a kutatás visszavihet a tervezéshez vagy az architektúrához.",
+    "decisionLabel": "Döntési pont",
+    "stages": [
+      {
+        "name": "Ötlet",
+        "decision": false,
+        "text": "A projekt eredete, inspirációja, célja és alapvető indoka. Ha az ötlet meglévő munkára épül, az inspirációt és a forrást rögzítem, és elkülönítem a saját ötlettől és annak céljától."
+      },
+      {
+        "name": "Tervezés",
+        "decision": false,
+        "text": "Mit kell létrehozni, és milyen eredményt kell elérni: cél, scope, szükséges komponensek, szükséges ismeretek és a fő fejlesztési lépések."
+      },
+      {
+        "name": "Kutatás",
+        "decision": false,
+        "text": "A projekt szempontjából fontos, ismeretlen technikai kérdések megválaszolása, semmi több."
+      },
+      {
+        "name": "Architektúra",
+        "decision": false,
+        "text": "A rendszer felépítése a kutatás eredményeire alapozva."
+      },
+      {
+        "name": "Megvalósítási terv",
+        "decision": false,
+        "text": "Az implementáció fő lépései és sorrendjük."
+      },
+      {
+        "name": "Készenléti ellenőrzés",
+        "decision": true,
+        "text": "Eldönti, hogy az ötlet készen áll-e a tényleges megvalósításra. Ha nem, a munka visszatér a kutatáshoz vagy a tervezéshez."
+      },
+      {
+        "name": "Megvalósítás",
+        "decision": false,
+        "text": "A projekt elkészítése saját repóban, forráskóddal, tesztekkel és projektspecifikus dokumentációval."
+      },
+      {
+        "name": "Eredmény",
+        "decision": false,
+        "text": "Az eredmény validálása a célhoz képest."
+      },
+      {
+        "name": "Közzététel",
+        "decision": false,
+        "text": "A bemutatható projektek projekt-README-vel kerülnek ki; a portfólió kurált válogatást mutat."
+      }
+    ],
+    "knowledgeTitle": "Nyelvek, technológiák és projektek",
+    "knowledgeText": "A technology node egy általános koncepciót ír le. A nyelvi bejegyzés azt dokumentálja, hogyan valósul meg a koncepció egy adott nyelven. A projekt azt, hogyan használja a koncepciót és a megvalósítást. A szétválasztás miatt egy koncepció egyszer van leírva, és a projektspecifikus megoldások nem szivárognak az általános leírásba.",
+    "knowledgeLink": "Tudástérkép megnyitása",
+    "researchTitle": "Kutatási megközelítés",
+    "researchText": "A kutatás célja sosem egy teljes technológia megtanulása. Konkrét projektigényből indul, és csak azt fedi le, amire a projektnek szüksége van.",
+    "researchRules": [
+      "Konkrét projektigényből indulok.",
+      "A technológiának csak a projekthez szükséges részeit kutatom, a teljes dokumentációját nem reprodukálom.",
+      "Ahol lehet, prototípussal vagy kísérlettel validálok.",
+      "Döntéssel zárom, amelyet technology node-ban (általános) vagy a projektdokumentációban (specifikus) rögzítek.",
+      "Ha egy koncepció több projektben is fontos, technology node lesz belőle; a projektspecifikus megvalósítás a projektnél marad.",
+      "Az általános koncepciót és nyelvenkénti megvalósítását külön kezelem."
+    ],
+    "researchLink": "Kutatás megtekintése",
+    "readinessTitle": "Készenléti ellenőrzés",
+    "readinessIntro": "A projekt csak akkor kerül megvalósításra, ha mindez teljesül:",
+    "readiness": [
+      "Az ötlet egyértelmű, a probléma vagy cél definiált",
+      "A kívánt eredmény meghatározott, a scope elfogadható",
+      "A fontos kutatási kérdések megválaszoltak",
+      "A kritikus technikai bizonytalanságok azonosítva vannak",
+      "A szükséges technológiák kutatása megtörtént, a szükséges nyelvi ismeretek azonosítva vannak",
+      "Az alapvető architektúra meghatározott, és létezik megvalósítási terv",
+      "A technikai vagy gyakorlati érték indokolja a megvalósítást",
+      "Nem pusztán egy ismert példa újraimplementálása megfelelő cél nélkül"
+    ],
+    "readinessNote": "Ha valamelyik feltétel nem teljesül, a munka a kutatásnál vagy a tervezésnél folytatódik.",
+    "publishTitle": "Mi kerül közzétételre",
+    "publishText": "A portfólió kurált: csak bemutatható, szakmailag releváns munka szerepel itt.",
+    "publish": [
+      "Projektek tömör, szakmai összefoglalót adó projekt-README-vel: probléma és cél, megoldás, az architektúra főbb elemei, technológiák, futtatás, korlátok és továbbfejlesztés.",
+      "Önálló értékkel bíró technológiai jegyzetek és kutatások.",
+      "Nem szerepel: nyers kutatási napló, a kísérletek teljes története, személyes jegyzetek és nem megosztható részletek."
+    ],
+    "bands": {
+      "projects": "Minden projekt ugyanazokon a szakaszokon és készenléti ellenőrzésen megy át, és hivatkozik a mögötte lévő technológiákra és kutatásokra.",
+      "technologies": "A technology node-ok projektigényekből születnek, nem technológiák öncélú tanulmányozásából.",
+      "research": "A kutatás konkrét projektkérdésből indul, és döntéssel zárul.",
+      "link": "Hogyan dolgozom"
+    },
+    "flow": [
+      "Projektigény",
+      "Ismeretlen / technikai kérdés",
+      "Szükséges technológia",
+      "Releváns koncepciók",
+      "Célzott kutatás",
+      "Prototípus / validáció",
+      "Döntés",
+      "Technology csomópont / projektdokumentáció"
+    ],
+    "modelLabels": {
+      "language": "Programozási nyelv",
+      "implements": "megvalósítja",
+      "technology": "Technológia / koncepció",
+      "usedBy": "használja",
+      "project": "Projekt"
+    },
+    "modelExample": "Példa: a Python és a Java megvalósítja a Branchinget, amelyet egy (tervezett) játékprojekt használ."
+  },
+  "footer": {
+    "text": "Megérteni, amit építünk; építeni, amit még nem értünk.",
+    "navTitle": "Navigáció",
+    "cv": "CV letöltése",
+    "source": "Forráskód",
+    "rights": "A kód MIT licenc alatt áll. A szövegekre, képekre és dokumentumokra minden jog fenntartva."
+  },
+  "langBanner": {
+    "label": "Language suggestion",
+    "text": "This page is also available in English.",
+    "link": "English version",
+    "dismiss": "Close"
   }
 }

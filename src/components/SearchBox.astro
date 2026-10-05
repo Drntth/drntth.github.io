@@ -1,0 +1,81 @@
+---
+import { Icon } from "astro-icon/components";
+import { getContent, type Lang } from "../i18n/utils";
+import type { Section } from "../lib/search";
+
+interface Props {
+  lang: Lang;
+  scope: Section;
+  flush?: boolean;
+}
+const { lang, scope, flush = false } = Astro.props;
+const s = getContent(lang).search;
+const uid = `sb-${scope}`;
+const labels = {
+  empty: s.empty,
+  results: s.results,
+  planned: s.planned,
+  sections: s.sections,
+  types: s.types,
+};
+---
+
+<div
+  data-search-box
+  data-lang={lang}
+  data-scope={scope}
+  data-labels={JSON.stringify(labels)}
+  class:list={["relative", !flush && "mb-8"]}
+>
+  <label class="sr-only" for={`${uid}-input`}>{s.placeholders[scope]}</label>
+  <div class="relative">
+    <Icon
+      name="lucide:search"
+      class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted"
+    />
+    <input
+      id={`${uid}-input`}
+      type="search"
+      role="combobox"
+      aria-expanded="false"
+      aria-controls={`${uid}-list`}
+      aria-autocomplete="list"
+      autocomplete="off"
+      placeholder={s.placeholders[scope]}
+      class="search-input"
+    />
+  </div>
+  <ul id={`${uid}-list`} role="listbox" hidden class="search-results"></ul>
+  <p class="sr-only" aria-live="polite" data-status></p>
+</div>
+
+<script>
+  import { mountSearch } from "../lib/search-ui";
+  import type { Section } from "../lib/search";
+
+  document
+    .querySelectorAll<HTMLElement>("[data-search-box]")
+    .forEach((root) => {
+      const input = root.querySelector("input")!;
+      const list = root.querySelector<HTMLElement>("[role=listbox]")!;
+      const status = root.querySelector<HTMLElement>("[data-status]")!;
+      const m = mountSearch({
+        lang: root.dataset.lang!,
+        scope: root.dataset.scope as Section,
+        input,
+        list,
+        status,
+        labels: JSON.parse(root.dataset.labels!),
+        emit: true,
+      });
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") m.clear();
+      });
+      document.addEventListener("click", (e) => {
+        if (!root.contains(e.target as Node)) {
+          list.hidden = true;
+          input.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+</script>

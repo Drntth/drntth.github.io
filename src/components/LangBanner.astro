@@ -1,0 +1,78 @@
+---
+import { Icon } from "astro-icon/components";
+import { getContent, switchPath, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+// The strings are written in the suggested language, so langBanner in
+// en.json is Hungarian and in hu.json is English.
+const b = getContent(lang).langBanner;
+const target: Lang = lang === "en" ? "hu" : "en";
+const href = switchPath(Astro.url, target);
+---
+
+<div
+  id="lang-banner"
+  class="lang-banner"
+  role="region"
+  aria-label={b.label}
+  lang={target}
+  data-target={target}
+  hidden
+>
+  <p class="text-sm">{b.text}</p>
+  <div class="flex items-center gap-2">
+    <a {href} hreflang={target} class="btn btn-primary py-1.5" data-lang-link
+      >{b.link}</a
+    >
+    <button
+      type="button"
+      class="icon-btn"
+      aria-label={b.dismiss}
+      data-lang-dismiss
+    >
+      <Icon name="lucide:x" class="size-4" />
+    </button>
+  </div>
+</div>
+
+<script>
+  const KEY = "lang-banner-dismissed";
+  const banner = document.getElementById("lang-banner");
+  if (banner) {
+    const read = () => {
+      try {
+        return localStorage.getItem(KEY) === "1";
+      } catch {
+        return false;
+      }
+    };
+    const remember = () => {
+      try {
+        localStorage.setItem(KEY, "1");
+      } catch {}
+    };
+    // First supported language in the browser's preference order.
+    const prefs = navigator.languages?.length
+      ? navigator.languages
+      : [navigator.language];
+    const first = prefs
+      .map((l) => l.slice(0, 2).toLowerCase())
+      .find((l) => l === "hu" || l === "en");
+
+    if (first === banner.dataset.target && !read()) {
+      const link = banner.querySelector<HTMLAnchorElement>("[data-lang-link]")!;
+      link.href += location.search + location.hash;
+      banner.hidden = false;
+      link.addEventListener("click", remember);
+      banner
+        .querySelector("[data-lang-dismiss]")!
+        .addEventListener("click", () => {
+          remember();
+          banner.hidden = true;
+        });
+    }
+  }
+</script>

@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { getContent, localePath, switchPath, type Lang } from "../i18n/utils";
+import { navItems, isCurrent, type NavItem } from "../i18n/nav";
 
 interface Props {
   lang: Lang;
@@ -9,67 +10,52 @@ const { lang } = Astro.props;
 const c = getContent(lang);
 const other: Lang = lang === "en" ? "hu" : "en";
 const home = localePath(lang, "/");
-const path = Astro.url.pathname.replace(/^\/hu(?=\/|$)/, "") || "/";
-
-const links = [
-  { href: `${home}#about`, label: c.nav.about },
-  { href: `${home}#stack`, label: c.nav.stack },
-  { href: `${home}#certificates`, label: c.nav.certificates },
-  {
-    href: localePath(lang, "/projects"),
-    label: c.nav.projects,
-    page: "/projects",
-  },
-  {
-    href: localePath(lang, "/technologies"),
-    label: c.nav.technologies,
-    page: "/technologies",
-  },
-  {
-    href: localePath(lang, "/research"),
-    label: c.nav.research,
-    page: "/research",
-  },
-  { href: `${home}#contact`, label: c.nav.contact },
-];
-const current = (l: { page?: string }) =>
-  l.page && path.startsWith(l.page) ? "page" : undefined;
-const linkCls =
-  "rounded-md px-2.5 py-1.5 text-sm transition-colors hover:text-accent aria-[current=page]:font-medium aria-[current=page]:text-accent-2";
+const items = navItems(lang);
+const cur = (i: NavItem) =>
+  isCurrent(Astro.url.pathname, i) ? "page" : undefined;
 ---
 
 <header
   class="sticky top-0 z-40 border-b border-line/60 bg-bg/80 backdrop-blur"
 >
   <nav
-    class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3"
+    class="container-page flex items-center justify-between gap-4 py-3"
+    aria-label={c.ui.mainNav}
   >
-    <a href={home} class="font-display font-semibold">{c.hero.name}</a>
+    <a
+      href={home}
+      class="shrink-0 whitespace-nowrap font-display font-semibold"
+    >
+      {c.hero.shortName}
+    </a>
 
-    <ul class="hidden items-center gap-1 lg:flex">
+    <ul class="nav-pill hidden xl:flex">
       {
-        links.map((l) => (
+        items.map((i) => (
           <li>
-            <a href={l.href} aria-current={current(l)} class={linkCls}>
-              {l.label}
+            <a href={i.href} aria-current={cur(i)} class="nav-link">
+              {i.label}
             </a>
           </li>
         ))
       }
     </ul>
 
-    <div class="flex items-center gap-2">
-      <a
-        href={c.contact.cv}
-        download
-        class="btn btn-primary hidden !py-1.5 sm:inline-flex"
+    <div class="flex shrink-0 items-center gap-2">
+      <button
+        type="button"
+        class="icon-btn"
+        data-search-open
+        aria-label={c.ui.search}
+        title="Ctrl K"
       >
-        <Icon name="lucide:file-down" class="size-4" />{c.nav.cv}
-      </a>
+        <Icon name="lucide:search" class="size-4" />
+      </button>
       <a
         href={switchPath(Astro.url, other)}
         hreflang={other}
         lang={other}
+        data-lang-switch
         aria-label={c.ui.language}
         class="icon-btn text-xs font-medium uppercase">{other}</a
       >
@@ -85,7 +71,7 @@ const linkCls =
       <button
         id="menu-toggle"
         type="button"
-        class="icon-btn lg:!hidden"
+        class="icon-btn xl:hidden"
         aria-label={c.ui.menu}
         aria-expanded="false"
         aria-controls="mobile-menu"
@@ -96,17 +82,13 @@ const linkCls =
     </div>
   </nav>
 
-  <div id="mobile-menu" class="hidden border-t border-line bg-bg lg:hidden">
-    <ul class="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-3">
+  <div id="mobile-menu" class="hidden border-t border-line bg-bg/95 xl:hidden">
+    <ul class="container-page grid grid-cols-2 gap-2 py-4 sm:grid-cols-3">
       {
-        links.map((l) => (
+        items.map((i) => (
           <li>
-            <a
-              href={l.href}
-              aria-current={current(l)}
-              class={`${linkCls} block py-2.5 text-base`}
-            >
-              {l.label}
+            <a href={i.href} aria-current={cur(i)} class="nav-card">
+              {i.label}
             </a>
           </li>
         ))
@@ -140,4 +122,12 @@ const linkCls =
     localStorage.setItem("theme", dark ? "dark" : "light");
     window.dispatchEvent(new Event("themechange"));
   });
+
+  document
+    .querySelectorAll<HTMLAnchorElement>("a[data-lang-switch]")
+    .forEach((a) =>
+      a.addEventListener("click", () => {
+        a.hash = location.hash;
+      }),
+    );
 </script>

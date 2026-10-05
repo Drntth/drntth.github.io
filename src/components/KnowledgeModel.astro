@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+import { getContent, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+const L = getContent(Astro.props.lang).methodPage;
+const box = "rounded-lg border px-4 py-3 text-center text-sm font-medium";
+---
+
+<div
+  class="card reveal flex flex-col items-stretch gap-3 p-6 md:flex-row md:items-center md:justify-between"
+>
+  <div class={`${box} border-accent-2/60`}>{L.modelLabels.language}</div>
+  <div class="flex items-center justify-center gap-2 text-xs text-muted">
+    <span>{L.modelLabels.implements}</span>
+    <Icon name="lucide:arrow-right" class="hidden size-4 md:block" /><Icon
+      name="lucide:arrow-down"
+      class="size-4 md:hidden"
+    />
+  </div>
+  <div class={`${box} border-accent/60`}>{L.modelLabels.technology}</div>
+  <div class="flex items-center justify-center gap-2 text-xs text-muted">
+    <span>{L.modelLabels.usedBy}</span>
+    <Icon name="lucide:arrow-right" class="hidden size-4 md:block" /><Icon
+      name="lucide:arrow-down"
+      class="size-4 md:hidden"
+    />
+  </div>
+  <div class={`${box} border-fg/40`}>{L.modelLabels.project}</div>
+</div>
+<p class="reveal mt-3 text-xs text-muted">{L.modelExample}</p>

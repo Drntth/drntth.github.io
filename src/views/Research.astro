@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getContent, localePath, loc, type Lang } from "../i18n/utils";
+import PageHeader from "../components/PageHeader.astro";
 
 interface Props {
   lang: Lang;
@@ -17,16 +18,22 @@ const techs = await getCollection("technologies");
 const projects = await getCollection("projects");
 ---
 
-<BaseLayout lang={lang} title={`${L.title} | ${c.hero.name}`}>
-  <h1 class="section-title reveal !text-4xl">{L.title}</h1>
-  <p class="reveal mb-4 text-justify text-muted">{L.intro}</p>
+<BaseLayout lang={lang} title={`${L.title} | ${c.hero.shortName}`}>
+  <PageHeader
+    lang={lang}
+    title={L.title}
+    intro={L.intro}
+    kind="research"
+    scope="research"
+  />
+
   <p
-    class="reveal mb-10 text-justify rounded-lg border border-dashed border-accent-2/60 p-3 text-sm"
+    class="reveal mb-6 rounded-lg border border-dashed border-accent-2/60 p-3 text-sm"
   >
     {L.note}
   </p>
 
-  <ul class="reveal mb-12 flex flex-wrap gap-2">
+  <ul class="reveal mb-10 flex flex-wrap gap-2">
     {
       L.rules.map((r) => (
         <li class="chip">
@@ -45,14 +52,18 @@ const projects = await getCollection("projects");
         const relTech = techs.filter((t) => r.data.technologies.includes(t.id));
         const relProj = projects.filter((p) => r.data.projects.includes(p.id));
         return (
-          <article id={r.id} class="card reveal scroll-mt-24 p-6 md:p-8">
+          <article
+            id={r.id}
+            data-hit
+            class="card reveal scroll-mt-24 p-6 md:p-8"
+          >
             <div class="flex flex-wrap items-center gap-3">
               <Icon name={r.data.icon} class="size-7 text-accent" />
               <span class="chip">{loc(r.data.topic, lang)}</span>
               <span
                 class:list={[
                   "chip",
-                  planned && "!border-dashed !border-accent-2/60",
+                  planned && "border-dashed border-accent-2/60",
                 ]}
               >
                 {planned ? L.planned : L.published}
@@ -116,7 +127,7 @@ const projects = await getCollection("projects");
               <div class="mt-6 flex flex-wrap gap-2 border-t border-line pt-5">
                 {relTech.map((t) => (
                   <a
-                    class="btn btn-ghost !py-1.5"
+                    class="btn btn-ghost py-1.5"
                     href={localePath(lang, `/technologies/${t.id}`)}
                   >
                     <Icon name="lucide:lightbulb" class="size-4" />
@@ -130,7 +141,7 @@ const projects = await getCollection("projects");
                 ))}
                 {r.data.links.map((l) => (
                   <a
-                    class="btn btn-ghost !py-1.5"
+                    class="btn btn-ghost py-1.5"
                     href={l.href}
                     target="_blank"
                     rel="noopener noreferrer"

@@ -1,0 +1,135 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import KnowledgeModel from "../components/KnowledgeModel.astro";
+import ResearchFlow from "../components/ResearchFlow.astro";
+import { getContent, localePath, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = getContent(lang);
+const m = c.methodPage;
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${m.title} | ${c.hero.shortName}`}
+  description={m.intro}
+>
+  <PageHeader lang={lang} title={m.title} intro={m.intro} scope="method" />
+
+  <section id="stages" class="mb-14 scroll-mt-24">
+    <h2 class="section-title reveal">{m.stagesTitle}</h2>
+    <p class="reveal mb-6 text-muted">{m.stagesNote}</p>
+    <ol class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        m.stages.map((s, i) => (
+          <li
+            id={`stage-${i + 1}`}
+            data-hit
+            class:list={[
+              "card reveal scroll-mt-24 p-5",
+              s.decision && "border-accent-2/60",
+            ]}
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-display text-2xl font-bold text-gradient">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              {s.decision && (
+                <span class="chip border-accent-2/60 text-accent-2">
+                  <Icon name="lucide:git-fork" class="size-3.5" />
+                  {m.decisionLabel}
+                </span>
+              )}
+            </div>
+            <h3 class="mt-2 font-display text-lg font-semibold">{s.name}</h3>
+            <p class="mt-1 text-sm text-muted">{s.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section id="knowledge" class="mb-14 scroll-mt-24">
+    <h2 class="section-title reveal">{m.knowledgeTitle}</h2>
+    <p class="reveal mb-6 text-muted">{m.knowledgeText}</p>
+    <KnowledgeModel lang={lang} />
+    <a
+      href={localePath(lang, "/technologies")}
+      class="btn btn-ghost reveal mt-5">{m.knowledgeLink}</a
+    >
+  </section>
+
+  <section id="research" class="mb-14 scroll-mt-24">
+    <h2 class="section-title reveal">{m.researchTitle}</h2>
+    <p class="reveal mb-6 text-muted">{m.researchText}</p>
+    <ResearchFlow steps={m.flow} />
+    <ul class="reveal mt-6 space-y-2 text-sm">
+      {
+        m.researchRules.map((r, i) => (
+          <li id={`rule-${i + 1}`} data-hit class="flex scroll-mt-24 gap-2">
+            <>
+              <Icon
+                name="lucide:check"
+                class="mt-0.5 size-4 shrink-0 text-accent-2"
+              />
+              <span>{r}</span>
+            </>
+          </li>
+        ))
+      }
+    </ul>
+    <a href={localePath(lang, "/research")} class="btn btn-ghost reveal mt-5"
+      >{m.researchLink}</a
+    >
+  </section>
+
+  <section id="readiness" class="mb-14 scroll-mt-24">
+    <h2 class="section-title reveal">{m.readinessTitle}</h2>
+    <p class="reveal mb-4 text-muted">{m.readinessIntro}</p>
+    <ul class="reveal grid gap-2 text-sm md:grid-cols-2">
+      {
+        m.readiness.map((r, i) => (
+          <li
+            id={`readiness-${i + 1}`}
+            data-hit
+            class="card flex scroll-mt-24 gap-2 p-3"
+          >
+            <>
+              <Icon
+                name="lucide:check"
+                class="mt-0.5 size-4 shrink-0 text-accent"
+              />
+              <span>{r}</span>
+            </>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="reveal mt-4 text-sm text-muted">{m.readinessNote}</p>
+  </section>
+
+  <section id="publishing" class="scroll-mt-24">
+    <h2 class="section-title reveal">{m.publishTitle}</h2>
+    <p class="reveal mb-4 text-muted">{m.publishText}</p>
+    <ul class="reveal space-y-2 text-sm">
+      {
+        m.publish.map((r, i) => (
+          <li id={`publish-${i + 1}`} data-hit class="flex scroll-mt-24 gap-2">
+            <>
+              <Icon
+                name="lucide:circle-check"
+                class="mt-0.5 size-4 shrink-0 text-accent-2"
+              />
+              <span>{r}</span>
+            </>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

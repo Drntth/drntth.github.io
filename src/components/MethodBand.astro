@@ -1,0 +1,31 @@
+---
+import { Icon } from "astro-icon/components";
+import { getContent, localePath, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+  kind: "projects" | "technologies" | "research";
+  bare?: boolean;
+}
+const { lang, kind, bare = false } = Astro.props;
+const c = getContent(lang);
+const b = c.methodPage.bands;
+---
+
+<aside
+  class:list={["card reveal no-print flex flex-col gap-3 p-5", !bare && "mb-8"]}
+  aria-label={c.nav.method}
+>
+  <p
+    class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent-2"
+  >
+    <Icon name="lucide:route" class="size-4" />{c.nav.method}
+  </p>
+  <p class="text-sm text-muted">{b[kind]}</p>
+  <a
+    href={localePath(lang, "/method")}
+    class="btn btn-ghost mt-auto self-end py-1.5"
+  >
+    {b.link}<Icon name="lucide:arrow-right" class="size-4" />
+  </a>
+</aside>

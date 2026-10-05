@@ -1,0 +1,63 @@
+---
+import { getContent, type Lang } from "../i18n/utils";
+
+interface Group {
+  key: string;
+  label: string;
+  options: { id: string; label: string }[];
+}
+interface Props {
+  lang: Lang;
+  groups: Group[];
+  total: number;
+}
+const { lang, groups, total } = Astro.props;
+const c = getContent(lang);
+const S = c.search;
+const L = c.technologiesPage;
+---
+
+<details
+  class="filter-bar card reveal"
+  data-filters
+  data-total={total}
+  data-labels={JSON.stringify({
+    showing: L.showing,
+    of: L.of,
+    unit: L.nodesUnit,
+    active: L.filtersActive,
+  })}
+>
+  <summary class="filter-summary">
+    <span class="font-medium">{L.filters}</span>
+    <span class="text-xs text-muted" data-filter-count></span>
+  </summary>
+  <div class="flex flex-col gap-4 p-4 pt-3 md:flex-row md:flex-wrap md:items-start md:gap-x-8">
+    {
+      groups.map((g) => (
+        <fieldset class="min-w-0">
+          <legend class="side-title mb-2">{g.label}</legend>
+          <div class="flex flex-wrap gap-2">
+            {g.options.map((o) => (
+              <button
+                type="button"
+                class="chip"
+                data-filter-group={g.key}
+                data-filter-value={o.id}
+                aria-pressed="false"
+              >
+                {o.label}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+      ))
+    }
+    <div class="flex items-end md:ml-auto md:self-end">
+      <button type="button" class="btn btn-ghost" data-filter-reset hidden>
+        {S.reset}
+      </button>
+    </div>
+  </div>
+  <p class="sr-only" aria-live="polite" data-filter-status></p>
+</details>

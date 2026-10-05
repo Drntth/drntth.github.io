@@ -1,0 +1,43 @@
+name: Lighthouse CI
+on:
+    pull_request:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    lighthouse:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+            - run: npm ci
+            - run: npm run build
+            - id: lhci
+              uses: treosh/lighthouse-ci-action@v12
+              with:
+                  configPath: ./lighthouserc.json
+                  uploadArtifacts: true
+                  temporaryPublicStorage: true
+            - name: Report links in the job summary
+              if: always()
+              env:
+                  LINKS: ${{ steps.lhci.outputs.links }}
+              run: |
+                  {
+                    echo "## Lighthouse reports"
+                    echo
+                    echo "Scores below the thresholds in lighthouserc.json appear as warnings in the log."
+                    echo
+                    if [ -n "$LINKS" ]; then
+                      echo "$LINKS" | jq -r 'to_entries[] | "- [\(.key)](\(.value))"'
+                    else
+                      echo "No report links were produced. See the artifact lighthouse-results."
+                    fi
+                  } >> "$GITHUB_STEP_SUMMARY"

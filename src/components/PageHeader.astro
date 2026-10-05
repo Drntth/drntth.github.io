@@ -1,0 +1,41 @@
+---
+import MethodBand from "./MethodBand.astro";
+import SearchBox from "./SearchBox.astro";
+import type { Section } from "../lib/search";
+import type { Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+  title: string;
+  intro: string;
+  kind?: "projects" | "technologies" | "research";
+  scope?: Section;
+}
+const { lang, title, intro, kind, scope } = Astro.props;
+const hasTools = Astro.slots.has("tools");
+---
+
+<header class="mb-10">
+  <div
+    class:list={[
+      "grid gap-6 lg:gap-10",
+      kind && "lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:items-stretch",
+    ]}
+  >
+    <div class="flex flex-col">
+      <h1 class="section-title reveal text-3xl md:text-4xl">{title}</h1>
+      <p class="reveal text-muted lg:text-lg">{intro}</p>
+      {scope && (
+        <div class="mt-auto pt-6">
+          <SearchBox lang={lang} scope={scope} flush />
+        </div>
+      )}
+    </div>
+    {kind && <MethodBand lang={lang} kind={kind} bare />}
+  </div>
+  {hasTools && (
+    <div class="mt-6">
+      <slot name="tools" />
+    </div>
+  )}
+</header>

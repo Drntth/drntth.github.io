@@ -6,12 +6,16 @@ interface Props {
   autoplay?: number;
   prev?: string;
   next?: string;
+  pause?: string;
+  play?: string;
 }
 const {
   label,
   autoplay = 6000,
   prev = "Previous",
   next = "Next",
+  pause = "Pause",
+  play = "Play",
 } = Astro.props;
 ---
 
@@ -22,18 +26,30 @@ const {
   aria-roledescription="carousel"
   aria-label={label}
 >
-  <div class="overflow-hidden rounded-2xl" data-viewport>
+  <div class="overflow-hidden rounded-2xl" data-viewport tabindex="0">
     <div class="flex"><slot /></div>
   </div>
-  <div class="mt-5 flex items-center justify-between" data-controls>
+  <div class="mt-5 flex items-center justify-between gap-4" data-controls>
     <div class="flex items-center gap-2" data-dots></div>
     <div class="flex gap-2">
-      <button type="button" data-prev class="icon-btn" aria-label={prev}
-        ><Icon name="lucide:chevron-left" class="size-4" /></button
+      <button
+        type="button"
+        data-toggle
+        class="icon-btn"
+        aria-label={pause}
+        title={pause}
+        data-label-pause={pause}
+        data-label-play={play}
       >
-      <button type="button" data-next class="icon-btn" aria-label={next}
-        ><Icon name="lucide:chevron-right" class="size-4" /></button
-      >
+        <Icon name="lucide:pause" data-icon-pause class="size-4" />
+        <Icon name="lucide:play" data-icon-play class="hidden size-4" />
+      </button>
+      <button type="button" data-prev class="icon-btn" aria-label={prev}>
+        <Icon name="lucide:chevron-left" class="size-4" />
+      </button>
+      <button type="button" data-next class="icon-btn" aria-label={next}>
+        <Icon name="lucide:chevron-right" class="size-4" />
+      </button>
     </div>
   </div>
 </div>
@@ -48,28 +64,93 @@ const {
 
   document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((root) => {
     const viewport = root.querySelector<HTMLElement>("[data-viewport]")!;
-    const plugins: EmblaPluginType[] = [WheelGesturesPlugin()];
-    if (!reduce) {
-      plugins.push(
-        Autoplay({
+    const toggle = root.querySelector<HTMLButtonElement>("[data-toggle]")!;
+
+    // Hover and focus pausing is handled below, so the plugin never stops on its own.
+    const autoplay = reduce
+      ? null
+      : Autoplay({
           delay: Number(root.dataset.autoplay) || 6000,
           stopOnInteraction: false,
-          stopOnMouseEnter: true,
-        }),
-      );
-    }
+          stopOnMouseEnter: false,
+          stopOnFocusIn: false,
+        });
+
+    const plugins: EmblaPluginType[] = [WheelGesturesPlugin()];
+    if (autoplay) plugins.push(autoplay);
     const embla = EmblaCarousel(
       viewport,
       { loop: true, align: "start" },
       plugins,
     );
 
+    const slides = embla.slideNodes();
+    slides.forEach((s, i) => {
+      s.setAttribute("role", "group");
+      s.setAttribute("aria-roledescription", "slide");
+      s.setAttribute("aria-label", `${i + 1} / ${slides.length}`);
+    });
+
     const count = embla.scrollSnapList().length;
     if (count < 2) {
       root.querySelector("[data-controls]")?.classList.add("hidden");
+      autoplay?.stop();
       return;
     }
 
+    // Autoplay: pause on hover, on focus inside, or by the user
+    if (!autoplay) toggle.classList.add("hidden");
+    let userPaused = false;
+    let hovering = false;
+    let focused = false;
+
+    const applyAutoplay = () => {
+      if (!autoplay) return;
+      const run = !userPaused && !hovering && !focused;
+      if (run && !autoplay.isPlaying()) autoplay.play();
+      if (!run && autoplay.isPlaying()) autoplay.stop();
+    };
+    const paintToggle = () => {
+      const label = userPaused
+        ? toggle.dataset.labelPlay!
+        : toggle.dataset.labelPause!;
+      toggle.setAttribute("aria-label", label);
+      toggle.title = label;
+      toggle
+        .querySelector("[data-icon-pause]")
+        ?.classList.toggle("hidden", userPaused);
+      toggle
+        .querySelector("[data-icon-play]")
+        ?.classList.toggle("hidden", !userPaused);
+    };
+
+    toggle.addEventListener("click", () => {
+      userPaused = !userPaused;
+      paintToggle();
+      applyAutoplay();
+    });
+    root.addEventListener("pointerenter", (e) => {
+      if (e.pointerType === "mouse") {
+        hovering = true;
+        applyAutoplay();
+      }
+    });
+    root.addEventListener("pointerleave", () => {
+      hovering = false;
+      applyAutoplay();
+    });
+    root.addEventListener("focusin", () => {
+      focused = true;
+      applyAutoplay();
+    });
+    root.addEventListener("focusout", (e) => {
+      if (!root.contains(e.relatedTarget as Node | null)) {
+        focused = false;
+        applyAutoplay();
+      }
+    });
+
+    // Dots
     const dotsEl = root.querySelector<HTMLElement>("[data-dots]")!;
     const dots = Array.from({ length: count }, (_, i) => {
       const b = document.createElement("button");
@@ -79,12 +160,15 @@ const {
       dotsEl.appendChild(b);
       return b;
     });
-    const sync = () =>
-      dots.forEach((d, i) =>
-        d.classList.toggle("is-active", i === embla.selectedScrollSnap()),
-      );
-    embla.on("select", sync).on("init", sync);
-    sync();
+    const syncDots = () =>
+      dots.forEach((d, i) => {
+        const on = i === embla.selectedScrollSnap();
+        d.classList.toggle("is-active", on);
+        if (on) d.setAttribute("aria-current", "true");
+        else d.removeAttribute("aria-current");
+      });
+    embla.on("select", syncDots).on("init", syncDots);
+    syncDots();
 
     root
       .querySelector("[data-prev]")
@@ -92,5 +176,15 @@ const {
     root
       .querySelector("[data-next]")
       ?.addEventListener("click", () => embla.scrollNext());
+    viewport.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        embla.scrollPrev();
+      }
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        embla.scrollNext();
+      }
+    });
   });
 </script>

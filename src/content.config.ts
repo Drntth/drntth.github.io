@@ -14,6 +14,7 @@ const projectText = z.object({
   result: z.string(),
   status: z.string(),
   highlights: z.array(z.string()).default([]),
+  metrics: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
   sections: z
     .array(z.object({ title: z.string(), body: z.array(z.string()) }))
     .default([]),

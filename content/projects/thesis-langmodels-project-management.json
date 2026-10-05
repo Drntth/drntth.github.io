@@ -39,11 +39,17 @@
     "solution": "A Django application with an intuitive interface and role-based access. Several small models are driven by different prompting techniques and tool configurations; each technique was tested alone and in combination, and one shared configuration was found that performs adequately across all models.",
     "result": "A working system that exports generated documents as Markdown, compatible with GitHub. Specific prompting techniques gave a significant quality improvement; handling complex relationships remains limited and would need further fine-tuning.",
     "status": "Completed (BSc thesis, 2025)",
+    "metrics": [
+      { "value": "248", "label": "unit tests" },
+      { "value": "258", "label": "Cypress end-to-end tests" },
+      { "value": "5", "label": "language models compared" },
+      { "value": "4", "label": "permission levels" }
+    ],
     "highlights": [
-      "248 unit tests and 258 Cypress end-to-end tests, all passing",
-      "Five small language models compared: DistilGPT2, GPT-Neo 125M, Facebook OPT 125M and 350M, GPT-2 Medium",
-      "Four permission levels: guest, user, staff, superuser",
-      "Containerized with Docker, image published on Docker Hub"
+      "One shared prompting and parameter configuration that performs adequately on all five models",
+      "Generated documents export as GitHub-compatible Markdown",
+      "Containerized with Docker, image published on Docker Hub",
+      "Cypress tests organized per permission level: guest, user, staff, superuser"
     ],
     "sections": [
       {
@@ -86,11 +92,17 @@
     "solution": "Django alkalmazás intuitív felülettel és szerepkör-alapú hozzáféréssel. Több kisebb modellt különböző promptolási technikákkal és eszközkonfigurációkkal hajtottam meg; a technikákat külön és kombinálva is teszteltem, és találtam egy közös konfigurációt, amely mindegyik modellnél megfelelően teljesít.",
     "result": "Működő rendszer, amely a generált dokumentumokat GitHub-kompatibilis Markdown formátumban tölti le. Specifikus promptolási technikákkal jelentős minőségjavulást értem el; a komplex összefüggések kezelése korlátozott, további finomhangolást igényel.",
     "status": "Befejezett (BSc szakdolgozat, 2025)",
+    "metrics": [
+      { "value": "248", "label": "egységteszt" },
+      { "value": "258", "label": "Cypress E2E teszt" },
+      { "value": "5", "label": "összehasonlított nyelvi modell" },
+      { "value": "4", "label": "jogosultsági szint" }
+    ],
     "highlights": [
-      "248 egységteszt és 258 Cypress end-to-end teszt, mind sikeres",
-      "Öt kisebb nyelvi modell összehasonlítása: DistilGPT2, GPT-Neo 125M, Facebook OPT 125M és 350M, GPT-2 Medium",
-      "Négy jogosultsági szint: vendég, felhasználó, moderátor, adminisztrátor",
-      "Dockerrel konténerizálva, az image elérhető a Docker Hubon"
+      "Egy közös prompt- és paraméterkonfiguráció, amely mind az öt modellnél megfelelően teljesít",
+      "A generált dokumentumok GitHub-kompatibilis Markdown formátumban tölthetők le",
+      "Dockerrel konténerizálva, az image elérhető a Docker Hubon",
+      "A Cypress tesztek jogosultsági szintenként szervezettek: vendég, felhasználó, moderátor, adminisztrátor"
     ],
     "sections": [
       {

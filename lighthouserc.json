@@ -1,0 +1,27 @@
+{
+  "ci": {
+    "collect": {
+      "startServerCommand": "npm run preview -- --port 4321",
+      "startServerReadyPattern": "4321",
+      "url": [
+        "http://localhost:4321/",
+        "http://localhost:4321/hu/",
+        "http://localhost:4321/projects/",
+        "http://localhost:4321/projects/thesis-langmodels-project-management/",
+        "http://localhost:4321/technologies/",
+        "http://localhost:4321/research/",
+        "http://localhost:4321/method/"
+      ],
+      "numberOfRuns": 1,
+      "settings": { "preset": "desktop" }
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["warn", { "minScore": 0.9 }],
+        "categories:accessibility": ["warn", { "minScore": 0.95 }],
+        "categories:best-practices": ["warn", { "minScore": 0.9 }],
+        "categories:seo": ["warn", { "minScore": 0.95 }]
+      }
+    }
+  }
+}

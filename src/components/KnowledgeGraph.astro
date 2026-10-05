@@ -155,6 +155,39 @@ const colors: Record<string, string> = {
       nodeEls.set(n.id, g);
     }
 
+    const highlight = (hit: Set<string>) => {
+      const near = new Set<string>(hit);
+      hit.forEach((id) => neighbors.get(id)?.forEach((x) => near.add(x)));
+      nodes.forEach((n) => {
+        nodeEls.get(n.id)!.style.opacity = hit.has(n.id)
+          ? "1"
+          : near.has(n.id)
+            ? "0.6"
+            : "0.15";
+      });
+      links.forEach((l, i) => {
+        const on = hit.has((l.source as GN).id) || hit.has((l.target as GN).id);
+        lineEls[i].style.opacity = on ? "1" : "0.08";
+      });
+    };
+
+    window.addEventListener("search:results", (e) => {
+      const d = (e as CustomEvent).detail as {
+        scope: string;
+        query: string;
+        urls: string[];
+      };
+      if (d.scope !== "technologies") return;
+      if (!d.query) return focusNode(null);
+      highlight(
+        new Set(
+          nodes
+            .filter((n) => n.href && d.urls.includes(n.href))
+            .map((n) => n.id),
+        ),
+      );
+    });
+
     const sim = forceSimulation<GN>(nodes)
       .force(
         "link",

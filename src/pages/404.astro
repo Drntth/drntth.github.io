@@ -1,23 +1,46 @@
 ---
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout lang="en" title="404 | Tóth Dorina Ildikó" noindex>
-  <section class="py-16 text-center">
-    <p class="font-display text-8xl font-bold">
+<BaseLayout lang="en" title="404 | Dorina Tóth" noindex>
+  <section class="py-12 text-center">
+    <p class="font-display text-8xl font-bold md:text-9xl">
       <span class="text-gradient">404</span>
     </p>
-    <h1 class="mt-4 font-display text-2xl font-semibold">Page not found</h1>
-    <p class="mt-2 text-muted">The page does not exist or has moved.</p>
-    <h2 class="mt-8 font-display text-2xl font-semibold">
-      Az oldal nem található
-    </h2>
-    <p class="mt-2 text-muted">
-      Az oldal nem létezik, vagy áthelyezésre került.
-    </p>
-    <div class="mt-8 flex justify-center gap-3">
-      <a href="/" class="btn btn-primary">Home</a>
-      <a href="/hu/" class="btn btn-ghost">Kezdőlap</a>
-    </div>
+    <button type="button" class="btn btn-ghost mt-6" data-search-open>
+      <Icon name="lucide:search" class="size-4" />Search / Keresés
+    </button>
+  </section>
+
+  <section class="grid gap-6 md:grid-cols-2">
+    <article class="card p-6 md:p-8">
+      <h1 class="font-display text-2xl font-semibold">Page not found</h1>
+      <p class="mt-2 text-muted">
+        The page does not exist or has moved. Try the search or one of these
+        pages.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/" class="btn btn-primary">Home</a>
+        <a href="/projects/" class="btn btn-ghost">Projects</a>
+        <a href="/technologies/" class="btn btn-ghost">Technologies</a>
+        <a href="/method/" class="btn btn-ghost">Method</a>
+      </div>
+    </article>
+    <article class="card p-6 md:p-8" lang="hu">
+      <h2 class="font-display text-2xl font-semibold">
+        Az oldal nem található
+      </h2>
+      <p class="mt-2 text-muted">
+        Az oldal nem létezik, vagy áthelyezésre került. Próbáld a keresőt vagy
+        az alábbi oldalakat.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/hu/" class="btn btn-primary">Kezdőlap</a>
+        <a href="/hu/projects/" class="btn btn-ghost">Projektek</a>
+        <a href="/hu/technologies/" class="btn btn-ghost">Technológiák</a>
+        <a href="/hu/method/" class="btn btn-ghost">Módszer</a>
+      </div>
+    </article>
   </section>
 </BaseLayout>

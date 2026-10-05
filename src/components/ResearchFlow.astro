@@ -8,11 +8,11 @@ const { steps } = Astro.props;
 <ol class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
   {
     steps.map((s, i) => (
-      <li class="card reveal flex items-start gap-3 p-4">
-        <span class="font-display text-2xl font-bold text-gradient">
+      <li class="card reveal flex items-center gap-3 p-4">
+        <span class="shrink-0 font-display text-2xl font-bold text-gradient">
           {String(i + 1).padStart(2, "0")}
         </span>
-        <span class="pt-1 text-sm">{s}</span>
+        <span class="flex-1 text-center text-sm">{s}</span>
       </li>
     ))
   }

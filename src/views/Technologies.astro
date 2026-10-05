@@ -3,9 +3,11 @@ import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import KnowledgeGraph from "../components/KnowledgeGraph.astro";
-import ResearchFlow from "../components/ResearchFlow.astro";
 import TechChip from "../components/TechChip.astro";
+import PageHeader from "../components/PageHeader.astro";
+import FilterBar from "../components/FilterBar.astro";
 import { getContent, localePath, type Lang } from "../i18n/utils";
+import { techOf } from "../i18n/stack";
 import { buildGraph } from "../lib/graph";
 
 interface Props {
@@ -14,49 +16,52 @@ interface Props {
 const { lang } = Astro.props;
 const c = getContent(lang);
 const L = c.technologiesPage;
+const S = c.search;
 const graph = await buildGraph(lang);
 const techs = (await getCollection("technologies")).sort(
   (a, b) => a.data.order - b.data.order,
 );
-const box = "rounded-lg border px-4 py-3 text-center text-sm font-medium";
+const languages = [
+  ...new Map(
+    techs.flatMap((t) =>
+      t.data.implementations.map(
+        (i) => [i.language, techOf(i.language, lang).name] as const,
+      ),
+    ),
+  ).entries(),
+];
+const filterGroups = [
+  {
+    key: "language",
+    label: S.filterLanguage,
+    options: languages.map(([id, name]) => ({ id, label: name })),
+  },
+  {
+    key: "status",
+    label: S.filterStatus,
+    options: [
+      { id: "published", label: L.published },
+      { id: "planned", label: L.planned },
+    ],
+  },
+];
 ---
 
-<BaseLayout lang={lang} title={`${L.title} | ${c.hero.name}`}>
-  <h1 class="section-title reveal !text-4xl">{L.title}</h1>
-  <p class="reveal mb-12 text-justify text-muted">{L.intro}</p>
-
-  <section class="mb-14">
-    <h2 class="section-title reveal">{L.modelTitle}</h2>
-    <p class="reveal mb-6 text-justify text-muted">{L.modelText}</p>
-    <div
-      class="card reveal flex flex-col items-stretch gap-3 p-6 md:flex-row md:items-center md:justify-between"
-    >
-      <div class={`${box} border-accent-2/60`}>{L.modelLabels.language}</div>
-      <div class="flex items-center justify-center gap-2 text-xs text-muted">
-        <span>{L.modelLabels.implements}</span>
-        <Icon name="lucide:arrow-right" class="hidden size-4 md:block" /><Icon
-          name="lucide:arrow-down"
-          class="size-4 md:hidden"
-        />
-      </div>
-      <div class={`${box} border-accent/60`}>{L.modelLabels.technology}</div>
-      <div class="flex items-center justify-center gap-2 text-xs text-muted">
-        <span>{L.modelLabels.usedBy}</span>
-        <Icon name="lucide:arrow-right" class="hidden size-4 md:block" /><Icon
-          name="lucide:arrow-down"
-          class="size-4 md:hidden"
-        />
-      </div>
-      <div class={`${box} border-fg/40`}>{L.modelLabels.project}</div>
-    </div>
-    <p class="reveal mt-3 text-xs text-muted">{L.modelExample}</p>
-  </section>
-
-  <section class="mb-14">
-    <h2 class="section-title reveal">{L.flowTitle}</h2>
-    <p class="reveal mb-6 text-justify text-muted">{L.flowNote}</p>
-    <ResearchFlow steps={L.flow} />
-  </section>
+<BaseLayout lang={lang} title={`${L.title} | ${c.hero.shortName}`}>
+  <PageHeader
+    lang={lang}
+    title={L.title}
+    intro={L.intro}
+    kind="technologies"
+    scope="technologies"
+  >
+    <FilterBar
+      slot="tools"
+      lang={lang}
+      groups={filterGroups}
+      total={techs.length}
+    />
+  </PageHeader>
 
   <section class="mb-14">
     <h2 class="section-title reveal">{L.graphTitle}</h2>
@@ -69,23 +74,46 @@ const box = "rounded-lg border px-4 py-3 text-center text-sm font-medium";
         legend={L.legend}
       />
     </div>
+    <p class="reveal mt-4 text-sm text-muted">
+      {L.modelHint}
+      <a
+        href={`${localePath(lang, "/method")}#knowledge`}
+        class="text-accent underline-offset-4 hover:underline"
+        >{L.modelLink}</a
+      >
+    </p>
   </section>
 
   <section>
     <h2 class="section-title reveal">{L.nodesTitle}</h2>
-    <div class="grid gap-4 md:grid-cols-2">
+    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3" data-cards>
       {
         techs.map((t) => {
           const d = t.data[lang];
           const planned = t.data.visibility === "planned";
+          const href = localePath(lang, `/technologies/${t.id}`);
           return (
             <a
-              href={localePath(lang, `/technologies/${t.id}`)}
-              class="card reveal block p-5"
+              href={href}
+              class:list={[
+                "card reveal block p-5",
+                planned && "border-dashed",
+              ]}
+              data-card
+              data-url={href}
+              data-languages={t.data.implementations
+                .map((i) => i.language)
+                .join(" ")}
+              data-status={planned ? "planned" : "published"}
             >
               <div class="flex items-start justify-between gap-3">
                 <Icon name={t.data.icon} class="size-7 text-accent" />
-                <span class:list={["chip", planned && "!border-dashed"]}>
+                <span
+                  class:list={[
+                    "chip",
+                    planned && "border-dashed border-accent-2/60 text-accent-2",
+                  ]}
+                >
                   {planned ? L.planned : L.published}
                 </span>
               </div>
@@ -105,5 +133,92 @@ const box = "rounded-lg border px-4 py-3 text-center text-sm font-medium";
         })
       }
     </div>
+    <p class="mt-4 text-sm text-muted" data-no-results hidden>
+      {S.noMatch}
+    </p>
   </section>
 </BaseLayout>
+
+<script>
+  const grid = document.querySelector<HTMLElement>("[data-cards]");
+  const bar = document.querySelector<HTMLDetailsElement>("[data-filters]");
+  if (grid && bar) {
+    const cards = [...grid.querySelectorAll<HTMLElement>("[data-card]")];
+    const buttons = [
+      ...bar.querySelectorAll<HTMLButtonElement>("button[data-filter-group]"),
+    ];
+    const reset = bar.querySelector<HTMLElement>("[data-filter-reset]")!;
+    const count = bar.querySelector<HTMLElement>("[data-filter-count]")!;
+    const status = bar.querySelector<HTMLElement>("[data-filter-status]")!;
+    const empty = document.querySelector<HTMLElement>("[data-no-results]")!;
+    const labels = JSON.parse(bar.dataset.labels!) as Record<string, string>;
+    const total = Number(bar.dataset.total);
+    let urls: Set<string> | null = null;
+
+    // Always open on desktop; collapsible panel below md.
+    const desktop = matchMedia("(min-width: 768px)");
+    const sync = () => {
+      if (desktop.matches) bar.open = true;
+    };
+    sync();
+    desktop.addEventListener("change", sync);
+    bar.addEventListener("toggle", sync);
+
+    const pressed = (group: string) =>
+      buttons
+        .filter(
+          (b) =>
+            b.dataset.filterGroup === group &&
+            b.getAttribute("aria-pressed") === "true",
+        )
+        .map((b) => b.dataset.filterValue!);
+
+    const apply = () => {
+      const langs = pressed("language");
+      const stats = pressed("status");
+      let shown = 0;
+      cards.forEach((card) => {
+        const ok =
+          (!urls || urls.has(card.dataset.url!)) &&
+          (!langs.length ||
+            langs.some((l) => card.dataset.languages!.split(" ").includes(l))) &&
+          (!stats.length || stats.includes(card.dataset.status!));
+        card.hidden = !ok;
+        if (ok) shown++;
+      });
+      const active = langs.length + stats.length;
+      empty.hidden = shown > 0;
+      reset.hidden = active === 0;
+      const text = `${labels.showing} ${shown} ${labels.of} ${total} ${labels.unit}${
+        active ? ` · ${active} ${labels.active}` : ""
+      }`;
+      count.textContent = text;
+      status.textContent = text;
+    };
+
+    buttons.forEach((b) =>
+      b.addEventListener("click", () => {
+        b.setAttribute(
+          "aria-pressed",
+          String(b.getAttribute("aria-pressed") !== "true"),
+        );
+        apply();
+      }),
+    );
+    reset.addEventListener("click", () => {
+      buttons.forEach((b) => b.setAttribute("aria-pressed", "false"));
+      apply();
+    });
+    window.addEventListener("search:results", (e) => {
+      const d = (e as CustomEvent).detail as {
+        scope: string;
+        query: string;
+        urls: string[];
+      };
+      if (d.scope !== "technologies") return;
+      urls = d.query ? new Set(d.urls) : null;
+      apply();
+    });
+    apply();
+  }
+</script>
