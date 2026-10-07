@@ -2,6 +2,8 @@
 
 Guide for AI assistants working on this repository. Read it fully before changing anything.
 
+Commit prefix: [GITHUB.IO]
+
 ## 1. Purpose
 
 `drntth.github.io` is the curated professional portfolio of Tóth Dorina Ildikó (software developer, AI and backend), published on GitHub Pages at https://drntth.github.io/.
@@ -79,9 +81,12 @@ These skills are invoked by the user with `/name` and are not visible to the mod
 
 At the end of every round, tell the user to run `/release-check`, then `/commit-message`. Do not commit or push.
 
+Claude configuration: `CLAUDE.md` is a symlink to this file. `.claude/settings.json` holds the shared permissions (build, dev server, `astro sync`; edits to schema, config, `package.json`, this file and `public/cv/` ask first). `CLAUDE.local.md` and `.claude/forbidden-terms.txt` are local and git-ignored; read them if present and never quote them in committed files.
+
 ## 5. Repository layout
 
 ```
+.claude/                  settings.json (shared permissions), skills/ (add-cert, add-project, release-check)
 .github/workflows/        deploy.yml (Pages), lighthouse.yml (Lighthouse CI)
 lighthouserc.json         Lighthouse CI pages and thresholds
 content/                  all text and data (edit here, not in components)

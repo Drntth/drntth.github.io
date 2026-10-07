@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(npm run dev *)",
+      "Bash(npx astro sync)"
+    ],
+    "ask": [
+      "Edit(src/content.config.ts)",
+      "Edit(astro.config.mjs)",
+      "Edit(package.json)",
+      "Edit(AGENTS.md)",
+      "Edit(public/cv/**)"
+    ]
+  }
+}

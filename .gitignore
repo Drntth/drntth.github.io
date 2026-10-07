@@ -25,6 +25,8 @@ pnpm-debug.log*
 
 # Claude
 .claude/settings.local.json
+CLAUDE.local.md
+.claude/forbidden-terms.txt
 
 # Lighthouse CI local output
 .lighthouseci/
