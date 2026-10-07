@@ -167,7 +167,8 @@
   "projects": {
     "title": "Projektek",
     "intro": "Elkészült, bemutatható projektek válogatása. Mindegyik leírja a célt, a megoldást és az eredményt, és hivatkozik a belőle született technológiai jegyzetekre és kutatásokra, így nyomon követhető, hogyan lett egy igényből döntés, majd működő rendszer.",
-    "description": "Válogatott szoftverprojektek: célok, megoldások, eredmények, technológiák és repólinkek.",
+    "seoTitle": "Projektek: AI és Python backend | Tóth Dorina",
+    "description": "Tóth Dorina válogatott szoftverprojektjei: célok, megoldások, eredmények, technológiák és repólinkek, köztük egy nyelvi modelleket használó Django webalkalmazás.",
     "noMatch": "Egy projekt sem felel meg a keresésnek.",
     "goal": "Cél",
     "solution": "Megoldás",
@@ -190,6 +191,9 @@
   "technologiesPage": {
     "title": "Technológiák",
     "intro": "Tudástérkép azokról a technológiákról és koncepciókról, amelyeket valós projektigényeken keresztül kutatok. A csomópontok nyelvekhez, projektekhez és kutatásokhoz kapcsolódnak; kapcsolatokat mutatnak, nem készségszintet.",
+    "seoTitle": "Technológiák: AI és backend tudástérkép | Tóth Dorina",
+    "description": "Tudástérkép AI és backend technológiákról és koncepciókról, amelyeket valós projektigényeken keresztül kutatok; nyelvekhez, projektekhez és kutatásokhoz kapcsolva.",
+    "detailDescription": "Technológiai jegyzet nyelvenkénti megvalósításokkal, kapcsolódó projektekkel és kutatásokkal.",
     "graphTitle": "Kapcsolati térkép",
     "graphHint": "Húzd a csomópontokat, vidd fölé az egeret a kapcsolatok kiemeléséhez, kattintással megnyitod. A szaggatott csomópontok tervezettek. A térkép magától bővül, ahogy új projekt, technológia és kutatás kerül be.",
     "graphLabel": "Gráf, amely programozási nyelveket, technológiákat, projekteket és kutatásokat köt össze",
@@ -229,6 +233,8 @@
   "researchPage": {
     "title": "Kutatás",
     "intro": "Kiválasztott, önálló szakmai értékkel bíró kutatások, mindegyik egy projekthez és az érintett technológiákhoz kötve.",
+    "seoTitle": "Kutatási jegyzetek | Tóth Dorina",
+    "description": "Kiválasztott, önálló szakmai értékkel bíró AI és backend kutatások, mindegyik egy projekthez és az érintett technológiákhoz kötve.",
     "note": "Ez az oldal terv. A Tervezett jelzésű bejegyzések a szándékolt tartalmat és szerkezetet írják le, nem kész kutatást.",
     "rulesTitle": "Publikálási szabályok",
     "rules": [
@@ -279,6 +285,8 @@
   "methodPage": {
     "title": "Módszer",
     "intro": "Hogyan lesz egy ötletből kész projekt, és honnan származik a mögötte lévő tudás: a szakaszok, a technológiák, nyelvek és projektek kapcsolata, és hogyan marad fókuszált a kutatás.",
+    "seoTitle": "Módszer: az ötlettől a kész projektig | Tóth Dorina",
+    "description": "Hogyan lesz egy ötletből kész projekt: a szakaszok, a technológiák, nyelvek és projektek kapcsolata, és hogyan marad fókuszált a kutatás.",
     "stagesTitle": "Szakaszok",
     "stagesNote": "A folyamat nem szigorúan lineáris: a kutatás visszavihet a tervezéshez vagy az architektúrához.",
     "decisionLabel": "Döntési pont",

@@ -42,13 +42,28 @@ const jsonLd = {
   ),
   author: { "@type": "Person", name: c.hero.shortName },
 };
+
+const breadcrumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    [c.nav.home, "/"],
+    [c.nav.projects, "/projects"],
+    [d.title, `/projects/${p.id}`],
+  ].map(([name, path], i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name,
+    item: new URL(localePath(lang, path), Astro.site).href,
+  })),
+};
 ---
 
 <BaseLayout
   lang={lang}
   title={`${d.title} | ${c.hero.shortName}`}
   description={d.summary}
-  jsonLd={jsonLd}
+  jsonLd={[jsonLd, breadcrumbs]}
 >
   <a href={localePath(lang, "/projects")} class="btn btn-ghost no-print mb-6">
     <Icon name="lucide:arrow-left" class="size-4" />{P.back}

@@ -7,8 +7,12 @@ export type Lang = keyof typeof languages;
 const dict = { en, hu };
 export const getContent = (lang: Lang) => dict[lang];
 
-export const localePath = (lang: Lang, path = "/") =>
-  lang === "en" ? path : `/hu${path}`;
+// Internal paths end with "/" to match the canonical URLs and the sitemap
+// (build.format "directory"); GitHub Pages would otherwise 301-redirect.
+export const localePath = (lang: Lang, path = "/") => {
+  const p = path.endsWith("/") ? path : `${path}/`;
+  return lang === "en" ? p : `/hu${p}`;
+};
 
 export function switchPath(url: URL, target: Lang) {
   const rest = url.pathname.replace(/^\/hu(?=\/|$)/, "") || "/";

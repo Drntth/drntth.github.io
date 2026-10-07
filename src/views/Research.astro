@@ -18,7 +18,11 @@ const techs = await getCollection("technologies");
 const projects = await getCollection("projects");
 ---
 
-<BaseLayout lang={lang} title={`${L.title} | ${c.hero.shortName}`}>
+<BaseLayout
+  lang={lang}
+  title={L.seoTitle}
+  description={L.description}
+>
   <PageHeader
     lang={lang}
     title={L.title}

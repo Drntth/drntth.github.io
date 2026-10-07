@@ -15,6 +15,9 @@ const c = getContent(lang);
 const L = c.technologiesPage;
 const tech = (await getEntry("technologies", slug))!;
 const d = tech.data[lang];
+// Short summaries get a suffix to reach a useful meta description length.
+const description =
+  d.summary.length < 100 ? `${d.summary} ${L.detailDescription}` : d.summary;
 const planned = tech.data.visibility === "planned";
 const projects = (await getCollection("projects")).filter(
   (p) => p.data.visibility === "public" && p.data.concepts.includes(slug),
@@ -37,12 +40,28 @@ const sections = [
   projects.length > 0 && { id: "projects", title: L.usedBy },
   research.length > 0 && { id: "research", title: L.researchBy },
 ].filter((x): x is { id: string; title: string } => Boolean(x));
+
+const breadcrumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    [c.nav.home, "/"],
+    [L.title, "/technologies"],
+    [d.title, `/technologies/${slug}`],
+  ].map(([name, path], i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name,
+    item: new URL(localePath(lang, path), Astro.site).href,
+  })),
+};
 ---
 
 <BaseLayout
   lang={lang}
   title={`${d.title} | ${L.title} | ${c.hero.shortName}`}
-  description={d.summary}
+  description={description}
+  jsonLd={breadcrumbs}
 >
   <a href={localePath(lang, "/technologies")} class="btn btn-ghost no-print mb-6">
     <Icon name="lucide:arrow-left" class="size-4" />{L.back}

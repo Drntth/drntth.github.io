@@ -17,7 +17,7 @@ interface Props {
   type?: "website" | "article";
   noindex?: boolean;
   print?: boolean;
-  jsonLd?: Record<string, unknown>;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 const {
   lang,
@@ -66,6 +66,17 @@ const person = {
     "Backend development",
   ],
 };
+
+const website = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${Astro.site}#website`,
+  name: c.hero.shortName,
+  url: String(Astro.site),
+  inLanguage: ["en", "hu"],
+  publisher: { "@id": `${Astro.site}#person` },
+};
+const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <!doctype html>
@@ -114,14 +125,19 @@ const person = {
       type="application/ld+json"
       set:html={JSON.stringify(person)}
     />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(website)}
+    />
     {
-      jsonLd && (
+      extraLd.map((ld) => (
         <script
           is:inline
           type="application/ld+json"
-          set:html={JSON.stringify(jsonLd)}
+          set:html={JSON.stringify(ld)}
         />
-      )
+      ))
     }
 
     <script is:inline>

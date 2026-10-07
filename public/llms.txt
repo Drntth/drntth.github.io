@@ -1,0 +1,32 @@
+# Dorina Tóth
+
+> Portfolio of Tóth Dorina Ildikó, software developer (AI and backend). Work areas: AI systems in Python (LLM, RAG, embeddings, prompt engineering, OCR, document processing) and backend development. Bilingual site: English (default) and Hungarian under /hu/.
+
+## Pages
+
+- [Home](https://drntth.github.io/): about, stack, certificates, contact
+- [Projects](https://drntth.github.io/projects/): selected finished projects with goal, solution, result and technologies
+- [Thesis project: language models in project management](https://drntth.github.io/projects/thesis-langmodels-project-management/): Django web application with Hugging Face language models, Docker, unit and Cypress tests
+- [Technologies](https://drntth.github.io/technologies/): knowledge map of technologies and concepts, connected to languages, projects and research
+- [Research](https://drntth.github.io/research/): research notes tied to concrete project needs
+- [Method](https://drntth.github.io/method/): how an idea becomes a finished project and how research stays focused
+
+## Hungarian
+
+- [Kezdőlap](https://drntth.github.io/hu/)
+- [Projektek](https://drntth.github.io/hu/projects/)
+- [Technológiák](https://drntth.github.io/hu/technologies/)
+- [Kutatás](https://drntth.github.io/hu/research/)
+- [Módszer](https://drntth.github.io/hu/method/)
+
+## Links
+
+- [GitHub](https://github.com/Drntth)
+- [LinkedIn](https://www.linkedin.com/in/dorina-t%C3%B3th-045488357/)
+- [CV (English, PDF)](https://drntth.github.io/cv/Toth_Dorina_Ildiko_CV_en.pdf)
+- [CV (Hungarian, PDF)](https://drntth.github.io/cv/Toth_Dorina_Ildiko_CV_hu.pdf)
+
+## Notes
+
+- Content is all rights reserved (see CONTENT_LICENSE.md in the repository); code is MIT.
+- Entries marked "Planned" describe intended content, not finished results.

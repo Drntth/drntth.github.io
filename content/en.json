@@ -167,7 +167,8 @@
   "projects": {
     "title": "Projects",
     "intro": "A selection of finished, presentable projects. Each one describes its goal, solution and result, and links to the technology notes and research that came out of it, so a requirement can be followed through to a decision and a working system.",
-    "description": "Selected software projects: goals, solutions, results, technologies and repository links.",
+    "seoTitle": "Projects: AI & Python Backend Work | Dorina Tóth",
+    "description": "Selected software projects by Dorina Tóth with goals, solutions, results, technologies and repository links, including a Django web app with language models.",
     "noMatch": "No project matches the current search.",
     "goal": "Goal",
     "solution": "Solution",
@@ -190,6 +191,9 @@
   "technologiesPage": {
     "title": "Technologies",
     "intro": "A knowledge map of the technologies and concepts I research through real project needs. Nodes connect to languages, projects and research; they show relationships, not skill levels.",
+    "seoTitle": "Technologies: AI & Backend Knowledge Map | Dorina Tóth",
+    "description": "Knowledge map of AI and backend technologies and concepts researched through real project needs, connected to languages, projects and research.",
+    "detailDescription": "Technology note with per-language implementations, related projects and research.",
     "graphTitle": "Connection map",
     "graphHint": "Drag nodes, hover to highlight connections, click to open. Dashed nodes are planned. The map grows automatically as projects, technologies and research are added.",
     "graphLabel": "Graph connecting programming languages, technologies, projects and research",
@@ -229,6 +233,8 @@
   "researchPage": {
     "title": "Research",
     "intro": "Selected research with standalone professional value, each tied to a project and the technologies it touches.",
+    "seoTitle": "Research Notes | Dorina Tóth",
+    "description": "Selected research with standalone professional value in AI and backend development, each tied to a project and the technologies it touches.",
     "note": "This page is a plan. Entries marked Planned describe the intended content and structure, not finished research.",
     "rulesTitle": "Publication rules",
     "rules": [
@@ -279,6 +285,8 @@
   "methodPage": {
     "title": "Method",
     "intro": "How an idea becomes a finished project and where the knowledge behind it comes from: the stages, how technologies, languages and projects relate, and how research stays focused.",
+    "seoTitle": "Method: From Idea to Finished Project | Dorina Tóth",
+    "description": "How an idea becomes a finished project: the stages, how technologies, languages and projects relate, and how research stays focused.",
     "stagesTitle": "Stages",
     "stagesNote": "The flow is not strictly linear: research can send me back to planning or architecture.",
     "decisionLabel": "Decision point",
