@@ -1,0 +1,52 @@
+{
+  "order": 5,
+  "visibility": "published",
+  "icon": "lucide:upload",
+  "implementations": [
+    {
+      "language": "python",
+      "en": {
+        "summary": "The build syncs into the output folder by comparing content, writes a SHA-256 manifest and a per-domain list of files to upload and delete.",
+        "notes": [
+          "A file is rewritten only if its size or bytes differ, so unchanged files keep their modification time.",
+          "Manifest entries of domains that were not rebuilt are kept, so building one site does not reset the others."
+        ]
+      },
+      "hu": {
+        "summary": "A build tartalom-összevetéssel szinkronizál a kimeneti mappába, SHA-256 manifestet ír, és domainenként listázza a feltöltendő és törlendő fájlokat.",
+        "notes": [
+          "Egy fájl csak akkor íródik újra, ha a mérete vagy a bájtjai eltérnek, így a változatlan fájlok megőrzik a módosítási idejüket.",
+          "A nem újraépített domainek manifest-bejegyzései megmaradnak, így egy oldal buildje nem írja felül a többiét."
+        ]
+      }
+    }
+  ],
+  "en": {
+    "title": "Incremental deploy",
+    "summary": "Uploading only the files that changed. The key question is change detection: FTP offers file size and modification time, but no content hash.",
+    "process": {
+      "requirement": "Upload static sites over FTP to shared hosting without re-sending every file after each build.",
+      "question": "How can an upload tool tell which files really changed, when a rebuild rewrites every file?",
+      "validation": "A second build without source changes reports no changes; tests cover the sync, the manifest diff and partial builds.",
+      "decision": "Keep the modification time of unchanged files, so 'overwrite if newer' tools work, and write a hash-based change list as a second check."
+    },
+    "body": [
+      "Modification time alone fails when the build rewrites everything; size alone fails when a same-length version string changes.",
+      "Deleting on the server needs an exclude list, because the server may hold files that are not part of the build."
+    ]
+  },
+  "hu": {
+    "title": "Inkrementális feltöltés",
+    "summary": "Csak a megváltozott fájlok feltöltése. A kulcskérdés a változásészlelés: az FTP fájlméretet és módosítási időt ad, tartalom-hash-t nem.",
+    "process": {
+      "requirement": "Statikus oldalak FTP-feltöltése osztott tárhelyre úgy, hogy ne menjen fel minden fájl minden build után.",
+      "question": "Honnan tudja a feltöltő eszköz, mi változott valójában, ha az újraépítés minden fájlt újraír?",
+      "validation": "Forrásváltozás nélküli második build után nincs változás; tesztek fedik a szinkront, a manifest-diffet és a részleges buildet.",
+      "decision": "A változatlan fájlok megőrzik a módosítási idejüket, így a „felülírás, ha újabb” eszközök helyesen működnek, és második ellenőrzésként hash-alapú változáslista készül."
+    },
+    "body": [
+      "A módosítási idő önmagában nem elég, ha a build mindent újraír; a méret önmagában nem elég, ha egy azonos hosszú verziószöveg változik.",
+      "A szerveroldali törléshez kizárási lista kell, mert a szerveren a buildhez nem tartozó fájlok is lehetnek."
+    ]
+  }
+}

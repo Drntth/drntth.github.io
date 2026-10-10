@@ -1,0 +1,101 @@
+{
+  "order": 3,
+  "visibility": "public",
+  "year": 2026,
+  "icon": "lucide:files",
+  "repo": "https://github.com/Drntth/static-multisite-generator",
+  "label": { "en": "Static multi-site generator", "hu": "Statikus többoldal-generátor" },
+  "concepts": [
+    "static-site-generation",
+    "incremental-deploy",
+    "web-performance",
+    "technical-seo",
+    "privacy-friendly-web",
+    "template-based-document-generation"
+  ],
+  "tech": ["python", "jinja2", "pillow", "bootstrap", "html5", "css3", "apache", "pytest", "bash", "git"],
+  "en": {
+    "title": "Static Multisite Generator",
+    "subtitle": "Several static websites from one source",
+    "summary": "A Python and Jinja2 generator that builds several static websites from one source for shared Apache hosting, with image optimization, generated SEO files and an upload-friendly change list.",
+    "goal": "Keep several small websites with a shared look in one place, let the build do the performance and SEO work, and make FTP uploads send only what changed.",
+    "solution": "Shared templates and assets with per-site overrides, rendered per domain with Jinja2. The build post-processes images in the HTML, generates sitemap, robots, llms.txt and .htaccess for every site, keeps unchanged files untouched and writes a hash-based list of files to upload. All front-end libraries and fonts are self-hosted.",
+    "result": "A public, documented generator with three fictional sample sites and a test suite. A second build without changes reports nothing to upload, and the link checker runs clean, including external links.",
+    "status": "Completed (2026)",
+    "metrics": [
+      { "value": "3", "label": "sample sites" },
+      { "value": "9", "label": "page templates" },
+      { "value": "4", "label": "generated files per site" },
+      { "value": "28", "label": "pytest tests" }
+    ],
+    "highlights": [
+      "Links between the sites work both in the local preview and online",
+      "Image sizes, loading priority and WebP srcset added automatically at build time",
+      "Unchanged files keep their modification time, so FTP clients skip them",
+      "No third-party requests: libraries and fonts served from the site itself",
+      "HTML autoescaping and strict template variables"
+    ],
+    "sections": [
+      {
+        "title": "How it works",
+        "body": [
+          "For every domain the build copies the shared and then the site-specific assets, renders the pages, post-processes the images, writes the meta files into a temporary folder and syncs it into the output, touching only changed files. A SHA-256 manifest gives the upload and delete list since the previous build."
+        ]
+      },
+      {
+        "title": "Testing",
+        "body": [
+          "The pytest suite runs against a temporary source tree and covers URL mapping, links between sites, asset versions and overrides, image attributes, the sync and change list, the generated files and the link checker."
+        ]
+      },
+      {
+        "title": "Limitations and future work",
+        "body": [
+          "The generated server configuration targets Apache, and there is no upload script yet: the change list is meant for a manual or lftp-based upload. Possible next steps are an FTPS upload script and consent-based analytics."
+        ]
+      }
+    ]
+  },
+  "hu": {
+    "title": "Static Multisite Generator",
+    "subtitle": "Több statikus weboldal egy forrásból",
+    "summary": "Python- és Jinja2-alapú generátor, amely egy forrásból több statikus weboldalt épít osztott Apache-tárhelyre, képoptimalizálással, generált SEO-fájlokkal és feltöltésbarát változáslistával.",
+    "goal": "Több, közös arculatú kis weboldal egy helyen, a teljesítmény- és SEO-munkát a build végezze, az FTP-feltöltés pedig csak a változásokat küldje.",
+    "solution": "Közös sablonok és assetek oldalankénti felülírással, domainenként Jinja2-vel renderelve. A build utófeldolgozza a HTML-ben a képeket, minden oldalhoz sitemapet, robots.txt-t, llms.txt-t és .htaccess-t generál, a változatlan fájlokhoz nem nyúl, és hash-alapú feltöltési listát ír. Minden front-end könyvtár és font saját tárhelyről jön.",
+    "result": "Publikus, dokumentált generátor három kitalált mintaoldallal és tesztekkel. Változás nélküli második build után nincs mit feltölteni, a linkellenőrzés a külső linkekkel együtt hibátlan.",
+    "status": "Befejezett (2026)",
+    "metrics": [
+      { "value": "3", "label": "mintaoldal" },
+      { "value": "9", "label": "oldalsablon" },
+      { "value": "4", "label": "generált fájl oldalanként" },
+      { "value": "28", "label": "pytest teszt" }
+    ],
+    "highlights": [
+      "Az oldalak közötti linkek a helyi előnézetben és élesben is működnek",
+      "Képméret, betöltési prioritás és WebP srcset automatikusan, build közben",
+      "A változatlan fájlok megőrzik a módosítási idejüket, így az FTP-kliens kihagyja őket",
+      "Nincs harmadik féltől jövő kérés: a könyvtárak és fontok az oldal saját tárhelyéről jönnek",
+      "HTML-autoescape és szigorú sablonváltozók"
+    ],
+    "sections": [
+      {
+        "title": "Működés",
+        "body": [
+          "A build domainenként bemásolja a közös, majd az oldalspecifikus asseteket, rendereli az oldalakat, utófeldolgozza a képeket, ideiglenes mappába írja a meta-fájlokat, végül a kimenetbe szinkronizál, csak a változott fájlokhoz nyúlva. Egy SHA-256 manifest adja az előző build óta feltöltendő és törlendő fájlok listáját."
+        ]
+      },
+      {
+        "title": "Tesztelés",
+        "body": [
+          "A pytest tesztek ideiglenes forrásfán futnak, és lefedik az URL-képzést, az oldalak közötti linkeket, az assetverziókat és a felülírást, a képattribútumokat, a szinkront és a változáslistát, a generált fájlokat és a linkellenőrzőt."
+        ]
+      },
+      {
+        "title": "Korlátok és továbbfejlesztés",
+        "body": [
+          "A generált szerverkonfiguráció Apache-ra készül, és még nincs feltöltő script: a változáslista kézi vagy lftp-alapú feltöltéshez készül. Lehetséges következő lépés egy FTPS-feltöltő script és a hozzájárulás-alapú analitika."
+        ]
+      }
+    ]
+  }
+}

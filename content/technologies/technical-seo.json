@@ -1,0 +1,36 @@
+{
+  "order": 7,
+  "visibility": "published",
+  "icon": "lucide:search",
+  "implementations": [],
+  "en": {
+    "title": "Technical SEO",
+    "summary": "The technical structure of a site that affects crawling, indexing and how it appears in search results, separate from writing content and building links.",
+    "process": {
+      "requirement": "Make several static domains crawlable and indexable, with a weighted to-do list instead of a flat checklist.",
+      "question": "Which technical points still matter, and which of them can the build generate instead of a person?",
+      "validation": "The build generates the sitemap, robots.txt, canonical links, JSON-LD, llms.txt and https redirects; a link checker checks the built output (internal, cross-site and external links).",
+      "decision": "Generate everything that can be derived from the pages and the site configuration; keep titles, descriptions and alt texts as page-level content."
+    },
+    "body": [
+      "Each domain counts as a separate site; duplicated content across domains needs a canonical link or different content.",
+      "Old URLs get a 301 redirect, which keeps their link value and avoids 404 pages.",
+      "llms.txt is cheap to generate but is not treated as an SEO tool (state as of 2026-10)."
+    ]
+  },
+  "hu": {
+    "title": "Technikai SEO",
+    "summary": "Az oldal technikai felépítése, amely a feltérképezést, az indexelést és a keresőbeli megjelenést befolyásolja; a tartalomírástól és a linképítéstől külön kezelve.",
+    "process": {
+      "requirement": "Több statikus domain feltérképezhetővé és indexelhetővé tétele, súlyozott teendőlistával egy egyszerű ellenőrzőlista helyett.",
+      "question": "Mely technikai pontok számítanak ma is, és melyiket generálhatja a build ember helyett?",
+      "validation": "A build generálja a sitemapet, a robots.txt-t, a canonical linkeket, a JSON-LD-t, az llms.txt-t és a https-átirányítást; a linkellenőrző a kész kimenetet vizsgálja (belső, oldalak közötti és külső linkek).",
+      "decision": "Minden generálódik, ami az oldalakból és a konfigurációból levezethető; a címek, leírások és alt szövegek oldalszintű tartalom maradnak."
+    },
+    "body": [
+      "Minden domain külön oldalnak számít; a domainek közötti duplikált tartalomhoz canonical link vagy eltérő tartalom kell.",
+      "A régi URL-ek 301 átirányítást kapnak, ami megőrzi a linkértéket és elkerüli a 404-et.",
+      "Az llms.txt olcsón generálható, de nem SEO-eszközként kezeljük (2026-10-es állapot)."
+    ]
+  }
+}

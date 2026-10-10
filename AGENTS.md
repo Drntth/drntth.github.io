@@ -199,7 +199,7 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 
 ## 8. Content rules (decided with the owner)
 
-- Publish only public, professionally relevant projects. Published now: the BSc thesis and the YAML LaTeX CV Generator.
+- Publish only public, professionally relevant projects. Published now: the BSc thesis, the YAML LaTeX CV Generator and the Static Multisite Generator.
 - Do not publish confidential or employer-related project details. Describe technology areas only, never concrete internal projects, systems, users or results.
 - Public lifecycle wording: describe stages and criteria, not where the material is kept.
 - Do not describe or reference where or how material is prepared, stored or reviewed before publication, in code, content, comments, README or this file.
@@ -223,9 +223,11 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 
 **CV generator project** (`yaml-latex-cv-generator`): 2026, public, MIT. Python, Jinja2, LaTeX (latexmk), YAML, pytest. Two languages (en, hu), two CV variants (`developer`, `general`), 8 committed sample PDFs from fictional data (Jane Doe), 32 pytest tests, reproducible PDF builds. Concept: `template-based-document-generation`.
 
+**Static multi-site project** (`static-multisite-generator`): 2026, public, MIT. Python, Jinja2, Pillow, Bootstrap, Apache `.htaccess`, pytest. Three fictional sample sites, 9 page templates, 4 generated files per site (sitemap, robots, llms.txt, .htaccess), 28 pytest tests, self-hosted libraries and fonts. Concepts: `static-site-generation`, `incremental-deploy`, `web-performance`, `technical-seo`, `privacy-friendly-web` (self-hosting only; analytics planned), `template-based-document-generation`.
+
 **Certificates** (all AWS Training and Certification): "AWS Foundations: Machine Learning Basics" and "Fundamentals of Machine Learning and Artificial Intelligence" (completed 2026-09-24), "Fundamentals of Generative AI" (completed 2026-10-04).
 
-**Stack decisions**: languages Python, Java, C#, TypeScript, JavaScript, SQL, PHP. Frontend: React, Astro, Tailwind CSS, Bootstrap. Databases PostgreSQL, MySQL, SQLite, MongoDB. pgvector is a PostgreSQL extension, listed under AI. AI tools: Ollama, Hugging Face Transformers, LangGraph, pgvector, PyTorch, OpenAI API, Anthropic API, Tesseract. Document generation: Jinja2, LaTeX, YAML; testing: pytest. Explicitly not claimed: LangChain, LlamaIndex, llama.cpp, ChromaDB, FAISS, Sentence Transformers, scikit-learn.
+**Stack decisions**: languages Python, Java, C#, TypeScript, JavaScript, SQL, PHP. Frontend: React, Astro, Tailwind CSS, Bootstrap. Databases PostgreSQL, MySQL, SQLite, MongoDB. pgvector is a PostgreSQL extension, listed under AI. AI tools: Ollama, Hugging Face Transformers, LangGraph, pgvector, PyTorch, OpenAI API, Anthropic API, Tesseract. Document and site generation: Jinja2, LaTeX, YAML, Pillow, Apache (.htaccess); testing: pytest. Explicitly not claimed: LangChain, LlamaIndex, llama.cpp, ChromaDB, FAISS, Sentence Transformers, scikit-learn.
 
 ## 10. Status
 

@@ -1,0 +1,54 @@
+{
+  "order": 4,
+  "visibility": "published",
+  "icon": "lucide:globe",
+  "implementations": [
+    {
+      "language": "python",
+      "en": {
+        "summary": "A Python build reads the sites from TOML, renders Jinja2 templates per domain and syncs the result into one output folder per site.",
+        "notes": [
+          "The template loader searches the site's pages first, then the shared templates, so every page extends one shared layout.",
+          "Template globals link(domain, path) and asset(path) give root-relative or absolute links and content-hashed CSS/JS URLs.",
+          "StrictUndefined and HTML autoescaping make typos and unescaped text fail or stay safe at build time."
+        ]
+      },
+      "hu": {
+        "summary": "A Python build TOML-ból olvassa az oldalakat, domainenként Jinja2 sablonokat renderel, és oldalanként egy kimeneti mappába szinkronizál.",
+        "notes": [
+          "A sablonbetöltő előbb az oldal saját sablonjaiban, utána a közösekben keres, így minden oldal egy közös layoutot örököl.",
+          "A link(domain, path) és az asset(path) sablonfüggvény gyökérrelatív vagy abszolút linket, illetve tartalom-hash alapú CSS/JS URL-t ad.",
+          "A StrictUndefined és a HTML-autoescape miatt az elgépelés build hiba, az escape nélküli szöveg pedig nem kerülhet ki."
+        ]
+      }
+    }
+  ],
+  "en": {
+    "title": "Static site generation",
+    "summary": "Building the HTML of websites from templates and data at build time, so the server only serves finished files. Here extended to several domains from one source.",
+    "process": {
+      "requirement": "Keep several small websites with a shared look on shared Apache hosting, without a server-side runtime.",
+      "question": "How can shared parts live in one place while each site can still override them, and links between the sites keep working locally and online?",
+      "validation": "Three sample sites build from one source with shared and per-site layers; tests cover links, assets, overrides and the generated files.",
+      "decision": "A small Python and Jinja2 build with a shared layer, per-site overrides on the same path, and generated server configuration."
+    },
+    "body": [
+      "Generated per site: sitemap.xml, robots.txt, llms.txt and an Apache .htaccess with https redirects, old-URL redirects, HSTS and cache headers.",
+      "HSTS starts with a short max-age and is raised only after https has been stable, because it is hard to undo."
+    ]
+  },
+  "hu": {
+    "title": "Statikus oldalgenerálás",
+    "summary": "A weboldalak HTML-jét build időben állítja elő sablonokból és adatból, így a szerver csak kész fájlokat szolgál ki. Itt több domainre kiterjesztve, egy forrásból.",
+    "process": {
+      "requirement": "Több, közös arculatú kis weboldal osztott Apache-tárhelyen, szerveroldali futtatókörnyezet nélkül.",
+      "question": "Hogyan lehetnek a közös részek egy helyen úgy, hogy minden oldal felülírhassa őket, és az oldalak közötti linkek helyben és élesben is működjenek?",
+      "validation": "Három mintaoldal épül egy forrásból közös és oldalspecifikus réteggel; tesztek fedik a linkeket, az asseteket, a felülírást és a generált fájlokat.",
+      "decision": "Kis Python- és Jinja2-build közös réteggel, azonos útvonalú oldalspecifikus felülírással és generált szerverkonfigurációval."
+    },
+    "body": [
+      "Oldalanként generált fájlok: sitemap.xml, robots.txt, llms.txt és egy Apache .htaccess https-átirányítással, régi URL-ek átirányításával, HSTS-sel és cache-fejlécekkel.",
+      "A HSTS rövid max-age-dzsel indul, és csak stabil https után nő, mert nehéz visszavonni."
+    ]
+  }
+}

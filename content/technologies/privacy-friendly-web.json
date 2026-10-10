@@ -1,0 +1,40 @@
+{
+  "order": 8,
+  "visibility": "published",
+  "icon": "lucide:shield-check",
+  "implementations": [],
+  "en": {
+    "title": "Privacy-friendly web",
+    "summary": "Web pages that send no visitor data to third parties by default: every front-end dependency is served from the site's own hosting.",
+    "process": {
+      "requirement": "Static sites for visitors in the EU that do not pass visitor IP addresses to external CDNs or font services.",
+      "question": "How can a site use a CSS framework, icons and custom fonts without loading anything from a third party?",
+      "validation": "The sample sites load Bootstrap, Bootstrap Icons and two variable fonts from their own assets; the generated pages contain no external requests.",
+      "decision": "Self-host every library and font, unmodified, with version, source and license recorded in a register next to the files."
+    },
+    "body": [
+      "A library is updated by replacing its folder as a whole and changing the version in the register.",
+      "Fonts are self-hosted variable fonts with one preload and font-display: swap."
+    ],
+    "planned": [
+      "Consent-based, first-party visitor analytics."
+    ]
+  },
+  "hu": {
+    "title": "Adatvédelem-barát web",
+    "summary": "Weboldalak, amelyek alapértelmezésként nem küldenek látogatói adatot harmadik félnek: minden front-end függőség az oldal saját tárhelyéről jön.",
+    "process": {
+      "requirement": "EU-s látogatóknak szóló statikus oldalak, amelyek nem adják át a látogató IP-címét külső CDN-nek vagy fontszolgáltatónak.",
+      "question": "Hogyan használhat egy oldal CSS-keretrendszert, ikonokat és saját fontokat úgy, hogy semmit ne töltsön be harmadik féltől?",
+      "validation": "A mintaoldalak a Bootstrapet, a Bootstrap Iconst és két változó fontot a saját assetjeikből töltik; a generált oldalakon nincs külső kérés.",
+      "decision": "Minden könyvtár és font saját tárhelyről, módosítatlanul, a verzióval, forrással és licenccel a fájlok melletti nyilvántartásban."
+    },
+    "body": [
+      "Egy könyvtár frissítése: a mappa egészben cserélődik, a verzió a nyilvántartásban változik.",
+      "A fontok saját tárhelyről kiszolgált változó fontok, egy preloaddal és font-display: swap beállítással."
+    ],
+    "planned": [
+      "Hozzájárulás-alapú, first-party látogatottságmérés."
+    ]
+  }
+}

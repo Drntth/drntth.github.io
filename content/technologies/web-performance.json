@@ -1,0 +1,52 @@
+{
+  "order": 6,
+  "visibility": "published",
+  "icon": "lucide:gauge",
+  "implementations": [
+    {
+      "language": "python",
+      "en": {
+        "summary": "The build post-processes the rendered HTML with Pillow: real image sizes, loading priority and WebP srcset variants from a content-hash cache.",
+        "notes": [
+          "Images in the header and the first image of the main content get high fetch priority; the rest load lazily.",
+          "srcset is added only for classes whose CSS sets a definite width; otherwise the browser would take the sizes value as the natural width."
+        ]
+      },
+      "hu": {
+        "summary": "A build Pillow-val utófeldolgozza a renderelt HTML-t: valódi képméret, betöltési prioritás és WebP srcset-változatok tartalom-hash szerinti gyorsítótárból.",
+        "notes": [
+          "A fejléc képei és a fő tartalom első képe magas prioritással töltődik, a többi lustán.",
+          "srcset csak olyan osztály kap, amelynek a CSS meghatározott szélességet ad; különben a böngésző a sizes értékét venné természetes szélességnek."
+        ]
+      }
+    }
+  ],
+  "en": {
+    "title": "Web performance",
+    "summary": "Faster loading and a stable layout, measured with Core Web Vitals. On image-heavy static sites, image handling matters most.",
+    "process": {
+      "requirement": "Image-heavy static pages that load slowly and shift their layout on mobile.",
+      "question": "Which image attributes and loading rules improve LCP and CLS without changing the design?",
+      "validation": "The build adds the attributes automatically; tests cover sizes, priorities and srcset rules on sample HTML.",
+      "decision": "Size attributes on every image, high priority for the first visible images, lazy loading for the rest, and WebP variants only where CSS fixes the width."
+    },
+    "body": [
+      "Core Web Vitals thresholds as of 2026-10: LCP up to 2.5 s, INP up to 200 ms and CLS up to 0.1 count as good.",
+      "Fewer render-blocking requests help as well: self-hosted fonts with one preload, deferred scripts and no full-screen preloader."
+    ]
+  },
+  "hu": {
+    "title": "Webes teljesítmény",
+    "summary": "Gyorsabb betöltés és stabil elrendezés, Core Web Vitals mutatókkal mérve. Képekben gazdag statikus oldalaknál a képkezelés számít a legtöbbet.",
+    "process": {
+      "requirement": "Képekben gazdag statikus oldalak, amelyek mobilon lassan töltődnek és elmozdul az elrendezésük.",
+      "question": "Mely képattribútumok és betöltési szabályok javítják az LCP-t és a CLS-t a design megváltoztatása nélkül?",
+      "validation": "A build automatikusan hozzáadja az attribútumokat; tesztek fedik a méreteket, a prioritást és a srcset szabályait minta-HTML-en.",
+      "decision": "Méretattribútum minden képen, magas prioritás az első látható képeknek, lusta betöltés a többinek, WebP-változatok csak ott, ahol a CSS rögzíti a szélességet."
+    },
+    "body": [
+      "Core Web Vitals küszöbök (2026-10-es állapot): az LCP legfeljebb 2,5 s, az INP legfeljebb 200 ms, a CLS legfeljebb 0,1 számít jónak.",
+      "A kevesebb render-blokkoló kérés is segít: saját tárhelyről kiszolgált fontok egy preloaddal, késleltetett scriptek, teljes képernyős preloader nélkül."
+    ]
+  }
+}
