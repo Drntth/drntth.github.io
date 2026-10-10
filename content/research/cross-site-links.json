@@ -1,0 +1,68 @@
+{
+  "order": 8,
+  "icon": "lucide:link-2",
+  "topic": {
+    "en": "Web publishing",
+    "hu": "Webes publikálás"
+  },
+  "asOf": "2026-10",
+  "technologies": ["static-site-generation", "technical-seo"],
+  "projects": ["static-multisite-generator"],
+  "sources": [
+    {
+      "label": {
+        "en": "static-multisite-generator (GitHub repository)",
+        "hu": "static-multisite-generator (GitHub-repó)"
+      },
+      "href": "https://github.com/Drntth/static-multisite-generator"
+    }
+  ],
+  "en": {
+    "title": "Links between sites on separate domains",
+    "summary": "How one template link stays correct in the local preview and online when sibling sites run on separate domains, and how to check it before uploading.",
+    "question": "How can the same template link be correct in the local preview and online when the sites run on separate domains, and how can it be checked before upload?",
+    "requirement": "Several sites from one source with a shared menu that also links to the sibling sites. With hand-written links, a misspelled domain or mixed http and https only shows up online.",
+    "method": [
+      "One template function, link(domain, path), returns a root-relative link on the same domain and an absolute https link to another domain.",
+      "Templates build the menu from the configured sites, without hard-coded domains.",
+      "Local preview: every domain runs on its own port, so links within the same site work locally.",
+      "A link checker on the built output resolves links to configured domains in the matching local folder, flags http links to the own domains, and checks external links over HTTP on request.",
+      "pytest for the link function and the checker's exit code; 0 errors on the sample sites, external links included."
+    ],
+    "findings": [
+      "A root-relative link always points to the current domain, so navigation within a site works locally and online.",
+      "An absolute link to a sibling site leads from the local preview to the live site; this is intentional, because templates cannot know the local port.",
+      "Sibling-site links can still be verified before upload: the checker looks at the local output by domain instead of the network.",
+      "Because the menu comes from the configuration, adding a site is one configuration entry with no template change."
+    ],
+    "decision": "One link function in the templates, a menu generated from the configuration, and a link check on the built output that resolves configured domains locally.",
+    "limits": [
+      "In the local preview a sibling-site link opens the live site; fully local navigation would need a preview URL mapping.",
+      "The link checker does not run JavaScript, so it does not see links created by scripts."
+    ]
+  },
+  "hu": {
+    "title": "Linkek külön domaineken futó oldalak között",
+    "summary": "Hogyan marad egy sablonbeli link helyes a helyi előnézetben és élesben, ha a testvéroldalak külön domaineken futnak, és hogyan ellenőrizhető ez feltöltés előtt.",
+    "question": "Hogyan lehet ugyanaz a sablonbeli link helyes a helyi előnézetben és élesben, ha az oldalak külön domaineken futnak, és hogyan ellenőrizhető ez feltöltés előtt?",
+    "requirement": "Több oldal egy forrásból, közös menüvel, amely a testvéroldalakra is mutat. Kézzel írt linkeknél egy elírt domain vagy a http és https keveredése csak élesben derül ki.",
+    "method": [
+      "Egyetlen sablonfüggvény, a link(domain, path), azonos domainen gyökérrelatív, más domainre abszolút https linket ad.",
+      "A sablonok a konfigurált oldalakból építik a menüt, beégetett domain nélkül.",
+      "Helyi előnézet: minden domain saját porton fut, így az oldalon belüli linkek helyben is működnek.",
+      "Linkellenőrző a kész kimeneten: a konfigurált domainekre mutató linkeket a megfelelő helyi mappában oldja fel, a saját domainekre mutató http linket hibának jelzi, a külső linkeket kérésre HTTP-vel ellenőrzi.",
+      "pytest a link-függvényre és az ellenőrző kilépési kódjára; a mintaoldalakon 0 hiba, a külső linkekkel együtt."
+    ],
+    "findings": [
+      "A gyökérrelatív link mindig az aktuális domainre mutat, így az oldalon belüli navigáció helyben és élesben is működik.",
+      "A testvéroldalra mutató abszolút link a helyi előnézetből az élő oldalra visz; ez szándékos, mert a sablon nem ismeri a helyi portot.",
+      "A testvéroldal-linkek feltöltés előtt mégis ellenőrizhetők: az ellenőrző a domain alapján a helyi kimenetet nézi, nem a hálózatot.",
+      "Mivel a menü a konfigurációból jön, egy új oldal felvétele egyetlen konfigurációs bejegyzés, sablonmódosítás nélkül."
+    ],
+    "decision": "Egy link-függvény a sablonokban, a konfigurációból generált menü, és linkellenőrzés a kész kimeneten, amely a konfigurált domaineket helyben oldja fel.",
+    "limits": [
+      "A helyi előnézetben a testvéroldal-link az élő oldalt nyitja meg; teljesen helyi navigációhoz előnézeti URL-leképezés kellene.",
+      "A linkellenőrző nem futtat JavaScriptet, így a szkriptből létrehozott linkeket nem látja."
+    ]
+  }
+}

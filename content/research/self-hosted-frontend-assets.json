@@ -1,0 +1,68 @@
+{
+  "order": 6,
+  "icon": "lucide:package",
+  "topic": {
+    "en": "Web publishing",
+    "hu": "Webes publikálás"
+  },
+  "asOf": "2026-10",
+  "technologies": ["privacy-friendly-web", "web-performance"],
+  "projects": ["static-multisite-generator"],
+  "sources": [
+    {
+      "label": "EDPB Guidelines 2/2023 on the technical scope of Art. 5(3) ePrivacy Directive",
+      "href": "https://edpb.europa.eu/system/files/2024-10/edpb_guidelines_202302_technical_scope_art_53_eprivacydirective_v2_en_0.pdf"
+    },
+    {
+      "label": {
+        "en": "static-multisite-generator (GitHub repository)",
+        "hu": "static-multisite-generator (GitHub-repó)"
+      },
+      "href": "https://github.com/Drntth/static-multisite-generator"
+    }
+  ],
+  "en": {
+    "title": "Self-hosted front-end assets instead of CDNs",
+    "summary": "How a static site can use a CSS framework, an icon set and custom fonts while the visitor's browser requests nothing from a third party.",
+    "question": "How can a static site use a CSS framework, icons and custom fonts without any request to a third party?",
+    "requirement": "Small static sites for visitors in the EU. A request to a CDN or a font service passes the visitor's IP address to a third party, which had to be avoided while keeping updates and licenses traceable.",
+    "method": [
+      "Unmodified copies of Bootstrap 5.3.8 and Bootstrap Icons 1.11.3 among the shared assets, with a register of folder, version, source, license and download date.",
+      "Two variable fonts (Inter, Playfair Display, SIL OFL) from the site's own hosting, with one preload and font-display: swap, and a separate license register.",
+      "CSS and JS get a content-hash version parameter, so they can be cached for a long time.",
+      "Check: the generated pages make no external resource requests; the link checker and the sample sites in a browser pass."
+    ],
+    "findings": [
+      "Self-hosting removes third-party requests for front-end dependencies; analytics remains a separate question.",
+      "Updates stay simple and auditable: a library folder is replaced as a whole and its version changes in the register.",
+      "Source map files can be left out: browsers request them only with the developer tools open, and the 404 does not affect visitors."
+    ],
+    "decision": "Every front-end library and font is served from the site itself, unmodified, with version, source and license recorded next to the files.",
+    "limits": [
+      "Security updates have to be followed by hand, based on the recorded versions.",
+      "Consent-based first-party analytics is not implemented."
+    ]
+  },
+  "hu": {
+    "title": "Saját tárhelyről kiszolgált front-end assetek CDN helyett",
+    "summary": "Hogyan használhat egy statikus oldal CSS-keretrendszert, ikonkészletet és saját fontokat úgy, hogy a látogató böngészője semmit ne kérjen harmadik féltől.",
+    "question": "Hogyan használhat egy statikus oldal CSS-keretrendszert, ikonokat és saját fontokat harmadik félhez intézett kérés nélkül?",
+    "requirement": "EU-s látogatóknak szóló kis statikus oldalak. Egy CDN- vagy fontszolgáltató-kérés a látogató IP-címét harmadik félnek adja át; ezt el kellett kerülni úgy, hogy a frissítés és a licencek követhetők maradjanak.",
+    "method": [
+      "A Bootstrap 5.3.8 és a Bootstrap Icons 1.11.3 módosítatlan másolata a közös assetek között, nyilvántartással (mappa, verzió, forrás, licenc, letöltés dátuma).",
+      "Két változó font (Inter, Playfair Display, SIL OFL) saját tárhelyről, egy preloaddal és font-display: swap beállítással, külön licencnyilvántartással.",
+      "A CSS és a JS tartalom-hash alapú verzió-paramétert kap, így hosszan cache-elhető.",
+      "Ellenőrzés: a generált oldalak nem kérnek külső erőforrást; a linkellenőrző és a mintaoldalak böngészőben rendben."
+    ],
+    "findings": [
+      "A saját tárhely megszünteti a front-end függőségek harmadik feles kéréseit; az analitika ettől külön kérdés marad.",
+      "A frissítés egyszerű és auditálható: a könyvtár mappája egészben cserélődik, a verzió a nyilvántartásban változik.",
+      "A source map fájlok elhagyhatók: a böngésző csak nyitott fejlesztői eszközöknél kéri őket, a 404 a látogatót nem érinti."
+    ],
+    "decision": "Minden front-end könyvtár és font saját tárhelyről, módosítatlanul, a verzióval, forrással és licenccel a fájlok mellett nyilvántartva.",
+    "limits": [
+      "A biztonsági frissítéseket kézzel, a nyilvántartott verziók alapján kell követni.",
+      "A hozzájárulás-alapú, first-party analitika nincs megvalósítva."
+    ]
+  }
+}

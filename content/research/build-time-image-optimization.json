@@ -1,0 +1,82 @@
+{
+  "order": 7,
+  "icon": "lucide:image",
+  "topic": {
+    "en": "Web publishing",
+    "hu": "Webes publikálás"
+  },
+  "asOf": "2026-10",
+  "technologies": ["web-performance", "static-site-generation"],
+  "projects": ["static-multisite-generator"],
+  "sources": [
+    {
+      "label": "web.dev: Optimize LCP",
+      "href": "https://web.dev/articles/optimize-lcp"
+    },
+    {
+      "label": "web.dev: Browser-level image lazy loading",
+      "href": "https://web.dev/articles/browser-level-image-lazy-loading"
+    },
+    {
+      "label": {
+        "en": "static-multisite-generator (GitHub repository)",
+        "hu": "static-multisite-generator (GitHub-repó)"
+      },
+      "href": "https://github.com/Drntth/static-multisite-generator"
+    }
+  ],
+  "en": {
+    "title": "Build-time image optimization",
+    "summary": "Which image optimizations a static site build can apply to every image without editing templates, and the traps found on the way.",
+    "question": "Which image optimizations can the build apply without editing templates by hand, and what has to be watched?",
+    "requirement": "Image-heavy small static sites loaded slowly and shifted their layout on mobile. Templates should not need manual attributes on every image.",
+    "method": [
+      "Post-processing of the rendered HTML: every img tag gets attributes based on the real file.",
+      "width and height from the actual image size, unless the tag already has them.",
+      "Images in the header and the first image in main get fetchpriority=\"high\"; the other images below the navigation get loading=\"lazy\".",
+      "Smaller WebP variants (480, 800 and 1200 px, only below the source width, quality 82) with srcset and sizes, but only for CSS classes whose width the CSS fixes.",
+      "Variants are cached by content hash, so a rebuild does not encode them again; a separate script converts source images to WebP with EXIF rotation and a size limit.",
+      "pytest for the image attributes, and the sample sites checked in a browser."
+    ],
+    "findings": [
+      "width and height reserve the space (lower CLS); with width: auto and height: auto in the CSS they only set the aspect ratio.",
+      "srcset is only safe for images with a fixed CSS width: with width: auto the browser takes the sizes value as the natural width and the image shrinks.",
+      "The main image must never be lazy; the build decides it from the header and the first image in main.",
+      "Converting every image would also have turned the shared favicon into WebP and broken per-site overrides, so the shared favicon is WebP from the start.",
+      "Without the image cache every build would encode the variants again."
+    ],
+    "decision": "The build adds size, priority and lazy loading to every image automatically, and srcset only for the listed fixed-width classes. Converting source images is a separate, manual step.",
+    "limits": [
+      "HTML processing uses regular expressions; that is enough for the generator's own templates, not for foreign HTML.",
+      "No AVIF variants; WebP works in every modern browser.",
+      "No real-user Core Web Vitals data (low traffic); Lighthouse lab data is the reference."
+    ]
+  },
+  "hu": {
+    "title": "Képoptimalizálás build közben",
+    "summary": "Mely képoptimalizálásokat végezheti el egy statikus oldal buildje minden képen a sablonok módosítása nélkül, és milyen buktatók jöttek elő közben.",
+    "question": "Mely képoptimalizálásokat végezheti el a build a sablonok kézi módosítása nélkül, és mire kell figyelni?",
+    "requirement": "Képekben gazdag kis statikus oldalak mobilon lassan töltődtek be, és elmozdult az elrendezés. A sablonokban nem akartuk minden képet kézzel kiegészíteni.",
+    "method": [
+      "A renderelt HTML utófeldolgozása: minden img tag a valódi fájl alapján kap attribútumokat.",
+      "width és height a kép tényleges méretéből, ha a tag még nem tartalmazza.",
+      "A header képei és a main első képe fetchpriority=\"high\" értéket kap, a navigáció alatti többi kép loading=\"lazy\"-t.",
+      "Kisebb WebP-változatok (480, 800 és 1200 px, csak a forrásnál kisebbek, minőség 82) srcset és sizes attribútummal, de csak olyan CSS-osztályoknál, amelyek szélességét a CSS rögzíti.",
+      "A változatok tartalom-hash alapján gyorsítótárba kerülnek, így újabb build nem kódolja újra őket; egy külön script a forrásképeket WebP-re alakítja EXIF szerinti forgatással és méretkorláttal.",
+      "pytest a képattribútumokra, a mintaoldalak böngészőben ellenőrizve."
+    ],
+    "findings": [
+      "A width és a height lefoglalja a helyet (kisebb CLS); ha a CSS width: auto és height: auto, csak a képarányt rögzítik.",
+      "A srcset csak rögzített CSS-szélességű képnél biztonságos: width: auto mellett a böngésző a sizes értékét veszi természetes szélességnek, és a kép összezsugorodik.",
+      "A fő kép soha nem lehet lazy; a build ezt a header és a main első képe alapján dönti el.",
+      "Minden kép konvertálása a közös favicont is WebP-re alakította volna, ami eltörte volna az oldalankénti felülírást, ezért a közös favicon eleve WebP.",
+      "Képgyorsítótár nélkül minden build újrakódolná a változatokat."
+    ],
+    "decision": "A build minden képhez automatikusan hozzáadja a méretet, a prioritást és a lusta betöltést, a srcset-et pedig csak a felsorolt, rögzített szélességű osztályokhoz. A forrásképek konvertálása külön, kézi lépés.",
+    "limits": [
+      "A HTML-feldolgozás reguláris kifejezésekkel történik; ez a generátor saját sablonjaihoz elég, idegen HTML-hez nem.",
+      "AVIF-változat nincs; a WebP minden modern böngészőben működik.",
+      "Valós felhasználói Core Web Vitals adat nincs (kis forgalom); a Lighthouse laboradata az irányadó."
+    ]
+  }
+}
