@@ -1,0 +1,94 @@
+{
+  "order": 2,
+  "visibility": "public",
+  "year": 2026,
+  "icon": "lucide:file-text",
+  "repo": "https://github.com/Drntth/yaml-latex-cv-generator",
+  "label": { "en": "CV generator", "hu": "CV-generátor" },
+  "concepts": ["template-based-document-generation"],
+  "tech": ["python", "jinja2", "latex", "yaml", "pytest", "git"],
+  "en": {
+    "title": "YAML LaTeX CV Generator",
+    "subtitle": "Bilingual CV and cover letter generator",
+    "summary": "Generates CVs and cover letters in English and Hungarian from one YAML content source, using Jinja2 templates and a LaTeX class, with per-application overrides and reproducible PDF builds.",
+    "goal": "Keep CVs and cover letters in two languages and several variants from a single source, so the versions never drift apart and errors such as missing translations or overlong pages show up during the build.",
+    "solution": "All text lives in YAML with language pairs and variant-dependent values. A Python build resolves language and variant, renders Jinja2 templates into LaTeX with automatic escaping and compiles the PDFs with latexmk. Per-application files may override only whitelisted keys, so facts stay unchanged.",
+    "result": "A public, documented generator with fictional sample data, two CV variants, fallback cover letters in both languages and committed sample PDFs. Repeated builds produce byte-identical files.",
+    "status": "Completed (2026)",
+    "metrics": [
+      { "value": "2", "label": "languages" },
+      { "value": "2", "label": "CV variants" },
+      { "value": "8", "label": "sample PDFs" },
+      { "value": "32", "label": "pytest tests" }
+    ],
+    "highlights": [
+      "A missing or malformed translation stops the build and names its location",
+      "Per-application overrides are limited to a whitelist; employers and dates cannot be changed",
+      "Reproducible PDFs through a fixed SOURCE_DATE_EPOCH",
+      "Build checks for page count and cover letter word count",
+      "ATS-friendly single-column layout without icon fonts"
+    ],
+    "sections": [
+      {
+        "title": "How it works",
+        "body": [
+          "YAML content, variant and application files are resolved into one plain context per language and variant. Jinja2 renders it into LaTeX with delimiters that do not clash with LaTeX braces, and latexmk compiles the PDF. Page and word counts are checked after each build."
+        ]
+      },
+      {
+        "title": "Testing",
+        "body": [
+          "The pytest suite covers language and variant resolution, LaTeX escaping, context building from the sample content, application overrides and early errors for missing image files. It runs without a LaTeX installation."
+        ]
+      },
+      {
+        "title": "Limitations and future work",
+        "body": [
+          "Languages and variants are fixed in the build script, and the PDF build needs a local TeX Live installation. An automated PDF build in CI is a possible next step."
+        ]
+      }
+    ]
+  },
+  "hu": {
+    "title": "YAML LaTeX CV Generator",
+    "subtitle": "Kétnyelvű CV- és motivációslevél-generátor",
+    "summary": "Egy YAML tartalmi forrásból angol és magyar CV-t és motivációs levelet generál Jinja2 sablonokkal és LaTeX-osztállyal, jelentkezésenkénti felülírással és reprodukálható PDF-builddel.",
+    "goal": "A CV-k és motivációs levelek két nyelven és több változatban egyetlen forrásból készüljenek, hogy a változatok ne térjenek el egymástól, és az olyan hibák, mint a hiányzó fordítás vagy a túl hosszú oldal, már a build során kiderüljenek.",
+    "solution": "Minden szöveg YAML-ben van, nyelvi párokkal és változatfüggő értékekkel. A Python build feloldja a nyelvet és a változatot, Jinja2 sablonokból automatikus escape-pel LaTeX-et renderel, a PDF-et latexmk fordítja. A jelentkezésfájlok csak engedélyezett kulcsokat írhatnak felül, így a tényadatok nem változnak.",
+    "result": "Publikus, dokumentált generátor kitalált mintaadatokkal, két CV-változattal, mindkét nyelvű általános motivációs levéllel és commitolt minta-PDF-ekkel. Az ismételt build bájtra azonos fájlokat ad.",
+    "status": "Befejezett (2026)",
+    "metrics": [
+      { "value": "2", "label": "nyelv" },
+      { "value": "2", "label": "CV-változat" },
+      { "value": "8", "label": "minta-PDF" },
+      { "value": "32", "label": "pytest teszt" }
+    ],
+    "highlights": [
+      "A hiányzó vagy hibás fordítás megállítja a buildet, és megnevezi a helyét",
+      "A jelentkezésenkénti felülírás engedélyezett kulcsokra korlátozott; munkahely és dátum nem módosítható",
+      "Reprodukálható PDF rögzített SOURCE_DATE_EPOCH-hal",
+      "Build-ellenőrzés az oldalszámra és a levél szószámára",
+      "ATS-barát, egyhasábos elrendezés ikonfontok nélkül"
+    ],
+    "sections": [
+      {
+        "title": "Működés",
+        "body": [
+          "A YAML-tartalomból, a változat- és a jelentkezésfájlból nyelvenként és változatonként egy egyszerű kontextus készül. Ezt Jinja2 rendereli LaTeX-be, a LaTeX kapcsos zárójeleivel nem ütköző delimiterekkel, a PDF-et latexmk fordítja. Minden build után oldal- és szószám-ellenőrzés fut."
+        ]
+      },
+      {
+        "title": "Tesztelés",
+        "body": [
+          "A pytest tesztek lefedik a nyelvi és változatfeloldást, a LaTeX-escape-et, a kontextus felépítését a mintatartalomból, a jelentkezésenkénti felülírást és a hiányzó képfájlok korai hibáját. LaTeX nélkül is futnak."
+        ]
+      },
+      {
+        "title": "Korlátok és továbbfejlesztés",
+        "body": [
+          "A nyelvek és a változatok a build szkriptben rögzítettek, a PDF-buildhez helyi TeX Live kell. Lehetséges következő lépés az automatikus PDF-build CI-ban."
+        ]
+      }
+    ]
+  }
+}

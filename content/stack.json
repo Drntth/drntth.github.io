@@ -48,6 +48,7 @@
           "name": "Bootstrap",
           "icon": "simple-icons:bootstrap"
         },
+        { "id": "jinja2", "name": "Jinja2", "icon": "simple-icons:jinja" },
         { "id": "html5", "name": "HTML5", "icon": "simple-icons:html5" },
         { "id": "css3", "name": "CSS3", "icon": "mdi:language-css3" }
       ]
@@ -88,7 +89,9 @@
           "name": "Markdown",
           "icon": "simple-icons:markdown"
         },
-        { "id": "latex", "name": "LaTeX", "icon": "simple-icons:latex" }
+        { "id": "latex", "name": "LaTeX", "icon": "simple-icons:latex" },
+        { "id": "yaml", "name": "YAML", "icon": "simple-icons:yaml" },
+        { "id": "pytest", "name": "pytest", "icon": "simple-icons:pytest" }
       ]
     },
     {

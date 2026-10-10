@@ -1,0 +1,54 @@
+{
+  "order": 3,
+  "visibility": "published",
+  "icon": "lucide:layout-template",
+  "implementations": [
+    {
+      "language": "python",
+      "en": {
+        "summary": "YAML data is resolved into a plain context in Python and rendered with Jinja2 into LaTeX, then compiled to PDF with latexmk.",
+        "notes": [
+          "Jinja2 delimiters are switched to \\VAR{}, \\BLOCK{} and \\#{} so they do not clash with LaTeX braces.",
+          "Escaping runs in the Jinja2 finalize hook, so every output value is escaped and already safe text is marked to avoid double escaping.",
+          "A fixed SOURCE_DATE_EPOCH makes the PDF output byte-identical for the same content."
+        ]
+      },
+      "hu": {
+        "summary": "A YAML-adatból Pythonban egyszerű kontextus készül, ezt Jinja2 rendereli LaTeX-be, a PDF-et pedig latexmk fordítja.",
+        "notes": [
+          "A Jinja2 delimiterei \\VAR{}, \\BLOCK{} és \\#{} lettek, hogy ne ütközzenek a LaTeX kapcsos zárójeleivel.",
+          "Az escape a Jinja2 finalize hookjában fut, így minden kiírt érték escape-elődik; a már biztonságos szöveg jelölést kap, hogy ne legyen kétszeres escape.",
+          "A rögzített SOURCE_DATE_EPOCH miatt azonos tartalomból bájtra azonos PDF készül."
+        ]
+      }
+    }
+  ],
+  "en": {
+    "title": "Template-based document generation",
+    "summary": "Separating content (structured data) from presentation (templates), so one build step produces every version of a document from a single source.",
+    "process": {
+      "requirement": "Keep a CV and a cover letter in two languages and several variants without the versions drifting apart.",
+      "question": "How can one content source produce every language and variant, while missing translations and overlong documents are caught automatically?",
+      "validation": "A working generator builds two variants in two languages; tests cover resolution and escaping, and repeated builds give identical PDFs.",
+      "decision": "Resolve language and variant before rendering, keep templates free of logic, allow overrides only for whitelisted keys, and check the output during the build."
+    },
+    "body": [
+      "Resolution order: defaults, then variant, then per-document override, then command line.",
+      "Escaping depends on the output format (LaTeX or HTML), so it belongs to the rendering step, not to the content."
+    ]
+  },
+  "hu": {
+    "title": "Sablonalapú dokumentumgenerálás",
+    "summary": "A tartalom (strukturált adat) és a megjelenés (sablon) szétválasztása, hogy egy build lépés egyetlen forrásból állítsa elő a dokumentum minden változatát.",
+    "process": {
+      "requirement": "Egy CV és egy motivációs levél két nyelven és több változatban, úgy, hogy a változatok ne térjenek el egymástól.",
+      "question": "Hogyan állíthat elő egy tartalmi forrás minden nyelvet és változatot úgy, hogy a hiányzó fordítás és a túl hosszú dokumentum automatikusan kiderüljön?",
+      "validation": "Működő generátor két változatot épít két nyelven; tesztek fedik a feloldást és az escape-et, az ismételt build azonos PDF-et ad.",
+      "decision": "A nyelv és a változat feloldása a renderelés előtt történik, a sablonokban nincs logika, felülírni csak engedélyezett kulcsokat lehet, a kimenetet a build ellenőrzi."
+    },
+    "body": [
+      "Feloldási sorrend: alapértelmezés, változat, dokumentumonkénti felülírás, parancssor.",
+      "Az escape a kimeneti formátumtól (LaTeX vagy HTML) függ, ezért a renderelés része, nem a tartalomé."
+    ]
+  }
+}
