@@ -1,0 +1,78 @@
+{
+  "order": 9,
+  "icon": "lucide:text-search",
+  "topic": {
+    "en": "Search",
+    "hu": "Keresés"
+  },
+  "asOf": "2026-10",
+  "technologies": ["client-side-search", "bilingual-content-model"],
+  "projects": ["drntth-github-io"],
+  "sources": [
+    {
+      "label": "MiniSearch",
+      "href": "https://github.com/lucaong/minisearch"
+    },
+    {
+      "label": "MDN: String.prototype.normalize()",
+      "href": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize"
+    },
+    {
+      "label": {
+        "en": "drntth.github.io (GitHub repository)",
+        "hu": "drntth.github.io (GitHub-repó)"
+      },
+      "href": "https://github.com/Drntth/drntth.github.io"
+    }
+  ],
+  "en": {
+    "title": "Accent-insensitive search for a bilingual static site",
+    "summary": "How a serverless search finds Hungarian words typed without accents, with typos and in inflected forms, and what that costs in index size.",
+    "question": "How can a serverless search find Hungarian words typed without accents, with typos and in inflected forms?",
+    "requirement": "A bilingual static portfolio with search and no external service. Hungarian visitors often type without accents, and Hungarian words appear with suffixes in the text, for example \"modellekkel\".",
+    "method": [
+      "One index per language generated at build time, searched in the browser with MiniSearch.",
+      "The same normalization at indexing and query time: Unicode NFD decomposition, removal of diacritic marks, lower case.",
+      "Prefix matching with a fuzzy tolerance of 0.2, every query word required, title and tags weighted higher.",
+      "Checked on the built Hungarian index (2026-10-10, 43 entries): \"feltöltés\" and \"feltoltes\" return the same 5 results; \"nyelvi modell\" and the misspelled \"nyelvi modelek\" both return 4, led by the small language model research; the fragment \"kepoptim\" also matches.",
+      "Measured on 2026-10-10, with 43 index entries; index size: English 34.7 KB (10.8 KB gzipped), Hungarian 38.8 KB (12.1 KB gzipped)."
+    ],
+    "findings": [
+      "Removing diacritics on both sides gives accent-insensitive search without a Hungarian dictionary.",
+      "Prefix matching covers most suffixes, because Hungarian suffixes follow the word stem (\"modell\" matches \"modellekkel\").",
+      "The fuzzy tolerance handles common typos such as a missing double consonant.",
+      "At this content size, loading the whole index on first focus is cheap; a split index is not needed."
+    ],
+    "decision": "One index per language, loaded lazily, with NFD normalization, prefix matching, fuzzy 0.2 and all words required. No stemming.",
+    "limits": [
+      "Words whose stem changes, for example \"tó\" and \"tavak\", are not matched by prefix; that would need a Hungarian stemmer.",
+      "Removing accents can merge different words, for example \"kor\" and \"kór\"; this was not examined separately.",
+      "The index grows with the content; much larger content would need a split index or another tool."
+    ]
+  },
+  "hu": {
+    "title": "Ékezetfüggetlen keresés kétnyelvű statikus oldalon",
+    "summary": "Hogyan találja meg egy szerver nélküli keresés az ékezet nélkül, elgépelve és toldalékolt alakban beírt magyar szavakat, és mennyibe kerül ez indexméretben.",
+    "question": "Hogyan találja meg egy szerver nélküli keresés a magyar szavakat ékezet nélkül, elgépelve és toldalékolt alakban is?",
+    "requirement": "Kétnyelvű statikus portfólió keresővel, külső szolgáltatás nélkül. A magyar látogató gyakran ékezet nélkül gépel, a magyar szavak pedig toldalékolva szerepelnek a szövegben, például „modellekkel”.",
+    "method": [
+      "Nyelvenként egy build-időben generált index, a böngészőben MiniSearch-csel keresve.",
+      "Azonos normalizálás indexeléskor és kereséskor: Unicode NFD felbontás, az ékezetjelek törlése, kisbetűsítés.",
+      "Prefix-egyezés 0,2-es fuzzy tűréssel, minden keresőszó kötelező, a cím és a címkék nagyobb súllyal.",
+      "Ellenőrzés a kész magyar indexen (2026-10-10, 43 bejegyzés): a „feltöltés” és a „feltoltes” ugyanazt az 5 találatot adja; a „nyelvi modell” és az elgépelt „nyelvi modelek” egyaránt 4-et, élen a kis nyelvi modellekről szóló kutatással; a „kepoptim” részlet is talál.",
+      "Mérés 2026-10-10-én, 43 indexbejegyzéssel; indexméret: angol 34,7 KB (gzip 10,8 KB), magyar 38,8 KB (gzip 12,1 KB)."
+    ],
+    "findings": [
+      "Az ékezetek törlése mindkét oldalon ékezetfüggetlen keresést ad, magyar szótár nélkül.",
+      "A prefix-egyezés lefedi a toldalékok nagy részét, mert a magyar toldalék a szótő után áll („modell” illeszkedik a „modellekkel” alakra).",
+      "A fuzzy tűrés kezeli a gyakori elgépeléseket, például a hiányzó kettőzött mássalhangzót.",
+      "Ennél a tartalommennyiségnél a teljes index első fókuszkor való betöltése olcsó; darabolt index nem kell."
+    ],
+    "decision": "Nyelvenként egy index, lusta betöltéssel, NFD-normalizálással, prefix-egyezéssel, 0,2-es fuzzy tűréssel és kötelező keresőszavakkal. Szótövezés nincs.",
+    "limits": [
+      "A tőváltozó szavakat, például „tó” és „tavak”, a prefix-egyezés nem találja meg; ehhez magyar szótövező kellene.",
+      "Az ékezetek törlése összevonhat eltérő szavakat, például „kor” és „kór”; ezt külön nem vizsgáltam.",
+      "Az index a tartalommal együtt nő; jóval nagyobb tartalomhoz darabolt index vagy más eszköz kellene."
+    ]
+  }
+}

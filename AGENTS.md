@@ -179,7 +179,7 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 - Client: MiniSearch in `src/lib/search-client.ts`, accent-insensitive, prefix and fuzzy matching, loaded on first focus. Shared UI logic: `src/lib/search-ui.ts`.
 - Global: header button and Ctrl/Cmd+K open `SearchDialog` (mounted in `BaseLayout`), results grouped by section, section chips filter.
 - Section: `SearchBox` with `scope` sits in the `PageHeader` toolbar of the list pages (Projects, Technologies, Research, Method) and is not shown on detail pages. The index still contains the long-form text of the detail pages, so a list-page search finds it.
-- Technologies: the scoped search filters the cards and highlights graph nodes through the `search:results` window event. Extra filters: language and status.
+- Technologies: the scoped search filters the cards and highlights graph nodes through the `search:results` window event. Extra filter: language.
 - Only the current language is searched. No external service.
 - Accessibility: combobox/listbox roles, arrow keys, Enter, Esc.
 - `projects[].en|hu.metrics` (value and label pairs) are key figures shown on the list card and the detail page. Keep them factual and countable; narrative claims go to `highlights`.
@@ -200,7 +200,7 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 
 ## 8. Content rules (decided with the owner)
 
-- Publish only public, professionally relevant projects. Published now: the BSc thesis, the YAML LaTeX CV Generator and the Static Multisite Generator.
+- Publish only public, professionally relevant projects. Published now: the BSc thesis, the YAML LaTeX CV Generator, the Static Multisite Generator and this portfolio site.
 - Do not publish confidential or employer-related project details. Describe technology areas only, never concrete internal projects, systems, users or results.
 - Public lifecycle wording: describe stages and criteria, not where the material is kept.
 - Do not describe or reference where or how material is prepared, stored or reviewed before publication, in code, content, comments, README or this file.
@@ -224,6 +224,8 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 **CV generator project** (`yaml-latex-cv-generator`): 2026, public, MIT. Python, Jinja2, LaTeX (latexmk), YAML, pytest. Two languages (en, hu), two CV variants (`developer`, `general`), 8 committed sample PDFs from fictional data (Jane Doe), 32 pytest tests, reproducible PDF builds. Concept: `template-based-document-generation`.
 
 **Static multi-site project** (`static-multisite-generator`): 2026, public, MIT. Python, Jinja2, Pillow, Bootstrap, Apache `.htaccess`, pytest. Three fictional sample sites, 9 page templates, 4 generated files per site (sitemap, robots, llms.txt, .htaccess), 28 pytest tests, self-hosted libraries and fonts. Concepts: `static-site-generation`, `incremental-deploy`, `web-performance`, `technical-seo`, `privacy-friendly-web` (self-hosting only), `template-based-document-generation`.
+
+**Portfolio project** (`drntth-github-io`): this site, 2026 rebuild (first commit 2025-08), public, MIT code. Astro 7, TypeScript, Tailwind CSS v4, GitHub Actions (deploy, Lighthouse CI). Two languages, four content collections, no third-party services. Concepts: `content-collections`, `bilingual-content-model`, `client-side-search`, `knowledge-graph-visualization`, `technical-seo`, `web-performance`.
 
 **Certificates** (all AWS Training and Certification): "AWS Foundations: Machine Learning Basics" and "Fundamentals of Machine Learning and Artificial Intelligence" (completed 2026-09-24), "Fundamentals of Generative AI" (completed 2026-10-04).
 

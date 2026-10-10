@@ -1,0 +1,49 @@
+{
+  "order": 10,
+  "icon": "lucide:languages",
+  "implementations": [
+    {
+      "language": "typescript",
+      "en": {
+        "summary": "One view per page with a lang prop and two thin route wrappers; localePath and switchPath build the paths, loc resolves plain or paired values, and a Node script checks key parity.",
+        "notes": [
+          "Internal paths end with a slash to match canonical URLs; GitHub Pages redirects the other form."
+        ]
+      },
+      "hu": {
+        "summary": "Oldalanként egy nézet lang propszal és két vékony route-wrapperrel; a localePath és a switchPath képzi az útvonalakat, a loc oldja fel a sima vagy páros értéket, egy Node-script pedig a kulcsparitást ellenőrzi.",
+        "notes": [
+          "A belső útvonalak perjelre végződnek, hogy egyezzenek a kanonikus URL-ekkel; a GitHub Pages a másik alakot átirányítja."
+        ]
+      }
+    }
+  ],
+  "en": {
+    "title": "Bilingual content model",
+    "summary": "Every text in every language lives side by side in one source with the same structure, and the language is part of the URL.",
+    "process": {
+      "requirement": "One portfolio in English and Hungarian without the two versions drifting apart.",
+      "question": "How can two language versions stay structurally identical and both be found by search engines?",
+      "validation": "Each entry has shared fields and equal en and hu blocks; interface strings have one dictionary per language with a key-parity check that also compares list lengths. URLs use the root for English and /hu/ for Hungarian, with hreflang pairs.",
+      "decision": "Language pairs in one source, a helper for every localized path, and a language suggestion banner instead of automatic redirects."
+    },
+    "body": [
+      "A value can be plain text, such as a name or a source title, or a language pair.",
+      "No automatic redirect: crawlers and visitors always get the URL they asked for."
+    ]
+  },
+  "hu": {
+    "title": "Kétnyelvű tartalommodell",
+    "summary": "Minden szöveg minden nyelvi változata egy forrásban, egymás mellett, azonos szerkezettel él, és a nyelv az URL része.",
+    "process": {
+      "requirement": "Egy portfólió angolul és magyarul, anélkül, hogy a két változat szétcsúszna.",
+      "question": "Hogyan maradhat két nyelvi változat szerkezetileg azonos, és hogyan találja meg mindkettőt a kereső?",
+      "validation": "Minden bejegyzésnek közös mezői és azonos szerkezetű en és hu blokkja van; a felületi szövegek nyelvenként egy szótárban vannak, kulcsparitás-ellenőrzéssel, amely a listák hosszát is összeveti. Az URL-ben az angol a gyökérben, a magyar /hu/ alatt van, hreflang-párokkal.",
+      "decision": "Nyelvi párok egy forrásban, segédfüggvény minden lokalizált útvonalhoz, és nyelvi ajánló banner automatikus átirányítás helyett."
+    },
+    "body": [
+      "Egy érték lehet sima szöveg, például név vagy forráscím, vagy nyelvi pár.",
+      "Nincs automatikus átirányítás: a keresőrobot és a látogató is a kért URL-t kapja."
+    ]
+  }
+}

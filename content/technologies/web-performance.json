@@ -31,7 +31,8 @@
     },
     "body": [
       "Core Web Vitals thresholds as of 2026-10: LCP up to 2.5 s, INP up to 200 ms and CLS up to 0.1 count as good.",
-      "Fewer render-blocking requests help as well: self-hosted fonts with one preload, deferred scripts and no full-screen preloader."
+      "Fewer render-blocking requests help as well: self-hosted fonts with one preload, deferred scripts and no full-screen preloader.",
+      "On this portfolio, Lighthouse CI runs on every push and pull request with fixed thresholds per category (performance 0.9, accessibility 0.95, best practices 0.9, SEO 0.95), reported as warnings."
     ]
   },
   "hu": {
@@ -45,7 +46,8 @@
     },
     "body": [
       "Core Web Vitals küszöbök (2026-10-es állapot): az LCP legfeljebb 2,5 s, az INP legfeljebb 200 ms, a CLS legfeljebb 0,1 számít jónak.",
-      "A kevesebb render-blokkoló kérés is segít: saját tárhelyről kiszolgált fontok egy preloaddal, késleltetett scriptek, teljes képernyős preloader nélkül."
+      "A kevesebb render-blokkoló kérés is segít: saját tárhelyről kiszolgált fontok egy preloaddal, késleltetett scriptek, teljes képernyős preloader nélkül.",
+      "Ezen a portfólión a Lighthouse CI minden pushra és pull requestre lefut, kategóriánként rögzített küszöbökkel (teljesítmény 0,9, akadálymentesség 0,95, best practices 0,9, SEO 0,95), figyelmeztetésként."
     ]
   }
 }

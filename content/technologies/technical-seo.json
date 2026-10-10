@@ -14,7 +14,8 @@
     "body": [
       "Each domain counts as a separate site; duplicated content across domains needs a canonical link or different content.",
       "Old URLs get a 301 redirect, which keeps their link value and avoids 404 pages.",
-      "llms.txt is cheap to generate but is not treated as an SEO tool (state as of 2026-10)."
+      "llms.txt is cheap to generate but is not treated as an SEO tool (state as of 2026-10).",
+      "On this bilingual portfolio, every page has hreflang pairs, Person JSON-LD, a sitemap entry and an Open Graph image; detail pages also carry a BreadcrumbList."
     ]
   },
   "hu": {
@@ -29,7 +30,8 @@
     "body": [
       "Minden domain külön oldalnak számít; a domainek közötti duplikált tartalomhoz canonical link vagy eltérő tartalom kell.",
       "A régi URL-ek 301 átirányítást kapnak, ami megőrzi a linkértéket és elkerüli a 404-et.",
-      "Az llms.txt olcsón generálható, de nem SEO-eszközként kezeljük (2026-10-es állapot)."
+      "Az llms.txt olcsón generálható, de nem SEO-eszközként kezeljük (2026-10-es állapot).",
+      "Ezen a kétnyelvű portfólión minden oldalnak van hreflang-párja, Person JSON-LD-je, sitemap-bejegyzése és Open Graph képe; a detail oldalakon BreadcrumbList is van."
     ]
   }
 }

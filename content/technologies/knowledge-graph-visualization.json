@@ -1,0 +1,49 @@
+{
+  "order": 12,
+  "icon": "lucide:share-2",
+  "implementations": [
+    {
+      "language": "typescript",
+      "en": {
+        "summary": "buildGraph turns the collections into nodes and links at build time; the client runs a d3-force simulation and draws plain SVG without the D3 DOM module.",
+        "notes": [
+          "Embedded JSON escapes < so a closing script tag cannot appear in the data.",
+          "With reduced motion the simulation is stepped 300 times up front and not animated."
+        ]
+      },
+      "hu": {
+        "summary": "A buildGraph build-időben csomópontokká és élekké alakítja a gyűjteményeket; a kliens d3-force szimulációt futtat, és D3 DOM-modul nélkül, sima SVG-t rajzol.",
+        "notes": [
+          "A beágyazott JSON a < jelet escape-eli, így az adatban nem jelenhet meg záró script-tag.",
+          "Csökkentett mozgásnál a szimuláció 300 lépése előre lefut, animáció nélkül."
+        ]
+      }
+    }
+  ],
+  "en": {
+    "title": "Knowledge graph visualization",
+    "summary": "An interactive force-directed graph generated from content relations that shows how languages, technologies, projects and research connect, without levels or scores.",
+    "process": {
+      "requirement": "Show the relations between languages, technologies, projects and research on a portfolio without skill ratings.",
+      "question": "How can the relations be shown in a way that stays correct as content grows and stays usable with a keyboard and reduced motion?",
+      "validation": "The graph is built at build time from the collections; an edge whose target does not exist is dropped. Node size follows the number of connections with an upper limit. Nodes are focusable links; with reduced motion the layout is computed up front without animation.",
+      "decision": "Generate the graph from content relations only, link every content node to its page, and highlight search results on the graph."
+    },
+    "body": [
+      "Node size shows the number of connections, not the depth of knowledge."
+    ]
+  },
+  "hu": {
+    "title": "Kapcsolatgráf-megjelenítés",
+    "summary": "A tartalom kapcsolataiból generált, interaktív, erőalapú gráf, amely megmutatja, hogyan kapcsolódnak a nyelvek, technológiák, projektek és kutatások, szintek és pontszámok nélkül.",
+    "process": {
+      "requirement": "A nyelvek, technológiák, projektek és kutatások kapcsolatainak megmutatása egy portfólióban, tudásszint-értékelés nélkül.",
+      "question": "Hogyan mutathatók meg a kapcsolatok úgy, hogy a tartalom bővülésével is helyesek maradjanak, és billentyűzettel, csökkentett mozgással is használhatók legyenek?",
+      "validation": "A gráf build-időben a gyűjteményekből épül; a nem létező célra mutató él kimarad. A csomópont mérete a kapcsolatok számát követi, felső korláttal. A csomópontok fókuszálható linkek; csökkentett mozgásnál az elrendezés előre, animáció nélkül számolódik.",
+      "decision": "A gráf csak a tartalom kapcsolataiból generálódik, minden tartalmi csomópont a saját oldalára mutat, és a keresési találatok a gráfon is kiemelődnek."
+    },
+    "body": [
+      "A csomópont mérete a kapcsolatok számát mutatja, nem a tudás mélységét."
+    ]
+  }
+}

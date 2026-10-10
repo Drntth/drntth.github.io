@@ -1,0 +1,125 @@
+{
+  "order": 4,
+  "year": 2026,
+  "icon": "lucide:layout-template",
+  "repo": "https://github.com/Drntth/drntth.github.io",
+  "demo": "https://drntth.github.io/",
+  "label": {
+    "en": "This portfolio site",
+    "hu": "Ez a portfólió"
+  },
+  "concepts": [
+    "content-collections",
+    "bilingual-content-model",
+    "client-side-search",
+    "knowledge-graph-visualization",
+    "technical-seo",
+    "web-performance"
+  ],
+  "tech": [
+    "astro",
+    "typescript",
+    "tailwind",
+    "javascript",
+    "html5",
+    "css3",
+    "github-actions",
+    "git"
+  ],
+  "en": {
+    "title": "Portfolio Site",
+    "subtitle": "A bilingual, searchable knowledge portfolio",
+    "summary": "A static Astro site in English and Hungarian that presents projects, technology notes and research together with their connections, with client-side search and a knowledge graph, without a server or third-party services.",
+    "goal": "Show not only finished projects but the knowledge behind them: which technologies a project uses, which language implements them and what research informed the decisions, in two languages and on free static hosting.",
+    "solution": "Content lives in JSON content collections validated by schemas; every entry has both language versions. Each page is one shared view with two thin route wrappers. A search index is generated per language at build time and loaded on first use, and the knowledge graph is built from the same collections. GitHub Actions deploys the site and runs Lighthouse CI.",
+    "result": "A live site where adding one content file updates the list pages, the detail page, the knowledge graph and the search index. Search works without accents, with typos and with Hungarian suffixes.",
+    "status": "Live, maintained (2026)",
+    "metrics": [
+      {
+        "value": "2",
+        "label": "languages"
+      },
+      {
+        "value": "4",
+        "label": "content collections"
+      },
+      {
+        "value": "0",
+        "label": "third-party services"
+      },
+      {
+        "value": "4",
+        "label": "Lighthouse CI categories checked"
+      }
+    ],
+    "highlights": [
+      "Schema-validated content: a broken entry fails the build instead of rendering empty fields",
+      "Global search (Ctrl/Cmd+K) and per-section search from one prebuilt index per language",
+      "Knowledge graph generated from content relations, with search highlighting and reduced-motion support",
+      "hreflang pairs, JSON-LD, sitemap and a language suggestion banner that never redirects",
+      "Lighthouse CI on every push and pull request"
+    ],
+    "sections": [
+      {
+        "title": "How it works",
+        "body": [
+          "Projects, technologies, research and certificates are content collections. Relations are stored as identifiers, so a project points to the technology notes it uses and a research note points to its project. The list pages, detail pages, search index and knowledge graph are all generated from these relations at build time."
+        ]
+      },
+      {
+        "title": "Quality checks",
+        "body": [
+          "The build validates every content file against its schema. A key-parity check keeps the English and Hungarian strings in sync, and Lighthouse CI checks performance, accessibility, best practices and SEO against fixed thresholds."
+        ]
+      }
+    ]
+  },
+  "hu": {
+    "title": "Portfólió weboldal",
+    "subtitle": "Kétnyelvű, kereshető tudásportfólió",
+    "summary": "Statikus Astro-oldal angolul és magyarul, amely a projekteket, a technológiai jegyzeteket és a kutatásokat kapcsolataikkal együtt mutatja be, kliensoldali kereséssel és kapcsolatgráffal, szerver és harmadik feles szolgáltatás nélkül.",
+    "goal": "Ne csak a kész projektek látszódjanak, hanem a mögöttük lévő tudás is: milyen technológiát használ egy projekt, melyik nyelv valósítja meg, és milyen kutatás alapozta meg a döntéseket, két nyelven, ingyenes statikus tárhelyen.",
+    "solution": "A tartalom sémával ellenőrzött JSON content collectionökben van; minden bejegyzésnek mindkét nyelvi változata megvan. Minden oldal egy közös nézet két vékony route-wrapperrel. A keresési index nyelvenként build-időben készül, és első használatkor töltődik be; a kapcsolatgráf ugyanezekből a gyűjteményekből épül. A telepítést és a Lighthouse CI-t GitHub Actions futtatja.",
+    "result": "Élő oldal, ahol egyetlen tartalomfájl felvétele frissíti a listaoldalakat, a detail oldalt, a kapcsolatgráfot és a keresési indexet. A keresés ékezet nélkül, elgépelve és toldalékolt magyar szavakra is működik.",
+    "status": "Élő, karbantartott (2026)",
+    "metrics": [
+      {
+        "value": "2",
+        "label": "nyelv"
+      },
+      {
+        "value": "4",
+        "label": "tartalomgyűjtemény"
+      },
+      {
+        "value": "0",
+        "label": "harmadik feles szolgáltatás"
+      },
+      {
+        "value": "4",
+        "label": "Lighthouse CI kategória"
+      }
+    ],
+    "highlights": [
+      "Sémával ellenőrzött tartalom: a hibás bejegyzés build hibát ad, nem üres mezőt",
+      "Globális (Ctrl/Cmd+K) és szekciónkénti keresés nyelvenként egy előre generált indexből",
+      "A tartalom kapcsolataiból generált kapcsolatgráf, keresési kiemeléssel és reduced-motion támogatással",
+      "hreflang-párok, JSON-LD, sitemap és nyelvi ajánló banner, amely soha nem irányít át",
+      "Lighthouse CI minden pushra és pull requestre"
+    ],
+    "sections": [
+      {
+        "title": "Működés",
+        "body": [
+          "A projektek, technológiák, kutatások és tanúsítványok content collectionök. A kapcsolatok azonosítóként tárolódnak: a projekt a használt technológiai jegyzetekre, a kutatás a projektjére mutat. A listaoldalak, a detail oldalak, a keresési index és a kapcsolatgráf build-időben ezekből a kapcsolatokból generálódik."
+        ]
+      },
+      {
+        "title": "Minőségellenőrzés",
+        "body": [
+          "A build minden tartalomfájlt ellenőriz a sémája alapján. Egy kulcsparitás-ellenőrzés szinkronban tartja az angol és a magyar szövegeket, a Lighthouse CI pedig rögzített küszöbökkel ellenőrzi a teljesítményt, az akadálymentességet, a best practices pontokat és a SEO-t."
+        ]
+      }
+    ]
+  }
+}

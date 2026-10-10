@@ -1,0 +1,51 @@
+{
+  "order": 9,
+  "icon": "lucide:database",
+  "implementations": [
+    {
+      "language": "typescript",
+      "en": {
+        "summary": "Astro content collections with the glob loader and zod schemas in src/content.config.ts; views read them with getCollection and getEntry, and dynamic routes are generated from the collection ids.",
+        "notes": [
+          "In Astro 7, z is imported from astro/zod.",
+          "The glob loader turns drntth.github.io into the id drntthgithubio."
+        ]
+      },
+      "hu": {
+        "summary": "Astro content collections glob loaderrel és zod-sémákkal a src/content.config.ts-ben; a nézetek getCollection és getEntry hívással olvasnak, a dinamikus route-ok a gyűjtemény azonosítóiból készülnek.",
+        "notes": [
+          "Astro 7-ben a z az astro/zod-ból importálandó.",
+          "A glob loader a drntth.github.io nevet drntthgithubio azonosítóvá alakítja."
+        ]
+      }
+    }
+  ],
+  "en": {
+    "title": "Content collections",
+    "summary": "Structured content in files, one collection per type, validated by a schema at build time, so pages read typed data instead of hard-coded values.",
+    "process": {
+      "requirement": "Keep the portfolio's projects, technologies, research and certificates separate from code, but typed and checked.",
+      "question": "How can content stay in plain files without broken or missing fields reaching the live site?",
+      "validation": "Four JSON collections with zod schemas; a wrong or missing field fails the build. Relations are stored as identifiers and drive the detail pages, the search index and the graph.",
+      "decision": "The schema is the source of truth: required fields, defaults and formats live there, and one new file updates every page that uses it."
+    },
+    "body": [
+      "Relations are identifiers, for example a project lists the technology notes it uses. A missing target is skipped by the views rather than failing the build, so identifiers need care.",
+      "The entry id comes from the file name; a dotted name loses its dots, so file names use hyphens."
+    ]
+  },
+  "hu": {
+    "title": "Tartalomgyűjtemények",
+    "summary": "Strukturált tartalom fájlokban, típusonként egy gyűjteményben, build-időben sémával ellenőrizve, így az oldalak típusos adatot olvasnak, nem kódba írt értékeket.",
+    "process": {
+      "requirement": "A portfólió projektjei, technológiái, kutatásai és tanúsítványai legyenek a kódtól elválasztva, mégis típusosan és ellenőrizve.",
+      "question": "Hogyan maradhat a tartalom egyszerű fájlokban úgy, hogy hibás vagy hiányzó mező ne jusson ki élesbe?",
+      "validation": "Négy JSON-gyűjtemény zod-sémákkal; a hibás vagy hiányzó mező build hibát ad. A kapcsolatok azonosítóként tárolódnak, ezekből épülnek a detail oldalak, a keresési index és a gráf.",
+      "decision": "A séma az igazság forrása: a kötelező mezők, alapértékek és formátumok ott élnek, és egy új fájl minden oldalt frissít, amely használja."
+    },
+    "body": [
+      "A kapcsolatok azonosítók, például egy projekt felsorolja a használt technológiai jegyzeteket. A nem létező célt a nézetek kihagyják, nem állítják le a buildet, ezért az azonosítókra figyelni kell.",
+      "A bejegyzés azonosítója a fájlnévből képződik; a pontok kiesnek belőle, ezért a fájlnevek kötőjelesek."
+    ]
+  }
+}

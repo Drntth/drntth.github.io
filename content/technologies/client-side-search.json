@@ -1,0 +1,51 @@
+{
+  "order": 11,
+  "icon": "lucide:search",
+  "implementations": [
+    {
+      "language": "typescript",
+      "en": {
+        "summary": "An Astro endpoint writes /search/<lang>.json at build time; MiniSearch loads it once per language with accent-free normalization, prefix and fuzzy matching.",
+        "notes": [
+          "The same processTerm must be set for indexing and for search.",
+          "Caching the loading promise prevents a duplicate download."
+        ]
+      },
+      "hu": {
+        "summary": "Egy Astro-végpont build-időben megírja a /search/<nyelv>.json fájlt; a MiniSearch nyelvenként egyszer tölti be, ékezetmentes normalizálással, prefix és fuzzy egyezéssel.",
+        "notes": [
+          "Ugyanaz a processTerm kell az indexeléshez és a kereséshez.",
+          "A betöltési ígéret gyorsítótárazása kiszűri a dupla letöltést."
+        ]
+      }
+    }
+  ],
+  "en": {
+    "title": "Client-side search",
+    "summary": "Full-text search with an index built as a static file at build time and queried in the browser, without a server or a third-party service.",
+    "process": {
+      "requirement": "A searchable static portfolio in two languages with no search service.",
+      "question": "How can a static site offer fast, forgiving search without sending queries anywhere?",
+      "validation": "One prebuilt index per language, loaded on first focus; the same term normalization at indexing and query time, prefix and fuzzy matching, and weighted fields. Tested on the Hungarian index with accents, typos and suffixes.",
+      "decision": "One index per language serves both the global search dialog and the per-section search boxes; section filtering happens on the client."
+    },
+    "body": [
+      "The long text of detail pages is indexed too, so a list-page search finds it.",
+      "Search results are also sent as a page event, so the card list and the knowledge graph can react to them."
+    ]
+  },
+  "hu": {
+    "title": "Kliensoldali keresés",
+    "summary": "Teljes szöveges keresés, amelynek indexe build-időben statikus fájlként készül, és a böngészőben fut, szerver és harmadik feles szolgáltatás nélkül.",
+    "process": {
+      "requirement": "Kereshető statikus portfólió két nyelven, keresőszolgáltatás nélkül.",
+      "question": "Hogyan adhat egy statikus oldal gyors, elnéző keresést úgy, hogy a keresés sehova ne kerüljön el?",
+      "validation": "Nyelvenként egy előre generált index, első fókuszkor betöltve; azonos normalizálás indexeléskor és kereséskor, prefix és fuzzy egyezés, súlyozott mezők. A magyar indexen ékezet nélkül, elgépelve és toldalékokkal tesztelve.",
+      "decision": "Nyelvenként egy index szolgálja ki a globális keresőablakot és a szekciónkénti keresőmezőket; a szekciószűrés a kliensen történik."
+    },
+    "body": [
+      "A detail oldalak hosszú szövege is az indexbe kerül, így a listaoldali keresés is megtalálja.",
+      "A találatok oldaleseményként is továbbmennek, így a kártyalista és a kapcsolatgráf is reagálhat rájuk."
+    ]
+  }
+}
