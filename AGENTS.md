@@ -203,7 +203,7 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 - Publish only public, professionally relevant projects. Published now: the BSc thesis, the YAML LaTeX CV Generator, the Static Multisite Generator and this portfolio site.
 - Do not publish confidential or employer-related project details. Describe technology areas only, never concrete internal projects, systems, users or results.
 - Employer work stays at CV level: employer, department, title, dates, generic technology areas and widely used public tools. Never internal system or product names, internal URLs, architecture or pipeline details, scoring rules, thresholds, model choices per task, prompts, test or benchmark results, hardware, costs, plans, or anything rewritten from work code or documents.
-- Technology notes, research and projects come only from own projects. Employer work is never a source for them, not even generalized or rebuilt as a side project.
+- Technology notes, research and projects come only from own projects. Employer work is never a source for them, not even generalized or rebuilt as a side project. Own projects in the same professional field are fine when they are built from public sources and do not touch the employer's products or use cases.
 - Public lifecycle wording: describe stages and criteria, not where the material is kept.
 - Do not describe or reference where or how material is prepared, stored or reviewed before publication, in code, content, comments, README or this file.
 - Research entries need standalone professional value and are added only after review.
