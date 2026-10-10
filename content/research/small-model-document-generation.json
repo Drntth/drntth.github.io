@@ -1,0 +1,74 @@
+{
+  "order": 1,
+  "icon": "lucide:bot",
+  "topic": {
+    "en": "Language models",
+    "hu": "Nyelvi modellek"
+  },
+  "asOf": "2026-10",
+  "technologies": ["prompt-engineering", "small-language-models"],
+  "projects": ["thesis-langmodels-project-management"],
+  "sources": [
+    {
+      "label": "Hugging Face Transformers: text generation strategies",
+      "href": "https://huggingface.co/docs/transformers/generation_strategies"
+    },
+    {
+      "label": {
+        "en": "thesis-langmodels-project-management (GitHub repository)",
+        "hu": "thesis-langmodels-project-management (GitHub-repó)"
+      },
+      "href": "https://github.com/Drntth/thesis-langmodels-project-management"
+    }
+  ],
+  "en": {
+    "title": "Document generation with small language models",
+    "summary": "What it takes to get usable project documents out of free language models with 82M to 355M parameters, on hardware that cannot run large models.",
+    "question": "How can small, freely available language models produce usable project documentation on minimal hardware?",
+    "requirement": "A web application that drafts project descriptions and specifications, without hardware for running large models.",
+    "method": [
+      "Five models compared: DistilGPT2, GPT-Neo 125M, Facebook OPT 125M and 350M, GPT-2 Medium, all through the Hugging Face text-generation pipeline.",
+      "Prompting techniques and generation parameters tested alone and in combination.",
+      "The application runs the same prompt on every model and shows the outputs side by side.",
+      "Quality judged by how well the output meets user expectations, because specification quality is hard to measure with numbers."
+    ],
+    "findings": [
+      "There is no universal configuration: a setting that helps one model can degrade another.",
+      "One shared, conservative configuration still worked adequately on all five models for the chosen task: temperature 0.3, top_p 0.9, repetition_penalty 1.2, no_repeat_ngram_size 2 and a per-task output length limit.",
+      "Long documents work better section by section: each section has its own stored prompt, and the prompts of related sections are added as context.",
+      "Completion-style prompts help models that are not instruction-tuned: the prompt ends with the start of the answer, for example \"The project title is:\".",
+      "Complex relationships between parts of a document remain weak and would need fine-tuning."
+    ],
+    "decision": "One shared sampling configuration for all models instead of per-model tuning, and section-by-section generation with related sections as context.",
+    "limits": [
+      "Quality was judged by people, without an automatic metric.",
+      "The results hold for the five models tested in 2025; stronger small models have appeared since.",
+      "The model is loaded on every request, which is slow; performance work is still open."
+    ]
+  },
+  "hu": {
+    "title": "Dokumentumgenerálás kis nyelvi modellekkel",
+    "summary": "Mi kell ahhoz, hogy 82M–355M paraméteres, ingyenes nyelvi modellek használható projektdokumentumot adjanak olyan hardveren, amely nagy modellt nem futtat.",
+    "question": "Hogyan adhatnak a kis, ingyenesen elérhető nyelvi modellek használható projektdokumentációt minimális hardveren?",
+    "requirement": "Webalkalmazás, amely projektleírást és specifikációt fogalmaz meg, nagy modellek futtatására alkalmas hardver nélkül.",
+    "method": [
+      "Öt modell összevetése: DistilGPT2, GPT-Neo 125M, Facebook OPT 125M és 350M, GPT-2 Medium, mind a Hugging Face text-generation pipeline-on.",
+      "Promptolási technikák és generálási paraméterek külön és kombinálva tesztelve.",
+      "Az alkalmazás ugyanazt a promptot minden modellen lefuttatja, és egymás mellett mutatja az eredményt.",
+      "A minőség mércéje az volt, mennyire felel meg a kimenet a felhasználói elvárásoknak, mert a specifikációk minősége számokkal nehezen mérhető."
+    ],
+    "findings": [
+      "Nincs univerzális konfiguráció: ami az egyik modellnél javít, a másiknál ronthat.",
+      "Egy közös, konzervatív konfiguráció mégis mind az öt modellnél megfelelően működött a kijelölt feladaton: temperature 0.3, top_p 0.9, repetition_penalty 1.2, no_repeat_ngram_size 2 és feladatonkénti kimenethossz-korlát.",
+      "A hosszú dokumentum szakaszonként jobban működik: minden szakasznak saját, tárolt promptja van, és a kapcsolódó szakaszok promptja kontextusként hozzáadódik.",
+      "A kiegészítés-stílusú prompt segít a nem utasításra hangolt modelleknél: a prompt a válasz elejével zárul, például „The project title is:”.",
+      "A dokumentumrészek közötti összetett összefüggések kezelése gyenge marad, ehhez finomhangolás kellene."
+    ],
+    "decision": "Egy közös mintavételi konfiguráció minden modellre modellenkénti hangolás helyett, és szakaszonkénti generálás a kapcsolódó szakaszokkal mint kontextussal.",
+    "limits": [
+      "A minőséget emberek ítélték meg, automatikus metrika nélkül.",
+      "Az eredmények a 2025-ben vizsgált öt modellre érvényesek; azóta erősebb kis modellek is megjelentek.",
+      "A modell minden kérésnél újratöltődik, ami lassú; a teljesítményoptimalizálás nyitott."
+    ]
+  }
+}

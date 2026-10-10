@@ -1,6 +1,5 @@
 {
   "order": 1,
-  "visibility": "published",
   "icon": "lucide:message-square-text",
   "implementations": [
     {

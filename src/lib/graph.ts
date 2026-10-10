@@ -6,7 +6,6 @@ export type GNode = {
   id: string;
   label: string;
   type: "language" | "technology" | "project" | "research";
-  planned: boolean;
   href?: string;
 };
 export type GLink = { source: string; target: string; kind: string };
@@ -31,18 +30,15 @@ export async function buildGraph(lang: Lang) {
       id: `tech:${t.id}`,
       label: t.data[lang].title,
       type: "technology",
-      planned: t.data.visibility === "planned",
       href: localePath(lang, `/technologies/${t.id}`),
     });
   }
   for (const p of projects) {
-    const planned = p.data.visibility === "planned";
     nodes.set(`proj:${p.id}`, {
       id: `proj:${p.id}`,
       label: p.data.label?.[lang] ?? p.data[lang].title,
       type: "project",
-      planned,
-      href: planned ? undefined : localePath(lang, `/projects/${p.id}`),
+      href: localePath(lang, `/projects/${p.id}`),
     });
   }
   for (const r of research) {
@@ -50,8 +46,7 @@ export async function buildGraph(lang: Lang) {
       id: `res:${r.id}`,
       label: r.data[lang].title,
       type: "research",
-      planned: r.data.visibility === "planned",
-      href: `${localePath(lang, "/research")}#${r.id}`,
+      href: localePath(lang, `/research/${r.id}`),
     });
   }
 
@@ -62,7 +57,6 @@ export async function buildGraph(lang: Lang) {
         id: key,
         label: techOf(id, lang).name,
         type: "language",
-        planned: false,
       });
     return key;
   };

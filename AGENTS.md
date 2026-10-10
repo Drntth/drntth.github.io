@@ -6,7 +6,7 @@ Commit prefix: [GITHUB.IO]
 
 ## 1. Purpose
 
-`drntth.github.io` is the curated professional portfolio of Tóth Dorina Ildikó (software developer, AI and backend), published on GitHub Pages at https://drntth.github.io/.
+`drntth.github.io` is the curated professional portfolio of Tóth Dorina Ildikó (software developer, AI and backend), published on GitHub Pages at <https://drntth.github.io/>.
 
 It is a curated portfolio, not an engineering log. Material is reviewed before it is added; only publishable, presentable material belongs in this repository.
 
@@ -85,7 +85,7 @@ Claude configuration: `CLAUDE.md` is a symlink to this file. `.claude/settings.j
 
 ## 5. Repository layout
 
-```
+```text
 .claude/                  settings.json (shared permissions), skills/ (add-cert, add-project, release-check)
 .github/workflows/        deploy.yml (Pages), lighthouse.yml (Lighthouse CI)
 lighthouserc.json         Lighthouse CI pages and thresholds
@@ -117,28 +117,29 @@ src/
   styles/global.css       tokens and shared classes
   views/                  real page markup shared by EN and HU
   views/Method.astro      how the work is organized: stages, knowledge model, research approach
+  views/Research.astro, views/ResearchDetail.astro   research list and detail pages
   content.config.ts       collection schemas (source of truth for fields)
 ```
 
 ## 6. Architecture rules
 
-**i18n**
+### i18n
 
 - English is the default locale without prefix (`/`), Hungarian lives under `/hu/`.
 - A page is a view in `src/views/` plus two wrappers: `src/pages/<name>.astro` (`lang="en"`) and `src/pages/hu/<name>.astro` (`lang="hu"`). Dynamic routes use `[slug].astro` in both trees.
 - Every user-visible string lives in `content/*.json`, with both `en` and `hu`. Never hardcode text in components (the bilingual 404 page is the only exception).
 - Always build links with `localePath(lang, path)`, and switch language with `switchPath`.
 
-**Content model**
+### Content model
 
 - Technology ids in `tech`, `concepts`, `implementations[].language` refer to ids in `content/stack.json` or to technology node slugs. Unknown ids fall back to a generic icon.
-- `projects[].visibility`: `public` appears on Home, Projects and detail pages. `planned` appears only in the knowledge graph.
-- `technologies[].visibility` and `research[].visibility`: `published` or `planned`. Planned entries must be visibly marked and describe intended content, not fake results.
+- No `visibility` field and no planned entries: every project, technology and research entry is a finished, published item. Placeholders for future content are not added.
+- `research`: `question`, `requirement`, `method[]`, `findings[]`, `decision`, `limits[]` per language; `asOf` (YYYY-MM) marks when the findings were last checked; `sources[]` are external references. Each entry has a detail page `/research/<slug>`.
 - Schemas are defined in `src/content.config.ts`. Change the schema first, then the data, then the views.
 
 **Knowledge model** (Technologies page)
 
-```
+```text
 Programming Language --implements--> Technology / Concept --used by--> Project
 ```
 
@@ -146,7 +147,7 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 - Research starts from a concrete project requirement, covers only what the project needs, and never reproduces full technology documentation. Flow: requirement, unknown question, required technology, relevant concepts, targeted research, prototype/validation, decision, node or project documentation.
 - The graph is generated from the collections (`src/lib/graph.ts`). Node size comes from the number of connections. Do not add manual node lists.
 
-**Styling**
+### Styling
 
 - Tokens in `global.css`: `--accent` (purple), `--accent-2` (red), `--bg`, `--surface`, `--fg`, `--muted`, `--line`. Purple and red must stay balanced; use gradients and alternate the two.
 - Shared classes: `.card`, `.chip`, `.btn`, `.btn-primary`, `.btn-ghost`, `.icon-btn`, `.section-title`, `.text-gradient`, `.reveal`.
@@ -172,9 +173,9 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 - Blocks: stages (nine, with the readiness check marked as a decision point; the flow is not strictly linear), knowledge model (`KnowledgeModel`), research approach (`ResearchFlow` plus rules), readiness criteria, what gets published.
 - Do not describe where material is kept or prepared, any switching between non-public and public, or discarded projects.
 
-**Search**
+### Search
 
-- `src/lib/search.ts` builds the entries at build time from the collections and the `methodPage` strings. `src/pages/search/[lang].json.ts` serves them as `/search/en.json` and `/search/hu.json`. Entry: `{ id, section, type, title, summary, text, tags, url, planned }`; `text` holds the long-form body, so detail-page content is searchable.
+- `src/lib/search.ts` builds the entries at build time from the collections and the `methodPage` strings. `src/pages/search/[lang].json.ts` serves them as `/search/en.json` and `/search/hu.json`. Entry: `{ id, section, type, title, summary, text, tags, url }`; `text` holds the long-form body, so detail-page content is searchable.
 - Client: MiniSearch in `src/lib/search-client.ts`, accent-insensitive, prefix and fuzzy matching, loaded on first focus. Shared UI logic: `src/lib/search-ui.ts`.
 - Global: header button and Ctrl/Cmd+K open `SearchDialog` (mounted in `BaseLayout`), results grouped by section, section chips filter.
 - Section: `SearchBox` with `scope` sits in the `PageHeader` toolbar of the list pages (Projects, Technologies, Research, Method) and is not shown on detail pages. The index still contains the long-form text of the detail pages, so a list-page search finds it.
@@ -190,7 +191,7 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 | Add a project          | Use /add-project (skill)                                                                                                                                                                                                                                                                         |
 | Add a stack item       | Add `{ id, name, icon }` to a group in `content/stack.json`.                                                                                                                                                                                                                                     |
 | Add a technology node  | Create `content/technologies/<slug>.json`. Fill `implementations` per language. Reference it from a project via `concepts`.                                                                                                                                                                      |
-| Add research           | Create `content/research/<slug>.json`. Link `technologies` and `projects`. Keep `visibility: planned` until real content exists.                                                                                                                                                                 |
+| Add research           | Create `content/research/<slug>.json` with all fields and both languages. Link `technologies` and `projects`. Only verified findings; mark unverified claims as such.                                                                                                                            |
 | Add a certificate      | Use /add-cert (skill)                                                                                                                                                                                                                                                                            |
 | Add a page             | View, two wrappers, header link, `nav` key in both JSON files, check the sitemap.                                                                                                                                                                                                                |
 | Add a string           | Add the key to both `en.json` and `hu.json`.                                                                                                                                                                                                                                                     |
@@ -210,7 +211,6 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 - Title is "Software Developer - AI & Backend" (no "Junior").
 - Keep the page short and scannable. Detailed notes belong to Technologies, Research and project detail pages.
 - Not published: phone number, birth date, address.
-- `game-project` and `branching` stay clearly marked as planned (visibility `planned`, "Planned" chips, dashed styling) until they get real content. Do not turn them into finished-looking entries.
 - Licensing: code is MIT (`LICENSE`); `content/`, `public/` and `src/assets/` are all rights reserved (`CONTENT_LICENSE.md`). Do not move personal content into code paths.
 
 ## 9. Confirmed facts
@@ -219,11 +219,11 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 
 **Experience**: Software Developer, Eszterházy Károly Catholic University IT Development Department, 2025-present (AI systems in Python; LLM, RAG, embeddings, prompt engineering, fine-tuning, OCR with Tesseract plus AI vision, document processing, SAT-based constraint optimization; experimenting with agent frameworks). Teaching assistant (C#, agile methods), 2023-2024. Web developer for Kepes György College (also external communication group lead, financial officer and secretary), 2022-2025.
 
-**Thesis project** (`thesis-langmodels-project-management`): title "Mesterséges intelligencia a webalkalmazásokban", subtitle "Nyelvi modellek a projektmenedzsmentben", 2025. Django, Python, SQLite, Bootstrap, JavaScript, Docker, Cypress, Hugging Face pipelines. Models: DistilGPT2, GPT-Neo 125M, Facebook OPT 125M and 350M, GPT-2 Medium. 248 unit tests and 258 Cypress end-to-end tests, all passing. Four permission levels. Markdown export compatible with GitHub. Docker Hub: https://hub.docker.com/r/drntth/thesis-langmodels-project-management. No demo and no screenshots: the project uses an icon instead of an image. The thesis PDF is intentionally not published (it contains sensitive data).
+**Thesis project** (`thesis-langmodels-project-management`): title "Mesterséges intelligencia a webalkalmazásokban", subtitle "Nyelvi modellek a projektmenedzsmentben", 2025. Django, Python, SQLite, Bootstrap, JavaScript, Docker, Cypress, Hugging Face pipelines. Models: DistilGPT2, GPT-Neo 125M, Facebook OPT 125M and 350M, GPT-2 Medium. 248 unit tests and 258 Cypress end-to-end tests, all passing. Four permission levels. Markdown export compatible with GitHub. Docker Hub: <https://hub.docker.com/r/drntth/thesis-langmodels-project-management>. No demo and no screenshots: the project uses an icon instead of an image. The thesis PDF is intentionally not published (it contains sensitive data).
 
 **CV generator project** (`yaml-latex-cv-generator`): 2026, public, MIT. Python, Jinja2, LaTeX (latexmk), YAML, pytest. Two languages (en, hu), two CV variants (`developer`, `general`), 8 committed sample PDFs from fictional data (Jane Doe), 32 pytest tests, reproducible PDF builds. Concept: `template-based-document-generation`.
 
-**Static multi-site project** (`static-multisite-generator`): 2026, public, MIT. Python, Jinja2, Pillow, Bootstrap, Apache `.htaccess`, pytest. Three fictional sample sites, 9 page templates, 4 generated files per site (sitemap, robots, llms.txt, .htaccess), 28 pytest tests, self-hosted libraries and fonts. Concepts: `static-site-generation`, `incremental-deploy`, `web-performance`, `technical-seo`, `privacy-friendly-web` (self-hosting only; analytics planned), `template-based-document-generation`.
+**Static multi-site project** (`static-multisite-generator`): 2026, public, MIT. Python, Jinja2, Pillow, Bootstrap, Apache `.htaccess`, pytest. Three fictional sample sites, 9 page templates, 4 generated files per site (sitemap, robots, llms.txt, .htaccess), 28 pytest tests, self-hosted libraries and fonts. Concepts: `static-site-generation`, `incremental-deploy`, `web-performance`, `technical-seo`, `privacy-friendly-web` (self-hosting only), `template-based-document-generation`.
 
 **Certificates** (all AWS Training and Certification): "AWS Foundations: Machine Learning Basics" and "Fundamentals of Machine Learning and Artificial Intelligence" (completed 2026-09-24), "Fundamentals of Generative AI" (completed 2026-10-04).
 
@@ -233,8 +233,8 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 
 To do:
 
-- [ ] Interview 1 (not now): owner rewrites research questions and planned texts in own words.
-- [ ] Optional: `research/<slug>` detail pages (Research currently has only a list page; entries are anchors `/research#<id>`); needs owner approval because it adds routes.
+- [ ] Interview 1 (not now): owner rewrites research questions in own words.
+- [x] `research/<slug>` detail pages.
 
 ## 11. Known pitfalls
 
@@ -252,7 +252,7 @@ To do:
 
 When starting the dev server, use background mode:
 
-```
+```text
 astro dev --background
 ```
 
@@ -260,7 +260,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 ## Documentation
 
-Full documentation: https://docs.astro.build
+Full documentation: <https://docs.astro.build>
 
 Consult these guides before working on related tasks:
 

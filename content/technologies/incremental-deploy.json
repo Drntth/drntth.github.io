@@ -1,6 +1,5 @@
 {
   "order": 5,
-  "visibility": "published",
   "icon": "lucide:upload",
   "implementations": [
     {

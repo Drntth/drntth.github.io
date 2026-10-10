@@ -195,18 +195,15 @@
     "description": "Knowledge map of AI and backend technologies and concepts researched through real project needs, connected to languages, projects and research.",
     "detailDescription": "Technology note with per-language implementations, related projects and research.",
     "graphTitle": "Connection map",
-    "graphHint": "Drag nodes, hover to highlight connections, click to open. Dashed nodes are planned. The map grows automatically as projects, technologies and research are added.",
+    "graphHint": "Drag nodes, hover to highlight connections, click to open. The map grows automatically as projects, technologies and research are added.",
     "graphLabel": "Graph connecting programming languages, technologies, projects and research",
     "legend": {
       "language": "Language",
       "technology": "Technology",
       "project": "Project",
-      "research": "Research",
-      "planned": "Planned"
+      "research": "Research"
     },
     "nodesTitle": "Technology nodes",
-    "published": "Published",
-    "planned": "Planned",
     "open": "Open node",
     "back": "All technologies",
     "requirement": "Project requirement",
@@ -217,7 +214,6 @@
     "noImpl": "No language implementation documented yet.",
     "usedBy": "Used by projects",
     "researchBy": "Related research",
-    "plannedTitle": "Planned content",
     "modelHint": "A programming language implements a technology or concept, which a project uses. The full model is explained on the Method page.",
     "modelLink": "How the model works",
     "filters": "Filters",
@@ -225,31 +221,36 @@
     "showing": "Showing",
     "of": "of",
     "nodesUnit": "nodes",
-    "plannedNotice": "This node is planned. The content below describes what it is intended to cover; it contains no finished results.",
     "toc": "On this page",
     "languagesTitle": "Languages",
     "related": "Related"
   },
   "researchPage": {
     "title": "Research",
-    "intro": "Selected research with standalone professional value, each tied to a project and the technologies it touches.",
+    "intro": "Selected research with standalone professional value. Each entry starts from a concrete project question and shows how it was validated, what came out and what was decided.",
     "seoTitle": "Research Notes | Dorina Tóth",
-    "description": "Selected research with standalone professional value in AI and backend development, each tied to a project and the technologies it touches.",
-    "note": "This page is a plan. Entries marked Planned describe the intended content and structure, not finished research.",
+    "description": "Selected research notes from real projects: the question, how it was validated, the findings and the decision, linked to projects and technologies.",
+    "detailDescription": "Research note with method, findings, decision and limits.",
     "rulesTitle": "Publication rules",
     "rules": [
       "Only selected research with standalone professional value is published.",
       "Research is never published automatically.",
       "Research starts from a concrete project question."
     ],
-    "planned": "Planned",
-    "published": "Published",
     "question": "Research question",
+    "requirement": "Project requirement",
+    "method": "Method and validation",
     "findings": "Findings",
-    "plannedTitle": "What will be published here",
-    "examplesTitle": "Example outputs",
+    "decision": "Decision",
+    "limits": "Limits and open questions",
+    "sources": "Sources",
     "technologies": "Related technologies",
-    "projects": "Related projects"
+    "projects": "Related project",
+    "asOf": "State as of",
+    "read": "Read research",
+    "back": "All research",
+    "toc": "On this page",
+    "noMatch": "No research matches the current search."
   },
   "search": {
     "placeholder": "Search the site",
@@ -274,11 +275,9 @@
       "research": "Research",
       "method": "Method"
     },
-    "planned": "Planned",
     "results": "results",
     "filterSection": "Section",
     "filterLanguage": "Language",
-    "filterStatus": "Status",
     "reset": "Reset filters",
     "noMatch": "No technology matches the current search and filters."
   },
@@ -394,7 +393,7 @@
       "usedBy": "used by",
       "project": "Project"
     },
-    "modelExample": "Example: Python and Java implement Branching, which a game project (planned) uses."
+    "modelExample": "Example: Python implements template-based document generation, which the YAML-to-LaTeX CV generator uses."
   },
   "footer": {
     "text": "To understand what we build; to build what we do not yet understand.",

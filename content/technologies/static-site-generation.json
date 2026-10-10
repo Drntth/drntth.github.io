@@ -1,6 +1,5 @@
 {
   "order": 4,
-  "visibility": "published",
   "icon": "lucide:globe",
   "implementations": [
     {

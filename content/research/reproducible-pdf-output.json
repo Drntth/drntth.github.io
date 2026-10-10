@@ -1,0 +1,70 @@
+{
+  "order": 3,
+  "icon": "lucide:repeat",
+  "topic": {
+    "en": "Document generation",
+    "hu": "Dokumentumgenerálás"
+  },
+  "asOf": "2026-10",
+  "technologies": ["template-based-document-generation"],
+  "projects": ["yaml-latex-cv-generator"],
+  "sources": [
+    {
+      "label": "Reproducible Builds: SOURCE_DATE_EPOCH",
+      "href": "https://reproducible-builds.org/specs/source-date-epoch/"
+    },
+    {
+      "label": {
+        "en": "yaml-latex-cv-generator (GitHub repository)",
+        "hu": "yaml-latex-cv-generator (GitHub-repó)"
+      },
+      "href": "https://github.com/Drntth/yaml-latex-cv-generator"
+    }
+  ],
+  "en": {
+    "title": "Reproducible PDF output",
+    "summary": "How committed sample PDFs change only when their content changes, so a rebuild does not leave eight modified binary files behind.",
+    "question": "How can a committed PDF change only when its content really changed?",
+    "requirement": "Sample PDFs are committed so the README preview and downloads work without a build. If every build writes a new timestamp into the PDFs, every run shows eight modified binary files and the real change is hidden.",
+    "method": [
+      "Compilation with a fixed SOURCE_DATE_EPOCH and FORCE_SOURCE_DATE=1.",
+      "latexmk -g, which forces a run even when latexmk sees no change.",
+      "Two consecutive full builds compared by file hash.",
+      "pdfinfo after every build for the page count, plus a word count for the cover letter."
+    ],
+    "findings": [
+      "Two builds produced hash-identical PDFs, so the committed output changes only with the content.",
+      "Without FORCE_SOURCE_DATE=1, pdfTeX uses SOURCE_DATE_EPOCH only in the metadata, not in dates printed in the text such as \\today.",
+      "latexmk does not notice changed environment variables such as the timestamp or TEXINPUTS, so the -g flag is needed.",
+      "Measurable limits, a one-page CV and a word range per language for the letter, run as part of the build instead of a manual check afterwards."
+    ],
+    "decision": "A fixed timestamp in the build, latexmk -g, and page and word checks after the build that warn instead of failing, because a long CV is still usable output.",
+    "limits": [
+      "Verified on one machine with one TeX installation; another TeX Live version may produce different bytes (unverified).",
+      "No automated PDF build in CI yet."
+    ]
+  },
+  "hu": {
+    "title": "Reprodukálható PDF-kimenet",
+    "summary": "Hogyan változnak a commitolt minta-PDF-ek csak tartalmi változáskor, hogy egy újrabuild ne hagyjon maga után nyolc módosított bináris fájlt.",
+    "question": "Hogyan változhat egy commitolt PDF csak akkor, ha a tartalma valóban változott?",
+    "requirement": "A minta-PDF-ek commitolva vannak, hogy a README előnézete és a letöltés build nélkül is működjön. Ha minden build új időbélyeget ír a PDF-be, minden futás nyolc módosított bináris fájlt mutat, és elvész a valódi változás.",
+    "method": [
+      "Fordítás rögzített SOURCE_DATE_EPOCH értékkel és FORCE_SOURCE_DATE=1 beállítással.",
+      "latexmk -g, amely akkor is lefuttatja a fordítást, ha a latexmk nem lát változást.",
+      "Két egymás utáni teljes build összevetése fájlhash alapján.",
+      "Minden build után pdfinfo az oldalszámhoz, a levélnél szószámlálás."
+    ],
+    "findings": [
+      "A két build hash-egyezően azonos PDF-eket adott, így a commitolt kimenet csak a tartalommal együtt változik.",
+      "FORCE_SOURCE_DATE=1 nélkül a pdfTeX a SOURCE_DATE_EPOCH-ot csak a metaadatokban használja, a szövegben megjelenő dátumokban, például a \\today-ben nem.",
+      "A latexmk nem észleli a környezeti változók, például az időbélyeg vagy a TEXINPUTS változását, ezért kell a -g kapcsoló.",
+      "A mérhető korlátok, az egyoldalas CV és a levél nyelvenkénti szószám-tartománya, a build részeként futnak, nem utólagos kézi ellenőrzésként."
+    ],
+    "decision": "Rögzített időbélyeg a buildben, latexmk -g, és build utáni oldal- és szószám-ellenőrzés, amely figyelmeztet, de nem állítja le a buildet, mert a hosszabb CV is használható kimenet.",
+    "limits": [
+      "Egy gépen, egy TeX-telepítéssel ellenőrizve; más TeX Live verzió eltérő bájtokat adhat (nem ellenőrzött).",
+      "Automatikus PDF-build CI-ban még nincs."
+    ]
+  }
+}

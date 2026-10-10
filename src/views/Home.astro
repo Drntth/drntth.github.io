@@ -17,9 +17,8 @@ const c = getContent(lang);
 const m = c.methodPage;
 const home = localePath(lang, "/");
 
-const projects = (await getCollection("projects"))
-  .filter((p) => p.data.visibility === "public")
-  .sort((a, b) => a.data.order - b.data.order);
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order);
 const certs = (await getCollection("certificates")).sort(
   (a, b) => a.data.order - b.data.order,
 );

@@ -13,7 +13,6 @@ export interface Entry {
   text: string;
   tags: string[];
   url: string;
-  planned: boolean;
 }
 
 const join = (...parts: (string | string[] | undefined)[]) =>
@@ -31,7 +30,7 @@ export async function buildIndex(lang: Lang): Promise<Entry[]> {
   );
   const entries: Entry[] = [];
 
-  for (const p of projects.filter((x) => x.data.visibility === "public")) {
+  for (const p of projects) {
     const d = p.data[lang];
     entries.push({
       id: `project:${p.id}`,
@@ -55,7 +54,6 @@ export async function buildIndex(lang: Lang): Promise<Entry[]> {
         ...p.data.concepts.map((id) => techTitle.get(id) ?? id),
       ],
       url: localePath(lang, `/projects/${p.id}`),
-      planned: false,
     });
   }
 
@@ -70,7 +68,6 @@ export async function buildIndex(lang: Lang): Promise<Entry[]> {
       text: join(
         d.process ? Object.values(d.process) : undefined,
         d.body,
-        d.planned,
         t.data.implementations.flatMap((i) => [
           i[lang].summary,
           ...i[lang].notes,
@@ -78,7 +75,6 @@ export async function buildIndex(lang: Lang): Promise<Entry[]> {
       ),
       tags: t.data.implementations.map((i) => techOf(i.language, lang).name),
       url: localePath(lang, `/technologies/${t.id}`),
-      planned: t.data.visibility === "planned",
     });
   }
 
@@ -90,13 +86,19 @@ export async function buildIndex(lang: Lang): Promise<Entry[]> {
       type: "research",
       title: d.title,
       summary: d.summary,
-      text: join(d.question, d.findings, d.planned, d.examples),
+      text: join(
+        d.question,
+        d.requirement,
+        d.method,
+        d.findings,
+        d.decision,
+        d.limits,
+      ),
       tags: [
         loc(r.data.topic, lang),
         ...r.data.technologies.map((id) => techTitle.get(id) ?? id),
       ],
-      url: `${localePath(lang, "/research")}#${r.id}`,
-      planned: r.data.visibility === "planned",
+      url: localePath(lang, `/research/${r.id}`),
     });
   }
 
@@ -118,7 +120,6 @@ export async function buildIndex(lang: Lang): Promise<Entry[]> {
       text,
       tags: [],
       url: `${base}#${anchor}`,
-      planned: false,
     });
 
   m.stages.forEach((s, i) =>

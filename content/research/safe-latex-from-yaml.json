@@ -1,0 +1,74 @@
+{
+  "order": 2,
+  "icon": "lucide:braces",
+  "topic": {
+    "en": "Document generation",
+    "hu": "Dokumentumgenerálás"
+  },
+  "asOf": "2026-10",
+  "technologies": ["template-based-document-generation"],
+  "projects": ["yaml-latex-cv-generator"],
+  "sources": [
+    {
+      "label": "Jinja2 API: Environment",
+      "href": "https://jinja.palletsprojects.com/en/stable/api/#jinja2.Environment"
+    },
+    {
+      "label": {
+        "en": "yaml-latex-cv-generator (GitHub repository)",
+        "hu": "yaml-latex-cv-generator (GitHub-repó)"
+      },
+      "href": "https://github.com/Drntth/yaml-latex-cv-generator"
+    }
+  ],
+  "en": {
+    "title": "Safe LaTeX from YAML text",
+    "summary": "How free text from YAML gets into a LaTeX template without breaking the build, while the template stays readable LaTeX.",
+    "question": "How can arbitrary YAML text go into a LaTeX template so that a special character never breaks compilation?",
+    "requirement": "CV and cover letter text lives in YAML and is compiled to PDF through LaTeX. The content often contains &, %, #, _ and $, which are control characters in LaTeX, and it must not contain raw LaTeX.",
+    "method": [
+      "Jinja2 with LaTeX-friendly delimiters (\\VAR{}, \\BLOCK{}, \\#{}) plus trim_blocks and lstrip_blocks.",
+      "Escaping in Jinja2's finalize hook, so it runs on every variable output; autoescape stays off because it is built for HTML.",
+      "A marker type (Raw) for text that is already safe LaTeX, and a separate URL filter.",
+      "pytest without LaTeX: special characters, backslash and braces, bold markers, unbalanced markers, missing values, the URL filter and blank lines from block tags. The full build compiles eight PDFs in two languages and two variants."
+    ],
+    "findings": [
+      "The default {{ }} delimiters clash with LaTeX braces; custom delimiters keep the template readable as LaTeX.",
+      "Escaping in finalize cannot be forgotten for a single variable, which makes it safer than a per-variable filter.",
+      "A single marker type is enough to prevent double escaping.",
+      "URLs inside \\href need only % and # escaped; full escaping breaks the link.",
+      "Without trim_blocks and lstrip_blocks, block lines leave empty lines, which LaTeX reads as paragraph breaks.",
+      "An unquoted comma in a YAML flow mapping silently creates an extra key; validating language pairs turns this into a build error."
+    ],
+    "decision": "Escape in finalize, with Raw as the explicit exception and a dedicated URL filter. The content allows only one markup, **bold**, which the build turns into \\textbf{}.",
+    "limits": [
+      "Checked for the character set used with pdfLaTeX; Unicode edge cases such as math symbols are not tested.",
+      "No inline markup beyond bold, for example no links or lists inside running text."
+    ]
+  },
+  "hu": {
+    "title": "Biztonságos LaTeX YAML-szövegből",
+    "summary": "Hogyan kerül a YAML-ben tárolt szabad szöveg LaTeX-sablonba úgy, hogy ne törje el a buildet, és a sablon olvasható LaTeX maradjon.",
+    "question": "Hogyan kerülhet tetszőleges YAML-szöveg LaTeX-sablonba úgy, hogy egy speciális karakter soha ne törje el a fordítást?",
+    "requirement": "A CV és a motivációs levél szövege YAML-ben van, és LaTeX-en keresztül PDF-fé fordul. A tartalomban gyakori a &, %, #, _ és $, amely LaTeX-ben vezérlőkarakter, nyers LaTeX pedig nem lehet benne.",
+    "method": [
+      "Jinja2 LaTeX-barát delimiterekkel (\\VAR{}, \\BLOCK{}, \\#{}), trim_blocks és lstrip_blocks mellett.",
+      "Escape a Jinja2 finalize hookjában, így minden változókimenetre lefut; az autoescape kikapcsolva marad, mert HTML-re készült.",
+      "Jelölő típus (Raw) a már biztonságos LaTeX-szövegre, és külön URL-szűrő.",
+      "pytest LaTeX nélkül: speciális karakterek, backslash és kapcsos zárójel, kiemelésjelek, páratlan jelölés, hiányzó érték, URL-szűrő és a blokk-tagek üres sorai. A teljes build nyolc PDF-et fordít két nyelven, két változatban."
+    ],
+    "findings": [
+      "Az alapértelmezett {{ }} delimiterek ütköznek a LaTeX kapcsos zárójeleivel; saját delimiterekkel a sablon olvasható LaTeX marad.",
+      "A finalize-beli escape-et egyetlen változónál sem lehet elfelejteni, ezért biztonságosabb a változónkénti szűrőnél.",
+      "A kétszeres escape ellen egyetlen jelölő típus elég.",
+      "A \\href-ben lévő URL-ben csak a % és a # escape-elendő; a teljes escape elrontja a linket.",
+      "trim_blocks és lstrip_blocks nélkül a blokksorok üres sorokat hagynak, amit a LaTeX bekezdéstörésnek vesz.",
+      "A YAML flow mappingben egy idézőjel nélküli vessző csendben extra kulcsot hoz létre; a nyelvi párok ellenőrzése ezt build hibává teszi."
+    ],
+    "decision": "Escape a finalize-ban, a Raw mint kifejezett kivétel, és külön URL-szűrő. A tartalomban egyetlen jelölés megengedett, a **kiemelés**, amelyet a build \\textbf{}-re fordít.",
+    "limits": [
+      "A pdfLaTeX-szel használt karakterkészletre ellenőrizve; a Unicode-különlegességek, például matematikai jelek nincsenek tesztelve.",
+      "A kiemelésen kívül nincs szövegközi jelölés, például link vagy lista a folyó szövegben."
+    ]
+  }
+}

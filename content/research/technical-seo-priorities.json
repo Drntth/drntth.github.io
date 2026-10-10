@@ -1,0 +1,85 @@
+{
+  "order": 4,
+  "icon": "lucide:search-check",
+  "topic": {
+    "en": "Web publishing",
+    "hu": "Webes publikálás"
+  },
+  "asOf": "2026-10",
+  "technologies": [
+    "technical-seo",
+    "static-site-generation",
+    "web-performance"
+  ],
+  "projects": ["static-multisite-generator"],
+  "sources": [
+    {
+      "label": "Google Search Central: SEO starter guide",
+      "href": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+    },
+    {
+      "label": "Google Search Central: Consolidate duplicate URLs",
+      "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+    },
+    {
+      "label": "Google: meta keywords (2009)",
+      "href": "https://developers.google.com/search/blog/2009/09/google-does-not-use-keywords-meta-tag"
+    },
+    {
+      "label": "llmstxt.org",
+      "href": "https://llmstxt.org/"
+    }
+  ],
+  "en": {
+    "title": "Technical SEO priorities for small static sites",
+    "summary": "A weighted list of the technical SEO points that matter for a family of small static sites on separate domains, and which of them a build can generate.",
+    "question": "Which technical SEO points still matter for small static sites on several domains, and which can the build generate instead of a person?",
+    "requirement": "Several small static sites, each on its own domain. A flat checklist treats every point the same, so scarce time does not go to what matters, and repeatable points should leave the manual work.",
+    "method": [
+      "Weighted list based on Google Search Central guidance: critical, high, medium, low.",
+      "Each point classified: derivable from the pages and the site configuration (build) or page-level content (person).",
+      "The generator produces the build points for the sample sites; a link checker runs on the built output, external links included."
+    ],
+    "findings": [
+      "Critical: no accidental noindex, and a responsive mobile layout.",
+      "High: unique title, no broken links, image weight and Core Web Vitals, enforced HTTPS.",
+      "Medium: sitemap and robots.txt, canonical links, meta description, one H1, alt texts, JSON-LD, descriptive internal links.",
+      "Low: heading hierarchy, URL slugs and llms.txt.",
+      "The build can generate the sitemap, robots.txt, canonical links, JSON-LD with visible data only, HTTPS and old-URL 301 redirects, and llms.txt, and it can check links.",
+      "Each domain counts as a separate site; the same content on two domains is duplicate content and needs a canonical link or different text.",
+      "The meta keywords tag has not been a ranking signal for Google since 2009.",
+      "llms.txt is cheap to generate, but Google Search does not use it; how many AI assistants read it is unverified."
+    ],
+    "decision": "Generate everything that can be derived from the pages and the configuration. Titles, descriptions and alt texts stay page-level content. llms.txt is included because it costs nothing, not as an SEO tool.",
+    "limits": [
+      "Time-sensitive: the role of llms.txt and structured data support can change; review planned for 2027-04.",
+      "Search Console and Bing Webmaster Tools submission stays a manual step per domain, and the list does not measure actual rankings."
+    ]
+  },
+  "hu": {
+    "title": "Technikai SEO-prioritások kis statikus oldalakhoz",
+    "summary": "Súlyozott lista azokról a technikai SEO-pontokról, amelyek egy külön domaineken futó kis statikus oldalcsaládnál számítanak, és arról, melyiket generálhatja a build.",
+    "question": "Mely technikai SEO-pontok számítanak ma több domaines kis statikus oldalaknál, és melyiket generálhatja a build ember helyett?",
+    "requirement": "Több kis statikus oldal, mindegyik saját domainen. Egy egyszerű ellenőrzőlista minden pontot egyformán kezel, így a kevés idő nem a fontos pontokra megy, az ismételhető pontokat pedig ki kell venni a kézi munkából.",
+    "method": [
+      "Súlyozott lista a Google Search Central útmutatói alapján: kritikus, magas, közepes, alacsony.",
+      "Minden pont besorolva: az oldalakból és a konfigurációból levezethető (build), vagy oldalszintű tartalom (ember).",
+      "A generátor előállítja a build-pontokat a mintaoldalakhoz; a linkellenőrző a kész kimeneten fut, a külső linkekkel együtt."
+    ],
+    "findings": [
+      "Kritikus: nincs véletlen noindex, és a mobil elrendezés reszponzív.",
+      "Magas: egyedi title, nincs törött link, képméret és Core Web Vitals, kényszerített HTTPS.",
+      "Közepes: sitemap és robots.txt, canonical, meta description, egy H1, alt szövegek, JSON-LD, leíró belső linkek.",
+      "Alacsony: címsor-hierarchia, URL-slugok és llms.txt.",
+      "A build generálhatja a sitemapet, a robots.txt-t, a canonical linkeket, a csak látható adatot tartalmazó JSON-LD-t, a HTTPS- és régi-URL-átirányítást (301) és az llms.txt-t, és ellenőrizheti a linkeket.",
+      "Minden domain külön oldalnak számít; ugyanaz a tartalom két domainen duplikátum, ehhez canonical vagy eltérő szöveg kell.",
+      "A meta keywords 2009 óta nem rangsorolási tényező a Google-nél.",
+      "Az llms.txt olcsón generálható, de a Google Search nem használja; hogy hány AI-asszisztens olvassa, nem ellenőrzött."
+    ],
+    "decision": "Minden generálódik, ami az oldalakból és a konfigurációból levezethető. A címek, leírások és alt szövegek oldalszintű tartalom maradnak. Az llms.txt bekerül, mert nincs költsége, de nem SEO-eszközként.",
+    "limits": [
+      "Időérzékeny: az llms.txt szerepe és a strukturált adatok támogatása változhat; felülvizsgálat 2027-04-ben.",
+      "A Search Console és a Bing Webmaster Tools beküldése domainenként kézi lépés marad, és a lista nem méri a tényleges rangsort."
+    ]
+  }
+}

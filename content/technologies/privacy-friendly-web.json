@@ -1,6 +1,5 @@
 {
   "order": 8,
-  "visibility": "published",
   "icon": "lucide:shield-check",
   "implementations": [],
   "en": {
@@ -15,9 +14,6 @@
     "body": [
       "A library is updated by replacing its folder as a whole and changing the version in the register.",
       "Fonts are self-hosted variable fonts with one preload and font-display: swap."
-    ],
-    "planned": [
-      "Consent-based, first-party visitor analytics."
     ]
   },
   "hu": {
@@ -32,9 +28,6 @@
     "body": [
       "Egy könyvtár frissítése: a mappa egészben cserélődik, a verzió a nyilvántartásban változik.",
       "A fontok saját tárhelyről kiszolgált változó fontok, egy preloaddal és font-display: swap beállítással."
-    ],
-    "planned": [
-      "Hozzájárulás-alapú, first-party látogatottságmérés."
     ]
   }
 }

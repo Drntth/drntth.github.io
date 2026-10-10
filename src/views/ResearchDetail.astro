@@ -1,0 +1,220 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getContent, localePath, loc, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+  slug: string;
+}
+const { lang, slug } = Astro.props;
+const c = getContent(lang);
+const L = c.researchPage;
+const r = (await getEntry("research", slug))!;
+const d = r.data[lang];
+const description =
+  d.summary.length < 100 ? `${d.summary} ${L.detailDescription}` : d.summary;
+const techs = (await getCollection("technologies")).filter((t) =>
+  r.data.technologies.includes(t.id),
+);
+const projects = (await getCollection("projects")).filter((p) =>
+  r.data.projects.includes(p.id),
+);
+const lists = [
+  { id: "method", title: L.method, items: d.method },
+  { id: "findings", title: L.findings, items: d.findings },
+];
+const sections = [
+  { id: "requirement", title: L.requirement },
+  ...lists,
+  { id: "decision", title: L.decision },
+  d.limits.length > 0 && { id: "limits", title: L.limits },
+  r.data.sources.length > 0 && { id: "sources", title: L.sources },
+].filter((x): x is { id: string; title: string } => Boolean(x));
+
+const breadcrumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    [c.nav.home, "/"],
+    [L.title, "/research"],
+    [d.title, `/research/${slug}`],
+  ].map(([name, path], i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name,
+    item: new URL(localePath(lang, path), Astro.site).href,
+  })),
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${d.title} | ${L.title} | ${c.hero.shortName}`}
+  description={description}
+  jsonLd={breadcrumbs}
+>
+  <a href={localePath(lang, "/research")} class="btn btn-ghost no-print mb-6">
+    <Icon name="lucide:arrow-left" class="size-4" />{L.back}
+  </a>
+
+  <header class="card reveal relative mb-8 overflow-hidden">
+    <div class="bg-linear-to-br from-accent/20 to-accent-2/20 p-6 md:p-10">
+      <Icon
+        name={r.data.icon}
+        aria-hidden="true"
+        class="pointer-events-none absolute -bottom-8 -right-8 size-56 text-accent opacity-10"
+      />
+      <div class="relative">
+        <div class="flex flex-wrap gap-2">
+          <span class="chip border-accent/50 text-accent"
+            >{loc(r.data.topic, lang)}</span
+          >
+          <span class="chip">{L.asOf}: {r.data.asOf}</span>
+        </div>
+        <h1 class="mt-4 font-display text-3xl font-bold md:text-5xl">
+          <span class="text-gradient">{d.title}</span>
+        </h1>
+        <p class="mt-5 text-muted lg:text-lg">{d.summary}</p>
+        <p class="mt-5 lg:text-lg">
+          <span class="font-medium text-accent">{L.question}:</span>{" "}
+          {d.question}
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div
+    class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] xl:grid-cols-[minmax(0,1fr)_22rem]"
+  >
+    <div class="min-w-0">
+      <section id="requirement" class="mb-10 scroll-mt-24">
+        <h2 class="section-title reveal text-xl">{L.requirement}</h2>
+        <p class="reveal text-muted">{d.requirement}</p>
+      </section>
+
+      {
+        lists.map((s) => (
+          <section id={s.id} class="mb-10 scroll-mt-24">
+            <h2 class="section-title reveal text-xl">{s.title}</h2>
+            <ul class="reveal list-disc space-y-2 pl-5 text-muted">
+              {s.items.map((x) => (
+                <li class="justify">{x}</li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+
+      <section id="decision" class="mb-10 scroll-mt-24">
+        <h2 class="section-title reveal text-xl">{L.decision}</h2>
+        <p
+          class="card reveal border-l-4 border-l-accent p-5 text-muted"
+        >
+          {d.decision}
+        </p>
+      </section>
+
+      {
+        d.limits.length > 0 && (
+          <section id="limits" class="mb-10 scroll-mt-24">
+            <h2 class="section-title reveal text-xl">{L.limits}</h2>
+            <ul class="reveal space-y-2 text-sm text-muted">
+              {d.limits.map((x) => (
+                <li class="flex gap-2">
+                  <Icon
+                    name="lucide:circle-alert"
+                    class="mt-0.5 size-4 shrink-0 text-accent-2"
+                  />
+                  <span class="justify">{x}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      {
+        r.data.sources.length > 0 && (
+          <section id="sources" class="scroll-mt-24">
+            <h2 class="section-title reveal text-xl">{L.sources}</h2>
+            <ul class="reveal space-y-2 text-sm">
+              {r.data.sources.map((s) => (
+                <li class="flex gap-2">
+                  <Icon
+                    name="lucide:external-link"
+                    class="mt-0.5 size-4 shrink-0 text-accent"
+                  />
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-accent underline-offset-4 hover:underline"
+                  >
+                    {loc(s.label, lang)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </div>
+
+    <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
+      <nav class="card no-print hidden p-5 lg:block" aria-label={L.toc}>
+        <h2 class="side-title">{L.toc}</h2>
+        <ol class="space-y-2 text-sm">
+          {
+            sections.map((s) => (
+              <li>
+                <a href={`#${s.id}`} class="side-link">
+                  {s.title}
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+      {
+        projects.length > 0 && (
+          <section class="card p-5">
+            <h2 class="side-title">{L.projects}</h2>
+            <ul class="space-y-2 text-sm">
+              {projects.map((p) => (
+                <li>
+                  <a
+                    class="side-link"
+                    href={localePath(lang, `/projects/${p.id}`)}
+                  >
+                    {p.data[lang].title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+      {
+        techs.length > 0 && (
+          <section class="card p-5">
+            <h2 class="side-title">{L.technologies}</h2>
+            <ul class="flex flex-wrap gap-2">
+              {techs.map((t) => (
+                <li>
+                  <a
+                    class="chip"
+                    href={localePath(lang, `/technologies/${t.id}`)}
+                  >
+                    {t.data[lang].title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </aside>
+  </div>
+</BaseLayout>

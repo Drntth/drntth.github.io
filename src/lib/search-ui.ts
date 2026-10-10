@@ -4,7 +4,6 @@ import type { Section } from "./search";
 export interface Labels {
   empty: string;
   results: string;
-  planned: string;
   sections: Record<string, string>;
   types: Record<string, string>;
 }
@@ -89,7 +88,6 @@ export function mountSearch(o: Options) {
       const title = el("div", "search-hit-title");
       title.appendChild(el("span", undefined, h.title));
       title.appendChild(el("span", "chip", o.labels.types[h.type] ?? h.type));
-      if (h.planned) title.appendChild(el("span", "chip", o.labels.planned));
       a.appendChild(title);
       a.appendChild(el("div", "search-hit-summary", clip(h.summary)));
       a.addEventListener("click", () => o.onNavigate?.());

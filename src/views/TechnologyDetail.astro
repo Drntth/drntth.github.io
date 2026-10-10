@@ -18,9 +18,8 @@ const d = tech.data[lang];
 // Short summaries get a suffix to reach a useful meta description length.
 const description =
   d.summary.length < 100 ? `${d.summary} ${L.detailDescription}` : d.summary;
-const planned = tech.data.visibility === "planned";
-const projects = (await getCollection("projects")).filter(
-  (p) => p.data.visibility === "public" && p.data.concepts.includes(slug),
+const projects = (await getCollection("projects")).filter((p) =>
+  p.data.concepts.includes(slug),
 );
 const research = (await getCollection("research")).filter((r) =>
   r.data.technologies.includes(slug),
@@ -35,7 +34,6 @@ const steps = d.process
   : [];
 const sections = [
   d.body.length > 0 && { id: "overview", title: d.title },
-  d.planned.length > 0 && { id: "planned", title: L.plannedTitle },
   { id: "implementations", title: L.implementations },
   projects.length > 0 && { id: "projects", title: L.usedBy },
   research.length > 0 && { id: "research", title: L.researchBy },
@@ -75,36 +73,13 @@ const breadcrumbs = {
         class="pointer-events-none absolute -bottom-8 -right-8 size-56 text-accent opacity-10"
       />
       <div class="relative">
-        <span
-          class:list={[
-            "chip",
-            planned
-              ? "border-dashed border-accent-2/60 text-accent-2"
-              : "border-accent/50 text-accent",
-          ]}>{planned ? L.planned : L.published}</span
-        >
-        <h1 class="mt-4 font-display text-3xl font-bold md:text-5xl">
+        <h1 class=" font-display text-3xl font-bold md:text-5xl">
           <span class="text-gradient">{d.title}</span>
         </h1>
         <p class="mt-5 text-muted lg:text-lg">{d.summary}</p>
       </div>
     </div>
   </header>
-
-  {
-    planned && (
-      <p
-        role="note"
-        class="reveal mb-8 flex gap-3 rounded-xl border border-dashed border-accent-2/60 p-4 text-sm"
-      >
-        <Icon
-          name="lucide:circle-dashed"
-          class="mt-0.5 size-4 shrink-0 text-accent-2"
-        />
-        <span>{L.plannedNotice}</span>
-      </p>
-    )
-  }
 
   <div
     class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] xl:grid-cols-[minmax(0,1fr)_22rem]"
@@ -140,25 +115,6 @@ const breadcrumbs = {
         )
       }
 
-      {
-        d.planned.length > 0 && (
-          <section id="planned" class="mb-10 scroll-mt-24">
-            <h2 class="section-title reveal text-xl">{L.plannedTitle}</h2>
-            <ul class="reveal space-y-2 text-sm">
-              {d.planned.map((p) => (
-                <li class="flex gap-2">
-                  <Icon
-                    name="lucide:circle-dashed"
-                    class="mt-0.5 size-4 shrink-0 text-accent-2"
-                  />
-                  <span class="justify">{p}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )
-      }
-
       <section id="implementations" class="mb-10 scroll-mt-24">
         <h2 class="section-title reveal text-xl">{L.implementations}</h2>
         {
@@ -167,12 +123,7 @@ const breadcrumbs = {
           ) : (
             <div class="grid gap-4 md:grid-cols-2">
               {tech.data.implementations.map((i) => (
-                <article
-                  class:list={[
-                    "card reveal p-5",
-                    planned && "border-dashed",
-                  ]}
-                >
+                <article class="card reveal p-5">
                   <TechChip id={i.language} lang={lang} />
                   <p class="mt-3 text-sm text-muted">{i[lang].summary}</p>
                   {i[lang].notes.length > 0 && (
@@ -218,7 +169,7 @@ const breadcrumbs = {
                 <li>
                   <a
                     class="btn btn-ghost"
-                    href={`${localePath(lang, "/research")}#${r.id}`}
+                    href={localePath(lang, `/research/${r.id}`)}
                   >
                     {r.data[lang].title}
                   </a>

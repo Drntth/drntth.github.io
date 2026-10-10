@@ -2,7 +2,7 @@
 
 Curated professional portfolio of Dorina Tóth (Software Developer, AI & Backend), in English and Hungarian.
 
-Live site: https://drntth.github.io/
+Live site: <https://drntth.github.io/>
 
 ## Stack
 
@@ -15,7 +15,7 @@ Astro, Tailwind CSS v4, Astro content collections (JSON), `astro-icon`, Embla Ca
 | `/`, `/hu/`                             | Hero, focus areas, selected projects, about, stack, certificates, contact |
 | `/projects`, `/projects/<slug>`         | Published projects and project detail pages                               |
 | `/technologies`, `/technologies/<slug>` | Technology knowledge map and technology nodes                             |
-| `/research`                             | Selected research (planned structure; entries are anchors on this page)   |
+| `/research`, `/research/<slug>`         | Selected research notes and research detail pages                         |
 | `/method`                               | How the work is organized: stages, knowledge model, research approach     |
 
 Every page exists in English and Hungarian (`/hu/...`). Search is available globally (header, Ctrl/Cmd+K) and within Projects, Technologies, Research and Method. All pages except Home have a print stylesheet. A small banner suggests the other language when the browser language differs; it never redirects.

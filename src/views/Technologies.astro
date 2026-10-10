@@ -36,14 +36,6 @@ const filterGroups = [
     label: S.filterLanguage,
     options: languages.map(([id, name]) => ({ id, label: name })),
   },
-  {
-    key: "status",
-    label: S.filterStatus,
-    options: [
-      { id: "published", label: L.published },
-      { id: "planned", label: L.planned },
-    ],
-  },
 ];
 ---
 
@@ -94,33 +86,18 @@ const filterGroups = [
       {
         techs.map((t) => {
           const d = t.data[lang];
-          const planned = t.data.visibility === "planned";
           const href = localePath(lang, `/technologies/${t.id}`);
           return (
             <a
               href={href}
-              class:list={[
-                "card reveal block p-5",
-                planned && "border-dashed",
-              ]}
+              class="card reveal block p-5"
               data-card
               data-url={href}
               data-languages={t.data.implementations
                 .map((i) => i.language)
                 .join(" ")}
-              data-status={planned ? "planned" : "published"}
             >
-              <div class="flex items-start justify-between gap-3">
-                <Icon name={t.data.icon} class="size-7 text-accent" />
-                <span
-                  class:list={[
-                    "chip",
-                    planned && "border-dashed border-accent-2/60 text-accent-2",
-                  ]}
-                >
-                  {planned ? L.planned : L.published}
-                </span>
-              </div>
+              <Icon name={t.data.icon} class="size-7 text-accent" />
               <h3 class="mt-3 font-display text-lg font-semibold">{d.title}</h3>
               <p class="mt-2 text-sm text-muted">{d.summary}</p>
               {t.data.implementations.length > 0 && (
@@ -179,18 +156,16 @@ const filterGroups = [
 
     const apply = () => {
       const langs = pressed("language");
-      const stats = pressed("status");
       let shown = 0;
       cards.forEach((card) => {
         const ok =
           (!urls || urls.has(card.dataset.url!)) &&
           (!langs.length ||
-            langs.some((l) => card.dataset.languages!.split(" ").includes(l))) &&
-          (!stats.length || stats.includes(card.dataset.status!));
+            langs.some((l) => card.dataset.languages!.split(" ").includes(l)));
         card.hidden = !ok;
         if (ok) shown++;
       });
-      const active = langs.length + stats.length;
+      const active = langs.length;
       empty.hidden = shown > 0;
       reset.hidden = active === 0;
       const text = `${labels.showing} ${shown} ${labels.of} ${total} ${labels.unit}${

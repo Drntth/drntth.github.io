@@ -1,6 +1,5 @@
 {
   "order": 3,
-  "visibility": "published",
   "icon": "lucide:layout-template",
   "implementations": [
     {

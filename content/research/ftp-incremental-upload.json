@@ -1,0 +1,80 @@
+{
+  "order": 5,
+  "icon": "lucide:cloud-upload",
+  "topic": {
+    "en": "Web publishing",
+    "hu": "Webes publikálás"
+  },
+  "asOf": "2026-10",
+  "technologies": ["incremental-deploy", "static-site-generation"],
+  "projects": ["static-multisite-generator"],
+  "sources": [
+    {
+      "label": "lftp manual",
+      "href": "https://lftp.yar.ru/lftp-man.html"
+    },
+    {
+      "label": "Unnecessary upload evasion with lftp mirrors",
+      "href": "https://dev.to/peateasea/unnecessary-upload-evasion-with-lftp-mirrors-1ee0"
+    },
+    {
+      "label": "Python: ftplib",
+      "href": "https://docs.python.org/3/library/ftplib.html"
+    },
+    {
+      "label": {
+        "en": "static-multisite-generator (GitHub repository)",
+        "hu": "static-multisite-generator (GitHub-repó)"
+      },
+      "href": "https://github.com/Drntth/static-multisite-generator"
+    }
+  ],
+  "en": {
+    "title": "Incremental upload over FTP",
+    "summary": "How an FTP upload can send only the files that changed when FTP offers no content hash, and what a static site build has to do for it.",
+    "question": "How can an FTP upload send only changed files when FTP provides no content hash?",
+    "requirement": "Shared hosting with FTP access only, no SSH or rsync. The build rewrote the whole output on every run, so the FTP client saw every file as new and uploaded everything each time.",
+    "method": [
+      "Change detection options compared: modification time (mtime), file size and content hash.",
+      "The build writes to a temporary folder and syncs into the output by comparing size and then bytes, so only differing files are written and files missing from the source are removed.",
+      "A SHA-256 manifest and a change list relative to the previous build (files to upload and to delete).",
+      "pytest for the sync and the manifest diff; after two builds without changes the second change list is empty."
+    ],
+    "findings": [
+      "FTP tools can only decide from file size and mtime.",
+      "Size is unreliable: replacing a version parameter of the same length (?v= plus 8 characters) does not change the HTML size.",
+      "mtime is reliable once the build keeps it for unchanged files; then FileZilla's \"overwrite if newer\" and lftp mirror --only-newer work correctly.",
+      "The hash manifest compares with the previous build, not with the server: after two builds without an upload, the second list is incomplete.",
+      "Mirroring with delete would also remove files on the server that are not part of the build, so it needs an exclude list."
+    ],
+    "decision": "Two layers: an mtime-preserving sync, so any FTP client decides correctly, and a hash-based change list for checking and manual uploads. No upload script for now.",
+    "limits": [
+      "An own FTPS upload script with a local state file, or a CI-based upload, is still open; the host firewall may block foreign CI IP addresses (unverified).",
+      "The change list does not know the actual state of the server."
+    ]
+  },
+  "hu": {
+    "title": "Inkrementális feltöltés FTP-n",
+    "summary": "Hogyan küldhet egy FTP-feltöltés csak változott fájlokat, ha az FTP nem ad tartalom-hash-t, és mit kell ehhez a statikusoldal-buildnek tennie.",
+    "question": "Hogyan küldhet egy FTP-feltöltés csak változott fájlokat, ha az FTP nem ad tartalom-hash-t?",
+    "requirement": "Osztott tárhely csak FTP-hozzáféréssel, SSH és rsync nélkül. A build minden futáskor a teljes kimenetet újraírta, így az FTP-kliens minden fájlt újnak látott, és mindig mindent feltöltött.",
+    "method": [
+      "A változásészlelési lehetőségek összevetése: módosítási idő (mtime), fájlméret és tartalom-hash.",
+      "A build ideiglenes mappába ír, majd méret és bájtok szerinti összevetéssel szinkronizál a kimenetbe: csak az eltérő fájl íródik, a forrásból hiányzó törlődik.",
+      "SHA-256 manifest és az előző buildhez viszonyított változáslista (feltöltendő és törlendő fájlok).",
+      "pytest a szinkronra és a manifest-diffre; két változás nélküli build után a második változáslista üres."
+    ],
+    "findings": [
+      "Az FTP-eszközök csak fájlméretből és mtime-ból dönthetnek.",
+      "A méret nem megbízható: egy azonos hosszú verzió-paraméter (?v= és 8 karakter) cseréje nem változtat a HTML méretén.",
+      "Az mtime megbízható, ha a build megőrzi a változatlan fájlokét; ekkor a FileZilla „felülírás, ha újabb” beállítása és az lftp mirror --only-newer helyesen működik.",
+      "A hash-manifest az előző buildhez viszonyít, nem a szerverhez: két feltöltés nélküli build után a második lista hiányos.",
+      "A törléssel járó tükrözés a szerveren lévő, buildben nem szereplő fájlokat is törölné, ezért kizárási lista kell hozzá."
+    ],
+    "decision": "Két réteg: mtime-megőrző szinkron, hogy bármely FTP-kliens jól döntsön, és hash-alapú változáslista ellenőrzéshez és kézi feltöltéshez. Feltöltő script egyelőre nincs.",
+    "limits": [
+      "Saját FTPS-feltöltő script helyi állapotfájllal, vagy CI-alapú feltöltés: nyitott kérdés; a tárhely tűzfala tilthatja a külföldi CI IP-címeket (nem ellenőrzött).",
+      "A változáslista nem ismeri a szerver tényleges állapotát."
+    ]
+  }
+}

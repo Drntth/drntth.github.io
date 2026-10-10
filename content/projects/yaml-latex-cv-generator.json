@@ -1,6 +1,5 @@
 {
   "order": 2,
-  "visibility": "public",
   "year": 2026,
   "icon": "lucide:file-text",
   "repo": "https://github.com/Drntth/yaml-latex-cv-generator",

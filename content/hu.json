@@ -195,18 +195,15 @@
     "description": "Tudástérkép AI és backend technológiákról és koncepciókról, amelyeket valós projektigényeken keresztül kutatok; nyelvekhez, projektekhez és kutatásokhoz kapcsolva.",
     "detailDescription": "Technológiai jegyzet nyelvenkénti megvalósításokkal, kapcsolódó projektekkel és kutatásokkal.",
     "graphTitle": "Kapcsolati térkép",
-    "graphHint": "Húzd a csomópontokat, vidd fölé az egeret a kapcsolatok kiemeléséhez, kattintással megnyitod. A szaggatott csomópontok tervezettek. A térkép magától bővül, ahogy új projekt, technológia és kutatás kerül be.",
+    "graphHint": "Húzd a csomópontokat, vidd fölé az egeret a kapcsolatok kiemeléséhez, kattintással megnyitod. A térkép magától bővül, ahogy új projekt, technológia és kutatás kerül be.",
     "graphLabel": "Gráf, amely programozási nyelveket, technológiákat, projekteket és kutatásokat köt össze",
     "legend": {
       "language": "Nyelv",
       "technology": "Technológia",
       "project": "Projekt",
-      "research": "Kutatás",
-      "planned": "Tervezett"
+      "research": "Kutatás"
     },
     "nodesTitle": "Technology csomópontok",
-    "published": "Publikált",
-    "planned": "Tervezett",
     "open": "Csomópont megnyitása",
     "back": "Összes technológia",
     "requirement": "Projektigény",
@@ -217,7 +214,6 @@
     "noImpl": "Még nincs dokumentált nyelvi megvalósítás.",
     "usedBy": "Ezek a projektek használják",
     "researchBy": "Kapcsolódó kutatás",
-    "plannedTitle": "Tervezett tartalom",
     "modelHint": "A programozási nyelv megvalósít egy technológiát vagy koncepciót, amelyet egy projekt használ. A teljes modell a Módszer oldalon olvasható.",
     "modelLink": "Hogyan működik a modell",
     "filters": "Szűrők",
@@ -225,31 +221,36 @@
     "showing": "Megjelenítve",
     "of": "/",
     "nodesUnit": "csomópont",
-    "plannedNotice": "Ez a csomópont tervezett. Az alábbi tartalom azt írja le, mit szán lefedni; kész eredményt nem tartalmaz.",
     "toc": "Ezen az oldalon",
     "languagesTitle": "Nyelvek",
     "related": "Kapcsolódó"
   },
   "researchPage": {
     "title": "Kutatás",
-    "intro": "Kiválasztott, önálló szakmai értékkel bíró kutatások, mindegyik egy projekthez és az érintett technológiákhoz kötve.",
+    "intro": "Kiválasztott, önálló szakmai értékkel bíró kutatások. Mindegyik konkrét projektkérdésből indul, és megmutatja, hogyan ellenőriztem, mi lett az eredmény és mi a döntés.",
     "seoTitle": "Kutatási jegyzetek | Tóth Dorina",
-    "description": "Kiválasztott, önálló szakmai értékkel bíró AI és backend kutatások, mindegyik egy projekthez és az érintett technológiákhoz kötve.",
-    "note": "Ez az oldal terv. A Tervezett jelzésű bejegyzések a szándékolt tartalmat és szerkezetet írják le, nem kész kutatást.",
+    "description": "Kiválasztott kutatási jegyzetek valós projektekből: a kérdés, az ellenőrzés módja, az eredmények és a döntés, projektekhez és technológiákhoz kötve.",
+    "detailDescription": "Kutatási jegyzet módszerrel, eredményekkel, döntéssel és korlátokkal.",
     "rulesTitle": "Publikálási szabályok",
     "rules": [
       "Csak kiválasztott, önálló szakmai értékkel bíró kutatás kerül ki.",
       "A privát kutatás sosem kerül ki automatikusan.",
       "A kutatás konkrét projektkérdésből indul."
     ],
-    "planned": "Tervezett",
-    "published": "Publikált",
     "question": "Kutatási kérdés",
+    "requirement": "Projektigény",
+    "method": "Módszer és ellenőrzés",
     "findings": "Eredmények",
-    "plannedTitle": "Mi fog itt megjelenni",
-    "examplesTitle": "Példa kimenetek",
+    "decision": "Döntés",
+    "limits": "Korlátok és nyitott kérdések",
+    "sources": "Források",
     "technologies": "Kapcsolódó technológiák",
-    "projects": "Kapcsolódó projektek"
+    "projects": "Kapcsolódó projekt",
+    "asOf": "Állapot",
+    "read": "Kutatás megnyitása",
+    "back": "Összes kutatás",
+    "toc": "Ezen az oldalon",
+    "noMatch": "Egy kutatás sem felel meg a keresésnek."
   },
   "search": {
     "placeholder": "Keresés az oldalon",
@@ -274,11 +275,9 @@
       "research": "Kutatás",
       "method": "Módszer"
     },
-    "planned": "Tervezett",
     "results": "találat",
     "filterSection": "Szekció",
     "filterLanguage": "Nyelv",
-    "filterStatus": "Állapot",
     "reset": "Szűrők törlése",
     "noMatch": "Egy technológia sem felel meg a keresésnek és a szűrőknek."
   },
@@ -394,7 +393,7 @@
       "usedBy": "használja",
       "project": "Projekt"
     },
-    "modelExample": "Példa: a Python és a Java megvalósítja a Branchinget, amelyet egy (tervezett) játékprojekt használ."
+    "modelExample": "Példa: a Python megvalósítja a sablonalapú dokumentumgenerálást, amelyet a YAML–LaTeX CV-generátor használ."
   },
   "footer": {
     "text": "Megérteni, amit építünk; építeni, amit még nem értünk.",

@@ -1,6 +1,5 @@
 {
   "order": 3,
-  "visibility": "public",
   "year": 2026,
   "icon": "lucide:files",
   "repo": "https://github.com/Drntth/static-multisite-generator",

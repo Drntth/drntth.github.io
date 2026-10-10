@@ -6,10 +6,7 @@ interface Props {
   links: GLink[];
   label: string;
   hint: string;
-  legend: Record<
-    "language" | "technology" | "project" | "research" | "planned",
-    string
-  >;
+  legend: Record<"language" | "technology" | "project" | "research", string>;
 }
 const { nodes, links, label, hint, legend } = Astro.props;
 const json = JSON.stringify({ nodes, links }).replace(/</g, "\\u003c");
@@ -34,11 +31,6 @@ const colors: Record<string, string> = {
         </li>
       ))
     }
-    <li class="flex items-center gap-1.5">
-      <span
-        class="inline-block size-2.5 rounded-full border border-dashed border-fg"
-      ></span>{legend.planned}
-    </li>
   </ul>
   <svg
     viewBox="0 0 900 560"
@@ -64,7 +56,6 @@ const colors: Record<string, string> = {
     id: string;
     label: string;
     type: string;
-    planned: boolean;
     href?: string;
     r: number;
   }
@@ -135,10 +126,9 @@ const colors: Record<string, string> = {
       const circle = svgEl("circle");
       circle.setAttribute("r", String(n.r));
       circle.style.fill = COLORS[n.type];
-      circle.style.fillOpacity = n.planned ? "0.18" : "0.95";
+      circle.style.fillOpacity = "0.95";
       circle.style.stroke = COLORS[n.type];
       circle.style.strokeWidth = "2";
-      if (n.planned) circle.style.strokeDasharray = "4 3";
       const text = svgEl("text");
       text.textContent = n.label;
       text.setAttribute("text-anchor", "middle");
@@ -203,11 +193,6 @@ const colors: Record<string, string> = {
         "collide",
         forceCollide<GN>().radius((d) => d.r + 26),
       );
-
-    links.forEach((l, i) => {
-      if ((l.source as GN).planned || (l.target as GN).planned)
-        lineEls[i].style.strokeDasharray = "4 3";
-    });
 
     const place = () => {
       for (const n of nodes) {

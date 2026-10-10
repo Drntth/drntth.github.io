@@ -14,7 +14,9 @@ const projectText = z.object({
   result: z.string(),
   status: z.string(),
   highlights: z.array(z.string()).default([]),
-  metrics: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
+  metrics: z
+    .array(z.object({ value: z.string(), label: z.string() }))
+    .default([]),
   sections: z
     .array(z.object({ title: z.string(), body: z.array(z.string()) }))
     .default([]),
@@ -24,7 +26,6 @@ const projects = defineCollection({
   loader: glob({ pattern: "*.json", base: "./content/projects" }),
   schema: z.object({
     order: z.number(),
-    visibility: z.enum(["public", "planned"]).default("public"),
     year: z.number().optional(),
     icon: z.string().default("lucide:folder-code"),
     image: z.string().optional(),
@@ -71,7 +72,6 @@ const techText = z.object({
     })
     .optional(),
   body: z.array(z.string()).default([]),
-  planned: z.array(z.string()).default([]),
 });
 const implText = z.object({
   summary: z.string(),
@@ -82,7 +82,6 @@ const technologies = defineCollection({
   loader: glob({ pattern: "*.json", base: "./content/technologies" }),
   schema: z.object({
     order: z.number(),
-    visibility: z.enum(["published", "planned"]).default("published"),
     icon: z.string().default("lucide:lightbulb"),
     implementations: z
       .array(z.object({ language: z.string(), en: implText, hu: implText }))
@@ -95,22 +94,33 @@ const technologies = defineCollection({
 const researchText = z.object({
   title: z.string(),
   summary: z.string(),
-  question: z.string().optional(),
-  findings: z.array(z.string()).default([]),
-  planned: z.array(z.string()).default([]),
-  examples: z.array(z.string()).default([]),
+  question: z.string(),
+  requirement: z.string(),
+  method: z.array(z.string()),
+  findings: z.array(z.string()),
+  decision: z.string(),
+  limits: z.array(z.string()).default([]),
 });
 
 const research = defineCollection({
   loader: glob({ pattern: "*.json", base: "./content/research" }),
   schema: z.object({
     order: z.number(),
-    visibility: z.enum(["published", "planned"]).default("planned"),
     icon: z.string().default("lucide:flask-conical"),
     topic: l10n,
+    // Month the findings were last checked (YYYY-MM).
+    asOf: z.string().regex(/^\d{4}-\d{2}$/),
     technologies: z.array(z.string()).default([]),
     projects: z.array(z.string()).default([]),
-    links,
+    sources: z
+      // Source titles stay in their original language unless a pair is given.
+      .array(
+        z.object({
+          label: z.union([z.string(), l10n]),
+          href: z.string().url(),
+        }),
+      )
+      .default([]),
     en: researchText,
     hu: researchText,
   }),

@@ -4,7 +4,7 @@ import type { Entry, Section } from "./search";
 type Doc = Entry & { tagsText: string };
 export type Hit = Pick<
   Entry,
-  "id" | "section" | "type" | "title" | "summary" | "tags" | "url" | "planned"
+  "id" | "section" | "type" | "title" | "summary" | "tags" | "url"
 > & { score: number };
 
 const norm = (t: string) =>
@@ -25,15 +25,7 @@ export function loadIndex(lang: string) {
       .then((entries) => {
         const ms = new MiniSearch<Doc>({
           fields: ["title", "tagsText", "summary", "text"],
-          storeFields: [
-            "section",
-            "type",
-            "title",
-            "summary",
-            "tags",
-            "url",
-            "planned",
-          ],
+          storeFields: ["section", "type", "title", "summary", "tags", "url"],
           processTerm: norm,
           searchOptions: {
             processTerm: norm,
