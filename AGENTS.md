@@ -202,6 +202,8 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 
 - Publish only public, professionally relevant projects. Published now: the BSc thesis, the YAML LaTeX CV Generator, the Static Multisite Generator and this portfolio site.
 - Do not publish confidential or employer-related project details. Describe technology areas only, never concrete internal projects, systems, users or results.
+- Employer work stays at CV level: employer, department, title, dates, generic technology areas and widely used public tools. Never internal system or product names, internal URLs, architecture or pipeline details, scoring rules, thresholds, model choices per task, prompts, test or benchmark results, hardware, costs, plans, or anything rewritten from work code or documents.
+- Technology notes, research and projects come only from own projects. Employer work is never a source for them, not even generalized or rebuilt as a side project.
 - Public lifecycle wording: describe stages and criteria, not where the material is kept.
 - Do not describe or reference where or how material is prepared, stored or reviewed before publication, in code, content, comments, README or this file.
 - Research entries need standalone professional value and are added only after review.
@@ -210,7 +212,8 @@ Programming Language --implements--> Technology / Concept --used by--> Project
 - Name policy: full name "Tóth Dorina Ildikó" in the hero, footer and CV; short form (`hero.shortName`: "Dorina Tóth" in EN, "Tóth Dorina" in HU) in titles, descriptions, header brand, `og:site_name` and READMEs. JSON-LD `name` is "Dorina Tóth" with the other forms as `alternateName`.
 - Title is "Software Developer - AI & Backend" (no "Junior").
 - Keep the page short and scannable. Detailed notes belong to Technologies, Research and project detail pages.
-- Not published: phone number, birth date, address.
+- Not published on the site pages: phone number, birth date, address. Exception: the downloadable CV PDFs (`public/cv/`) keep their header with phone number and city, as the owner decided.
+- Client work is named only as "individual client" ("egyéni megrendelő"), never by the client's or the client's business name, matching the CV.
 - Licensing: code is MIT (`LICENSE`); `content/`, `public/` and `src/assets/` are all rights reserved (`CONTENT_LICENSE.md`). Do not move personal content into code paths.
 
 ## 9. Confirmed facts
