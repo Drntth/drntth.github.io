@@ -41,7 +41,7 @@ After finishing a round, update the "To do" list in section 10 (remove finished 
 
 ## 3. Stack
 
-- Astro 7 (static output, GitHub Pages) with Vite 8. Node 22.12 or newer is required.
+- Astro 7 (static output, GitHub Pages) with Vite 8. Node 24 or newer is required.
 - Tailwind CSS v4 through `@tailwindcss/vite`. Design tokens are CSS variables.
 - Icons: `astro-icon` with `simple-icons`, `mdi`, `lucide`. No emojis anywhere.
 - Fonts: `@fontsource-variable/inter` (body), `@fontsource-variable/space-grotesk` (display), self-hosted.
@@ -50,13 +50,15 @@ After finishing a round, update the "To do" list in section 10 (remove finished 
 - SEO: `@astrojs/sitemap`, JSON-LD, Open Graph, hreflang.
 - Dev scripts: `scripts/favicon.mjs`, `scripts/og.mjs` (use `sharp`).
 - Search: MiniSearch (client side, lazy loaded).
-- CI: GitHub Actions for deploy (`deploy.yml`) and Lighthouse CI (`lighthouse.yml`, config in `lighthouserc.json`).
+- CI: GitHub Actions for checks (`ci.yml`: `tools/check.sh`, i.e. `npm run check` and build, on Node 24 for every push and pull request; `./setup-hooks.sh` once after cloning enables the pre-commit secret guard), deploy (`deploy.yml`) and Lighthouse CI (`lighthouse.yml`, config in `lighthouserc.json`).
+- No versioning and no changelog: every push to `main` deploys; history is the git log. Dependabot: not used.
 
 ## 4. Commands
 
 ```bash
 npm install
 npm run dev          # or: astro dev --background (see Development block at the end)
+npm run check        # en.json and hu.json have the same keys
 npm run build        # must pass before every push
 npm run preview
 npx @lhci/cli autorun     # local Lighthouse run after a build (needs lighthouserc.json; output in .lighthouseci/)
@@ -87,7 +89,7 @@ Claude configuration: `CLAUDE.md` is a symlink to this file. `.claude/settings.j
 
 ```text
 .claude/                  settings.json (shared permissions), skills/ (add-cert, add-project, release-check)
-.github/workflows/        deploy.yml (Pages), lighthouse.yml (Lighthouse CI)
+.github/workflows/        ci.yml (check + build), deploy.yml (Pages), lighthouse.yml (Lighthouse CI)
 lighthouserc.json         Lighthouse CI pages and thresholds
 content/                  all text and data (edit here, not in components)
   en.json, hu.json        site-wide strings per language
@@ -97,7 +99,7 @@ content/                  all text and data (edit here, not in components)
   research/*.json         research entries (collection "research")
   certificates/*.json     certificates (collection "certificates")
 public/                   static files: cv/, certs/, favicons, og.png, robots.txt
-scripts/                  one-off asset generators
+scripts/                  one-off asset generators, check-i18n.mjs (en/hu key check)
 src/
   assets/avatar.jpg       hero image, source of favicon and OG avatar
   components/             Background, Carousel, FilterBar, Footer, Header, KnowledgeGraph,

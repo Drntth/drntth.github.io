@@ -25,11 +25,12 @@ Every page exists in English and Hungarian (`/hu/...`). Search is available glob
 ```bash
 npm install
 npm run dev
+npm run check
 npm run build
 npm run preview
 ```
 
-Node 22.12 or newer is required.
+Node 24 or newer is required.
 
 ## Editing content
 
