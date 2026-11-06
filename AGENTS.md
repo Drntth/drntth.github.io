@@ -61,6 +61,7 @@ npm run dev          # or: astro dev --background (see Development block at the 
 npm run check        # en.json and hu.json have the same keys
 npm run build        # must pass before every push
 npm run preview
+./serve-web.sh               # build + local server at http://localhost:4321/ (--host: LAN too, stop: stop the server)
 npx @lhci/cli autorun     # local Lighthouse run after a build (needs lighthouserc.json; output in .lighthouseci/)
 node scripts/favicon.mjs   # regenerate favicons from src/assets/avatar.jpg
 node scripts/og.mjs        # regenerate public/og.png
