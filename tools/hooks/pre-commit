@@ -3,6 +3,11 @@
 # Prints file names only, never the matched value.
 set -u
 
+# Machine-wide secret scanner if installed (optional, skipped when missing)
+if command -v git-secret-scan >/dev/null 2>&1; then
+  git-secret-scan || exit 1
+fi
+
 blocked='(^|/)(\.env(\..*)?|cfg_local\.py)$|\.(asc|gpg|pgp|key|private)$|private-key|secret-key'
 files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E "$blocked" | grep -v -E '(^|/)\.env\.example$')
 if [ -n "$files" ]; then
